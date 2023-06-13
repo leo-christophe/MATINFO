@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 namespace MATINFO.Model
 {
     public class CategorieMateriel : Crud<CategorieMateriel>
+
     {
         private int idCategorie;
         private string nomCategorie;
@@ -60,7 +62,22 @@ namespace MATINFO.Model
 
         public ObservableCollection<CategorieMateriel> FindAll()
         {
-            throw new NotImplementedException();
+            ObservableCollection<CategorieMateriel> lesCategories = new ObservableCollection<CategorieMateriel>();
+            DataAccess accesBD = new DataAccess();
+            String requete = "select idcategorie, nomcategorie from categorie_materiel ;";
+            DataTable datas = accesBD.GetData(requete);
+            if (datas != null)
+            {
+                foreach (DataRow row in datas.Rows)
+                {
+                    CategorieMateriel e = new CategorieMateriel(
+                        int.Parse(row["idCategorie"].ToString()),
+                        (String)row["nomCategorie"]
+                        );
+                    lesCategories.Add(e);
+                }
+            }
+            return lesCategories;
         }
 
         public ObservableCollection<CategorieMateriel> FindBySelection(string criteres)

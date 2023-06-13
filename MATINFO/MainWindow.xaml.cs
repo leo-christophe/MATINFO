@@ -38,13 +38,16 @@ namespace MATINFO
         modifCategorie modificationCat;
 
         confirmation fenetreConfirmation;
+
+        DataAccess accesBD;
+        bool res;
         public MainWindow()
         {
             InitializeComponent();
 
-            DataAccess accesBD = new DataAccess();
-            bool res = accesBD.OpenConnection();
-            MessageBox.Show("Résultat de la connexion : " + res);
+            accesBD = new DataAccess();
+            res = accesBD.OpenConnection();
+
 
             /*
             CategoriesMateriel = new List<CategorieMateriel> { };

@@ -124,7 +124,7 @@
         <Label Content="Gestion du Materiel" HorizontalAlignment="Center" Margin="0,2,0,0" VerticalAlignment="Top" Width="138" Grid.Column="1" Height="26" Grid.Row="1" FontWeight="Bold" FontFamily="Segoe UI Variable Small Semibold"/>
         <Label Content="Gestion des Attributions" HorizontalAlignment="Center" Margin="0,2,0,0" VerticalAlignment="Top" Width="146" Grid.Column="2" Height="26" RenderTransformOrigin="0.49,0.515" Grid.Row="1" FontWeight="Bold" FontFamily="Segoe UI Variable Small Semibold"/>
         <Label Content="Gestion des Catégories" HorizontalAlignment="Center" Margin="0,2,0,0" VerticalAlignment="Top" Width="139" Grid.Column="3" Height="26" Grid.Row="1" FontWeight="Bold" FontFamily="Segoe UI Variable Small Semibold"/>
-        <Button x:Name="btCreerMat" Grid.Column="1" Content="Créer" HorizontalAlignment="Center" Margin="0,269,0,0" VerticalAlignment="Top" Width="56" Click="ButtonClickCreate" Grid.Row="1" Height="20" Background="{x:Null}">
+        <Button x:Name="btCreerMat" Grid.Column="1" Content="Créer" HorizontalAlignment="Left" Margin="110,279,0,0" VerticalAlignment="Top" Width="80" Click="ButtonClickCreate" Grid.Row="1" Height="50" Background="{x:Null}">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -138,7 +138,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btCreerPers" Content="Créer" HorizontalAlignment="Left" Margin="106,269,0,0" VerticalAlignment="Top" Width="56" Click="ButtonClickCreate" Grid.Row="1" Height="20" Background="{x:Null}">
+        <Button x:Name="btCreerPers" Content="Créer" HorizontalAlignment="Left" Margin="10,279,0,0" VerticalAlignment="Top" Width="80" Click="ButtonClickCreate" Grid.Row="1" Height="50" Background="{x:Null}">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -152,7 +152,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btCreerAtt" Grid.Column="2" Content="Créer" HorizontalAlignment="Center" Margin="0,269,0,0" VerticalAlignment="Top" Width="56" Click="ButtonClickCreate" Grid.Row="1" Height="20" BorderBrush="#FF707070" Background="{x:Null}">
+        <Button x:Name="btCreerAtt" Grid.Column="2" Content="Créer" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top" Width="80" Click="ButtonClickCreate" Grid.Row="1" Height="50" BorderBrush="#FF707070" Background="{x:Null}">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -166,7 +166,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btCreerCat" Grid.Column="3" Content="Créer" HorizontalAlignment="Center" Margin="0,269,0,0" VerticalAlignment="Top" Width="56" Click="ButtonClickCreate" Grid.Row="1" Height="20" Background="{x:Null}">
+        <Button x:Name="btCreerCat" Grid.Column="3" Content="Créer" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top" Width="60" Click="ButtonClickCreate" Grid.Row="1" Height="50" Background="{x:Null}">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -180,7 +180,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btModifierPers" Content="Modifier" HorizontalAlignment="Left" Margin="106,292,0,0" VerticalAlignment="Top" Width="56" Click="ButtonClickModification" Grid.Row="1" Height="20" Background="{x:Null}">
+        <Button x:Name="btModifierPers" Content="Modifier" HorizontalAlignment="Center" Margin="0,279,0,0" VerticalAlignment="Top" Width="80" Click="ButtonClickModification" Grid.Row="1" Height="50" Background="{x:Null}">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -194,7 +194,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btModifierMat" Content="Modifier" HorizontalAlignment="Center" Margin="0,292,0,0" VerticalAlignment="Top" Width="56" Click="ButtonClickModification" Grid.Column="1" Grid.Row="1" Height="20" Background="{x:Null}">
+        <Button x:Name="btModifierMat" Content="Modifier" HorizontalAlignment="Left" Margin="210,279,0,0" VerticalAlignment="Top" Width="80" Click="ButtonClickModification" Grid.Column="1" Grid.Row="1" Height="50" Background="{x:Null}">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -208,7 +208,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btModifierAtt" Content="Modifier" HorizontalAlignment="Center" Margin="0,292,0,0" VerticalAlignment="Top" Width="56" Click="ButtonClickModification" Grid.Column="2" Grid.Row="1" Height="20" Background="{x:Null}">
+        <Button x:Name="btModifierAtt" Content="Modifier" HorizontalAlignment="Center" Margin="0,280,0,0" VerticalAlignment="Top" Width="80" Click="ButtonClickModification" Grid.Column="2" Grid.Row="1" Height="50" Background="{x:Null}">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -222,7 +222,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btModifierCat" Content="Modifier" HorizontalAlignment="Center" Margin="0,292,0,0" VerticalAlignment="Top" Width="56" Click="ButtonClickModification" Grid.Column="3" Grid.Row="1" Height="20" Background="{x:Null}">
+        <Button x:Name="btModifierCat" Content="Modifier" HorizontalAlignment="Center" Margin="0,280,0,0" VerticalAlignment="Top" Width="60" Click="ButtonClickModification" Grid.Column="3" Grid.Row="1" Height="50" Background="{x:Null}">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -236,7 +236,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btSupprimerPers" Content="Supprimer" HorizontalAlignment="Left" Margin="102,316,0,0" VerticalAlignment="Top" Width="66" Click="ButtonClickSuppression" Grid.Row="1" Height="20" Background="{x:Null}">
+        <Button x:Name="btSupprimerPers" Content="Supprimer" HorizontalAlignment="Left" Margin="221,279,0,0" VerticalAlignment="Top" Width="80" Click="ButtonClickSuppression" Grid.Row="1" Height="50" Background="{x:Null}">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -250,7 +250,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btSupprimerMat" Content="Supprimer" HorizontalAlignment="Center" Margin="0,316,0,0" VerticalAlignment="Top" Width="66" Click="ButtonClickSuppression" Grid.Column="1" Grid.Row="1" Height="20" Background="{x:Null}">
+        <Button x:Name="btSupprimerMat" Content="Supprimer" HorizontalAlignment="Left" Margin="310,279,0,0" VerticalAlignment="Top" Width="80" Click="ButtonClickSuppression" Grid.Column="1" Grid.Row="1" Height="50" Background="{x:Null}">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -264,7 +264,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btSupprimerAtt" Content="Supprimer" HorizontalAlignment="Center" Margin="0,316,0,0" VerticalAlignment="Top" Width="66" Click="ButtonClickSuppression" Grid.Column="2" Grid.Row="1" Height="20" Background="{x:Null}">
+        <Button x:Name="btSupprimerAtt" Content="Supprimer" HorizontalAlignment="Left" Margin="182,280,0,0" VerticalAlignment="Top" Width="80" Click="ButtonClickSuppression" Grid.Column="2" Grid.Row="1" Height="50" Background="{x:Null}">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -278,7 +278,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btSupprimerCat" Content="Supprimer" HorizontalAlignment="Center" Margin="0,316,0,0" VerticalAlignment="Top" Width="66" Click="ButtonClickSuppression" Grid.Column="3" Grid.Row="1" Height="20" Background="{x:Null}">
+        <Button x:Name="btSupprimerCat" Content="Supprimer" HorizontalAlignment="Left" Margin="147,280,0,0" VerticalAlignment="Top" Width="60" Click="ButtonClickSuppression" Grid.Column="3" Grid.Row="1" Height="50" Background="{x:Null}">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -293,7 +293,7 @@
             </Button.Resources>
         </Button>
 
-        <Rectangle HorizontalAlignment="Left" Height="72" Stroke="Black" VerticalAlignment="Center" Width="1300" Grid.ColumnSpan="4" Fill="#FF797878"/>
+        <Rectangle HorizontalAlignment="Left" Height="72" VerticalAlignment="Center" Width="1300" Grid.ColumnSpan="4" Fill="LightGray"/>
         <Image Source="/ressources/MATINFO.png" Stretch="Fill" Width="83" Height="70" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Image Grid.Column="3" Margin="152,5,10,10" Source="/ressources/interrogation-mark.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center"/>
         <Image Grid.Column="3" Margin="10,5,148,11" Source="/ressources/folder.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center"/>

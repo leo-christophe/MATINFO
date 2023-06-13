@@ -5,14 +5,20 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:MATINFO"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="clr-namespace:MATINFO.Model"
     Title="Matinfo"
     Width="1300"
     Height="450"
-    mc:Ignorable="d" Icon="/ressources/desktop.png" WindowStartupLocation="CenterScreen">
+    Icon="/ressources/desktop.png"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Window.DataContext>
+        <model:ApplicationData x:Name="applicationdata" />
+    </Window.DataContext>
     <Grid Background="#FFEDEDED">
         <Grid.RowDefinitions>
-            <RowDefinition Height="69*"/>
-            <RowDefinition Height="365*"/>
+            <RowDefinition Height="69*" />
+            <RowDefinition Height="365*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="311*" />
@@ -22,19 +28,18 @@
         </Grid.ColumnDefinitions>
         <ListView
             x:Name="listViewPersonnel"
-            Margin="10,23,9,85" Grid.Row="1">
+            ItemsSource ="{Binding Path=LesPersonnels}"
+            Grid.Row="1"
+            Margin="10,23,9,85">
             <ListView.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="White" Offset="0"/>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="Black" />
+                    <GradientStop Offset="0" Color="White" />
                 </LinearGradientBrush>
             </ListView.Background>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn
-                        Width="20"
-                        DisplayMemberBinding="{Binding IdPersonnel}"
-                        Header="id" />
+
                     <GridViewColumn
                         Width="60"
                         DisplayMemberBinding="{Binding NomPersonnel}"
@@ -45,7 +50,7 @@
                         Header="Prenom" />
                     <GridViewColumn
                         Width="120"
-                        DisplayMemberBinding="{Binding MailPersonnel}"
+                        DisplayMemberBinding="{Binding EmailPersonnel}"
                         Header="Mail" />
                 </GridView>
             </ListView.View>
@@ -53,25 +58,31 @@
 
         <ListView
             x:Name="listViewMateriel"
+            Grid.Row="1"
             Grid.Column="1"
-            Margin="10,23,10,85" Grid.Row="1">
+            Margin="10,23,10,85"
+            ItemsSource="{Binding Path=LesMateriaux}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn
-                        Width="120"
-                        DisplayMemberBinding="{Binding CodeBarreInventaire}"
-                        Header="codeBarre" />
-                    <GridViewColumn
-                        Width="85"
-                        DisplayMemberBinding="{Binding CodeCategorie}"
-                        Header="codeCategorie" />
-                    <GridViewColumn
-                        Width="140"
-                        DisplayMemberBinding="{Binding NomMateriel}"
+                        Width="Auto"
+                        DisplayMemberBinding="{Binding Path=NomMateriel}"
                         Header="nomMateriel" />
+
                     <GridViewColumn
-                        Width="125"
-                        DisplayMemberBinding="{Binding RefConstructeur}"
+                        Width="Auto"
+                        DisplayMemberBinding="{Binding Path=UneCategorieM.NomCategorie}"
+                        Header="nom categorie" />
+
+                    <GridViewColumn
+                        Width="Auto"
+                        DisplayMemberBinding="{Binding Path=CodeBarreInventaire}"
+                        Header="codeBarre" />
+
+
+                    <GridViewColumn
+                        Width="Auto"
+                        DisplayMemberBinding="{Binding Path=ReferenceConstructeur}"
                         Header="referenceConstructeur" />
                 </GridView>
             </ListView.View>
@@ -79,8 +90,9 @@
 
         <ListView
             x:Name="listViewAttributions"
+            Grid.Row="1"
             Grid.Column="2"
-            Margin="10,23,10,85" Grid.Row="1">
+            Margin="10,23,10,85">
             <ListView.View>
                 <GridView>
                     <GridViewColumn
@@ -105,207 +117,417 @@
 
         <ListView
             x:Name="listViewCategories"
+            Grid.Row="1"
             Grid.Column="3"
-            Margin="7,23,8,85" Grid.Row="1">
+            Margin="7,23,8,85"
+            ItemsSource="{Binding Path=LesCategoriesMateriel}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn
-                        Width="85"
-                        DisplayMemberBinding="{Binding IdCategorie}"
-                        Header="codeCategorie" />
-                    <GridViewColumn
-                        Width="110"
-                        DisplayMemberBinding="{Binding NomCategorie}"
+                        Width="Auto"
+                        DisplayMemberBinding="{Binding Path=NomCategorie}"
                         Header="nomCategorie" />
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label Content="Gestion du Personnel" HorizontalAlignment="Center" Margin="0,2,0,0" VerticalAlignment="Top" Width="139" Height="26" Grid.Row="1" FontWeight="Bold" FontFamily="Segoe UI Variable Small Semibold"/>
-        <Label Content="Gestion du Materiel" HorizontalAlignment="Center" Margin="0,2,0,0" VerticalAlignment="Top" Width="138" Grid.Column="1" Height="26" Grid.Row="1" FontWeight="Bold" FontFamily="Segoe UI Variable Small Semibold"/>
-        <Label Content="Gestion des Attributions" HorizontalAlignment="Center" Margin="0,2,0,0" VerticalAlignment="Top" Width="146" Grid.Column="2" Height="26" RenderTransformOrigin="0.49,0.515" Grid.Row="1" FontWeight="Bold" FontFamily="Segoe UI Variable Small Semibold"/>
-        <Label Content="Gestion des Catégories" HorizontalAlignment="Center" Margin="0,2,0,0" VerticalAlignment="Top" Width="139" Grid.Column="3" Height="26" Grid.Row="1" FontWeight="Bold" FontFamily="Segoe UI Variable Small Semibold"/>
-        <Button x:Name="btCreerMat" Grid.Column="1" Content="Créer" HorizontalAlignment="Left" Margin="110,279,0,0" VerticalAlignment="Top" Width="80" Click="ButtonClickCreate" Grid.Row="1" Height="50" Background="{x:Null}">
+        <Label
+            Grid.Row="1"
+            Width="139"
+            Height="26"
+            Margin="0,2,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Content="Gestion du Personnel"
+            FontFamily="Segoe UI Variable Small Semibold"
+            FontWeight="Bold" />
+        <Label
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="138"
+            Height="26"
+            Margin="0,2,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Content="Gestion du Materiel"
+            FontFamily="Segoe UI Variable Small Semibold"
+            FontWeight="Bold" />
+        <Label
+            Grid.Row="1"
+            Grid.Column="2"
+            Width="146"
+            Height="26"
+            Margin="0,2,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Content="Gestion des Attributions"
+            FontFamily="Segoe UI Variable Small Semibold"
+            FontWeight="Bold"
+            RenderTransformOrigin="0.49,0.515" />
+        <Label
+            Grid.Row="1"
+            Grid.Column="3"
+            Width="139"
+            Height="26"
+            Margin="0,2,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Content="Gestion des Catégories"
+            FontFamily="Segoe UI Variable Small Semibold"
+            FontWeight="Bold" />
+        <Button
+            x:Name="btCreerMat"
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="80"
+            Height="50"
+            Margin="110,279,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="{x:Null}"
+            Click="ButtonClickCreate"
+            Content="Créer">
             <Button.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <TranslateTransform/>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <TranslateTransform />
                 </TransformGroup>
             </Button.RenderTransform>
             <Button.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="8"/>
+                    <Setter Property="CornerRadius" Value="8" />
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btCreerPers" Content="Créer" HorizontalAlignment="Left" Margin="10,279,0,0" VerticalAlignment="Top" Width="80" Click="ButtonClickCreate" Grid.Row="1" Height="50" Background="{x:Null}">
+        <Button
+            x:Name="btCreerPers"
+            Grid.Row="1"
+            Width="80"
+            Height="50"
+            Margin="10,279,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="{x:Null}"
+            Click="ButtonClickCreate"
+            Content="Créer">
             <Button.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <TranslateTransform/>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <TranslateTransform />
                 </TransformGroup>
             </Button.RenderTransform>
             <Button.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="8"/>
+                    <Setter Property="CornerRadius" Value="8" />
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btCreerAtt" Grid.Column="2" Content="Créer" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top" Width="80" Click="ButtonClickCreate" Grid.Row="1" Height="50" BorderBrush="#FF707070" Background="{x:Null}">
+        <Button
+            x:Name="btCreerAtt"
+            Grid.Row="1"
+            Grid.Column="2"
+            Width="80"
+            Height="50"
+            Margin="10,280,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="{x:Null}"
+            BorderBrush="#FF707070"
+            Click="ButtonClickCreate"
+            Content="Créer">
             <Button.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <TranslateTransform/>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <TranslateTransform />
                 </TransformGroup>
             </Button.RenderTransform>
             <Button.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="8"/>
+                    <Setter Property="CornerRadius" Value="8" />
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btCreerCat" Grid.Column="3" Content="Créer" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top" Width="60" Click="ButtonClickCreate" Grid.Row="1" Height="50" Background="{x:Null}">
+        <Button
+            x:Name="btCreerCat"
+            Grid.Row="1"
+            Grid.Column="3"
+            Width="60"
+            Height="50"
+            Margin="10,280,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="{x:Null}"
+            Click="ButtonClickCreate"
+            Content="Créer">
             <Button.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <TranslateTransform/>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <TranslateTransform />
                 </TransformGroup>
             </Button.RenderTransform>
             <Button.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="8"/>
+                    <Setter Property="CornerRadius" Value="8" />
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btModifierPers" Content="Modifier" HorizontalAlignment="Center" Margin="0,279,0,0" VerticalAlignment="Top" Width="80" Click="ButtonClickModification" Grid.Row="1" Height="50" Background="{x:Null}">
+        <Button
+            x:Name="btModifierPers"
+            Grid.Row="1"
+            Width="80"
+            Height="50"
+            Margin="0,279,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Background="{x:Null}"
+            Click="ButtonClickModification"
+            Content="Modifier">
             <Button.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <TranslateTransform/>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <TranslateTransform />
                 </TransformGroup>
             </Button.RenderTransform>
             <Button.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="8"/>
+                    <Setter Property="CornerRadius" Value="8" />
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btModifierMat" Content="Modifier" HorizontalAlignment="Left" Margin="210,279,0,0" VerticalAlignment="Top" Width="80" Click="ButtonClickModification" Grid.Column="1" Grid.Row="1" Height="50" Background="{x:Null}">
+        <Button
+            x:Name="btModifierMat"
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="80"
+            Height="50"
+            Margin="210,279,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="{x:Null}"
+            Click="ButtonClickModification"
+            Content="Modifier">
             <Button.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <TranslateTransform/>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <TranslateTransform />
                 </TransformGroup>
             </Button.RenderTransform>
             <Button.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="8"/>
+                    <Setter Property="CornerRadius" Value="8" />
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btModifierAtt" Content="Modifier" HorizontalAlignment="Center" Margin="0,280,0,0" VerticalAlignment="Top" Width="80" Click="ButtonClickModification" Grid.Column="2" Grid.Row="1" Height="50" Background="{x:Null}">
+        <Button
+            x:Name="btModifierAtt"
+            Grid.Row="1"
+            Grid.Column="2"
+            Width="80"
+            Height="50"
+            Margin="0,280,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Background="{x:Null}"
+            Click="ButtonClickModification"
+            Content="Modifier">
             <Button.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <TranslateTransform/>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <TranslateTransform />
                 </TransformGroup>
             </Button.RenderTransform>
             <Button.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="8"/>
+                    <Setter Property="CornerRadius" Value="8" />
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btModifierCat" Content="Modifier" HorizontalAlignment="Center" Margin="0,280,0,0" VerticalAlignment="Top" Width="60" Click="ButtonClickModification" Grid.Column="3" Grid.Row="1" Height="50" Background="{x:Null}">
+        <Button
+            x:Name="btModifierCat"
+            Grid.Row="1"
+            Grid.Column="3"
+            Width="60"
+            Height="50"
+            Margin="0,280,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Background="{x:Null}"
+            Click="ButtonClickModification"
+            Content="Modifier">
             <Button.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <TranslateTransform/>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <TranslateTransform />
                 </TransformGroup>
             </Button.RenderTransform>
             <Button.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="8"/>
+                    <Setter Property="CornerRadius" Value="8" />
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btSupprimerPers" Content="Supprimer" HorizontalAlignment="Left" Margin="221,279,0,0" VerticalAlignment="Top" Width="80" Click="ButtonClickSuppression" Grid.Row="1" Height="50" Background="{x:Null}">
+        <Button
+            x:Name="btSupprimerPers"
+            Grid.Row="1"
+            Width="80"
+            Height="50"
+            Margin="221,279,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="{x:Null}"
+            Click="ButtonClickSuppression"
+            Content="Supprimer">
             <Button.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <TranslateTransform/>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <TranslateTransform />
                 </TransformGroup>
             </Button.RenderTransform>
             <Button.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="8"/>
+                    <Setter Property="CornerRadius" Value="8" />
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btSupprimerMat" Content="Supprimer" HorizontalAlignment="Left" Margin="310,279,0,0" VerticalAlignment="Top" Width="80" Click="ButtonClickSuppression" Grid.Column="1" Grid.Row="1" Height="50" Background="{x:Null}">
+        <Button
+            x:Name="btSupprimerMat"
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="80"
+            Height="50"
+            Margin="310,279,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="{x:Null}"
+            Click="ButtonClickSuppression"
+            Content="Supprimer">
             <Button.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <TranslateTransform/>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <TranslateTransform />
                 </TransformGroup>
             </Button.RenderTransform>
             <Button.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="8"/>
+                    <Setter Property="CornerRadius" Value="8" />
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btSupprimerAtt" Content="Supprimer" HorizontalAlignment="Left" Margin="182,280,0,0" VerticalAlignment="Top" Width="80" Click="ButtonClickSuppression" Grid.Column="2" Grid.Row="1" Height="50" Background="{x:Null}">
+        <Button
+            x:Name="btSupprimerAtt"
+            Grid.Row="1"
+            Grid.Column="2"
+            Width="80"
+            Height="50"
+            Margin="182,280,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="{x:Null}"
+            Click="ButtonClickSuppression"
+            Content="Supprimer">
             <Button.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <TranslateTransform/>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <TranslateTransform />
                 </TransformGroup>
             </Button.RenderTransform>
             <Button.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="8"/>
+                    <Setter Property="CornerRadius" Value="8" />
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btSupprimerCat" Content="Supprimer" HorizontalAlignment="Left" Margin="147,280,0,0" VerticalAlignment="Top" Width="60" Click="ButtonClickSuppression" Grid.Column="3" Grid.Row="1" Height="50" Background="{x:Null}">
+        <Button
+            x:Name="btSupprimerCat"
+            Grid.Row="1"
+            Grid.Column="3"
+            Width="60"
+            Height="50"
+            Margin="147,280,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="{x:Null}"
+            Click="ButtonClickSuppression"
+            Content="Supprimer">
             <Button.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <TranslateTransform/>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <TranslateTransform />
                 </TransformGroup>
             </Button.RenderTransform>
             <Button.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="8"/>
+                    <Setter Property="CornerRadius" Value="8" />
                 </Style>
             </Button.Resources>
         </Button>
 
-        <Rectangle HorizontalAlignment="Left" Height="72" VerticalAlignment="Center" Width="1300" Grid.ColumnSpan="4" Fill="LightGray"/>
-        <Image Source="/ressources/MATINFO.png" Stretch="Fill" Width="83" Height="70" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Image Grid.Column="3" Margin="152,5,10,10" Source="/ressources/interrogation-mark.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-        <Image Grid.Column="3" Margin="10,5,148,11" Source="/ressources/folder.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-        <Image Grid.Column="2" Margin="14,5,199,11" Source="/ressources/attributes.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-        <Image Grid.Column="1" Margin="228,5,217,6" Source="/ressources/laptop.png" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Image Margin="242,4,8,7" Source="/ressources/teacher.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" HorizontalAlignment="Center">
+        <Rectangle
+            Grid.ColumnSpan="4"
+            Width="1300"
+            Height="72"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Fill="LightGray" />
+        <Image
+            Width="83"
+            Height="70"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Source="/ressources/MATINFO.png"
+            Stretch="Fill" />
+        <Image
+            Grid.Column="3"
+            Margin="152,5,10,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Source="/ressources/interrogation-mark.png"
+            Stretch="Fill" />
+        <Image
+            Grid.Column="3"
+            Margin="10,5,148,11"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Source="/ressources/folder.png"
+            Stretch="Fill" />
+        <Image
+            Grid.Column="2"
+            Margin="14,5,199,11"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Source="/ressources/attributes.png"
+            Stretch="Fill" />
+        <Image
+            Grid.Column="1"
+            Margin="228,5,217,6"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Source="/ressources/laptop.png"
+            Stretch="Fill" />
+        <Image
+            Margin="242,4,8,7"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            RenderTransformOrigin="0.5,0.5"
+            Source="/ressources/teacher.png"
+            Stretch="Fill">
             <Image.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.124"/>
-                    <TranslateTransform/>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <RotateTransform Angle="-0.124" />
+                    <TranslateTransform />
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>

@@ -1,22 +1,38 @@
 ﻿using MATINFO.Model;
+using System;
 using System.Collections.ObjectModel;
-using Test_WPF_SQL.Model;
+using System.Linq;
 
-namespace Test_WPF_SQL.Model
+namespace MATINFO.Model
 {
     public class ApplicationData
     {
-        public ObservableCollection<CategorieMateriel> CategoriesMateriel { get; set; }
-        public ObservableCollection<Materiel> lesMateriaux { get; set; }
-        public ObservableCollection<Personnel> lesPersonnels { get; set; }
+        public ObservableCollection<CategorieMateriel> LesCategoriesMateriel { get; set; }
+        public ObservableCollection<Materiel> LesMateriaux { get; set; }
+        public ObservableCollection<Personnel> LesPersonnels { get; set; }
         public ApplicationData()
         {
-            CategorieMateriel e = new CategorieMateriel();
-            Materiel materiel = new Materiel();
+            CategorieMateriel categorieMateriel = new CategorieMateriel();
             Personnel personnel = new Personnel();
-            CategoriesMateriel = e.FindAll();
-            lesMateriaux = materiel.FindAll();
-            lesPersonnels = personnel.FindAll();
+            Materiel materiel = new Materiel();
+
+            LesCategoriesMateriel = categorieMateriel.FindAll();
+            LesMateriaux = materiel.FindAll();
+            LesPersonnels = personnel.FindAll();
+
+            foreach ( Materiel leMateriel in LesMateriaux.ToList())
+            {
+                leMateriel.UneCategorieM = LesCategoriesMateriel.ToList().Find(g => g.IdCategorie == leMateriel.FK_idCategorie);
+
+            }
+
+            foreach ( CategorieMateriel uneCategorie in LesCategoriesMateriel.ToList())
+            {
+                uneCategorie.LesMateriauxCM = new ObservableCollection<Materiel>(
+                    LesMateriaux.ToList().FindAll(e => e.FK_idCategorie == uneCategorie.IdCategorie));
+            }
+
+
         }
     }
 }

@@ -86,7 +86,10 @@ namespace MATINFO.Model
 
         public void Delete()
         {
-            throw new NotImplementedException();
+            DataAccess accesBD = new DataAccess();
+            String requete = "DELETE FROM personnel WHERE idpersonnel=" + IdPersonnel + ";";
+            DataTable datas = accesBD.GetData(requete);
+
         }
 
         public ObservableCollection<Personnel> FindAll()

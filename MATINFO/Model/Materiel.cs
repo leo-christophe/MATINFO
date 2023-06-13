@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MATINFO.Model
 {
@@ -12,9 +13,12 @@ namespace MATINFO.Model
     {
         private int idMateriel;
         private int fK_idCategorie;
-        private string ?nomMateriel;
-        private string ?referenceConstructeur;
-        private string ?codeBarreInventaire;
+        private string? nomMateriel;
+        private string? referenceConstructeur;
+        private string? codeBarreInventaire;
+
+        private CategorieMateriel uneCategorieM;
+        
 
         public Materiel()
         {
@@ -94,6 +98,19 @@ namespace MATINFO.Model
             }
         }
 
+        public CategorieMateriel UneCategorieM
+        {
+            get
+            {
+                return uneCategorieM;
+            }
+
+            set
+            {
+                uneCategorieM = value;
+            }
+        }
+
         public void Create()
         {
             throw new NotImplementedException();
@@ -101,7 +118,9 @@ namespace MATINFO.Model
 
         public void Delete()
         {
-            throw new NotImplementedException();
+            DataAccess accesBD = new DataAccess();
+            String requete = $"DELETE FROM MATERIEL WHERE idMateriel = {this.IdMateriel};";
+            DataTable datas = accesBD.GetData(requete);
         }
 
         public ObservableCollection<Materiel> FindAll()
@@ -127,19 +146,54 @@ namespace MATINFO.Model
             return lesMateriaux;
         }
 
+        /// <summary>
+        /// FindBySelection permet d'affiner les résultats d'une recherche complète. Elle est composées au minimum d'une clause (WHERE, HAVE, ORDER...) 
+        /// </summary>
+        /// <param name="criteres"></param>
+        /// <returns></returns>
         public ObservableCollection<Materiel> FindBySelection(string criteres)
         {
-            throw new NotImplementedException();
+            ObservableCollection<Materiel> lesMateriaux = new ObservableCollection<Materiel>();
+            DataAccess accesBD = new DataAccess();
+            String requete = $"select idmateriel, idcategorie, nommateriel, referenceconstructeurmateriel, codebarreinventaire from materiel {criteres};";
+            DataTable datas = accesBD.GetData(requete);
+            if (datas != null)
+            {
+                foreach (DataRow row in datas.Rows)
+                {
+                    Materiel e = new Materiel(
+                        int.Parse(row["idmateriel"].ToString()),
+                        int.Parse(row["idcategorie"].ToString()),
+                        (String)row["nommateriel"],
+                        (String)row["referenceconstructeurmateriel"],
+                        (String)row["codebarreinventaire"]
+                        );
+                    lesMateriaux.Add(e);
+                }
+            }
+            return lesMateriaux;
         }
 
         public void Read()
         {
-            throw new NotImplementedException();
+            ObservableCollection<Materiel> lesMateriaux = new ObservableCollection<Materiel>();
+            DataAccess accesBD = new DataAccess();
+            String requete = $"select * from materiel;";
+            DataTable datas = accesBD.GetData(requete);
+            if (datas != null)
+            {
+                foreach (DataRow row in datas.Rows)
+                {
+                    Console.WriteLine($"{ int.Parse(row["idmateriel"].ToString())} { int.Parse(row["idcategorie"].ToString())} { (String)row["nommateriel"]} { (String)row["referenceconstructeurmateriel"]} { (String)row["codebarreinventaire"]}");
+                }
+            }
         }
 
         public void Update()
         {
-            throw new NotImplementedException();
+            DataAccess accesBD = new DataAccess();
+            String requete = $"select * from materiel;";
+            DataTable datas = accesBD.GetData(requete);
         }
     }
 }

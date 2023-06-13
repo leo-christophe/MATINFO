@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MATINFO.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,19 +20,38 @@ namespace MATINFO
     /// </summary>
     public partial class confirmation : Window
     {
+
+        private bool supprimer;
         public confirmation()
         {
+            this.Supprimer = false;
             InitializeComponent();
+            
+        }
+
+        public bool Supprimer
+        {
+            get
+            {
+                return supprimer;
+            }
+
+            set
+            {
+                supprimer = value;
+            }
         }
 
         private void ButtonClickAnnuler(object sender, RoutedEventArgs e)
         {
             this.Hide();
+            this.Supprimer = false; 
         }
 
         private void ButtonClickConfirmer(object sender, RoutedEventArgs e)
         {
             this.Hide();
+            this.Supprimer = true;
         }
     }
 }

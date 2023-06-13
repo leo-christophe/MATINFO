@@ -48,13 +48,6 @@ namespace MATINFO
             accesBD = new DataAccess();
             res = accesBD.OpenConnection();
 
-
-            /*
-            CategoriesMateriel = new List<CategorieMateriel> { };
-            Personnels = new List<Personnel> { };
-            Materiels = new List<Materiel> { };
-            Attributions = new List<Attribution> { };
-            */
             creationWinPers = new creerPersonnel();
             creationWinMat = new creerMateriel();
             creationWinCat = new creerCategorie();
@@ -78,6 +71,7 @@ namespace MATINFO
             creationWinAtt.Hide();
 
             fenetreConfirmation.Hide();
+
         }
 
         private void ButtonClickCreate(object sender, RoutedEventArgs e)
@@ -138,7 +132,35 @@ namespace MATINFO
 
         private void ButtonClickSuppression(object sender, RoutedEventArgs e)
         {
-            fenetreConfirmation.Show();
+            switch ( ( (Button)(sender) ).Name )
+            {
+                case "btSupprimerMat":
+                { 
+                    applicationdata.LesMateriaux[listViewMateriel.SelectedIndex].Delete();
+                    applicationdata.LesMateriaux.RemoveAt(listViewMateriel.SelectedIndex);
+                    listViewMateriel.Items.Refresh();
+                    fenetreConfirmation.Supprimer = false;
+                    break;
+                }
+
+                case "btSupprimerCat":
+                {
+                    applicationdata.LesCategoriesMateriel[listViewCategories.SelectedIndex].Delete();
+                    applicationdata.LesCategoriesMateriel.RemoveAt(listViewCategories.SelectedIndex);
+                    listViewCategories.Items.Refresh();
+                    fenetreConfirmation.Supprimer = false;
+                    break;
+                }
+
+                case "btSupprimerPers":
+                {
+                    applicationdata.LesPersonnels[listViewPersonnel.SelectedIndex].Delete();
+                    applicationdata.LesPersonnels.RemoveAt(listViewPersonnel.SelectedIndex);
+                    listViewPersonnel.Items.Refresh();
+                    fenetreConfirmation.Supprimer = false;
+                    break;
+                }
+            }
         }
     }
 }

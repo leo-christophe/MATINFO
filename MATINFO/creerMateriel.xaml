@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MATINFO"
         mc:Ignorable="d"
-        Title="Création de matériel" Height="400" Width="225" ResizeMode="NoResize" Icon="/ressources/desktop.png" WindowStartupLocation="CenterScreen">
-    <Grid Margin="0,0,0,0">
-        <Button Content="OK" HorizontalAlignment="Center" Margin="0,211,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618"/>
+        Title="Création de matériel" Height="310" Width="254" ResizeMode="NoResize" Icon="/ressources/desktop.png" WindowStartupLocation="CenterScreen">
+    <Grid Margin="0,0,0,-6">
+        <Button Content="AJOUTER" HorizontalAlignment="Left" Margin="10,217,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Height="43" Width="88"/>
         <Label Content="Nom du materiel" HorizontalAlignment="Center" Margin="0,26,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="169" HorizontalContentAlignment="Center"/>
         <Label Content="Code barre" HorizontalAlignment="Center" Margin="0,72,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="169" HorizontalContentAlignment="Center"/>
         <TextBox HorizontalAlignment="Center" Margin="0,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169"/>
@@ -16,5 +16,6 @@
         <TextBox HorizontalAlignment="Center" Margin="0,147,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169"/>
         <Label Content="Référence constructeur" HorizontalAlignment="Center" Margin="0,165,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="169" HorizontalContentAlignment="Center"/>
         <TextBox HorizontalAlignment="Center" Margin="0,188,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169"/>
+        <Button Content="ANNULER" HorizontalAlignment="Left" Margin="127,217,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Height="43" Width="88"/>
     </Grid>
 </Window>

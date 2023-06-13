@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MATINFO"
         mc:Ignorable="d"
-        Title="Création d'une catégorie" Height="150" Width="225" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/ressources/add-folder.png">
-    <Grid>
-        <Button Content="OK" HorizontalAlignment="Center" Margin="0,88,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618"/>
+        Title="Création d'une catégorie" Height="155" Width="236" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/ressources/add-folder.png">
+    <Grid Margin="0,0,0,-1">
+        <Button Content="AJOUTER" HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Height="33" Width="97"/>
         <Label Content="Nom de la catégorie" HorizontalAlignment="Center" Margin="0,26,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="169" HorizontalContentAlignment="Center"/>
         <TextBox HorizontalAlignment="Center" Margin="0,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169"/>
+        <Button Content="ANNULER" HorizontalAlignment="Left" Margin="118,74,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Height="33" Width="97"/>
 
     </Grid>
 </Window>

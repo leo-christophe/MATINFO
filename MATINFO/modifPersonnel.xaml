@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MATINFO"
         mc:Ignorable="d"
-        Title="Modification du personnel" Height="250" Width="225" Icon="/ressources/teacher.png" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Modification du personnel" Height="274" Width="244" Icon="/ressources/teacher.png" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Button Content="OK" HorizontalAlignment="Left" Margin="187,181,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618"/>
+        <Button Content="VALIDER" HorizontalAlignment="Left" Margin="10,185,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Height="39" Width="97"/>
         <Label Content="Nom du personnel" HorizontalAlignment="Center" Margin="0,66,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="169" HorizontalContentAlignment="Center"/>
-        <Label Content="Prénom du personnel" HorizontalAlignment="Left" Margin="27,25,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="126" HorizontalContentAlignment="Center"/>
+        <Label Content="Prénom du personnel" HorizontalAlignment="Center" Margin="0,25,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="170" HorizontalContentAlignment="Center"/>
         <TextBox HorizontalAlignment="Center" Margin="0,93,0,0" TextWrapping="Wrap" Text="Nouveau nom" VerticalAlignment="Top" Width="169" Foreground="#FFA6A6A6"/>
-        <TextBox Margin="28,48,0,0" TextWrapping="Wrap" Text="Nouveau prénom" VerticalAlignment="Top" HorizontalAlignment="Left" Width="112" RenderTransformOrigin="0.5,0.5" Foreground="#FFAEABAB">
+        <TextBox Margin="0,48,0,0" TextWrapping="Wrap" Text="Nouveau prénom" VerticalAlignment="Top" HorizontalAlignment="Center" Width="169" RenderTransformOrigin="0.5,0.5" Foreground="#FFAEABAB">
             <TextBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="1"/>
@@ -24,27 +24,7 @@
         </TextBox>
         <Label Content="Mail du personnel" HorizontalAlignment="Center" Margin="0,115,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="169" HorizontalContentAlignment="Center"/>
         <TextBox HorizontalAlignment="Center" Margin="0,141,0,0" TextWrapping="Wrap" Text="Mail nouveau" VerticalAlignment="Top" Width="169" Foreground="#FF9D9D9D"/>
-        <Button Content="ANNULER" HorizontalAlignment="Left" Margin="118,181,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Width="59"/>
-        <TextBox Margin="162,48,0,0" TextWrapping="Wrap" Text="Selection" VerticalAlignment="Top" HorizontalAlignment="Left" Width="38" RenderTransformOrigin="0.5,0.5" Background="#FFE3FEFF" Height="18" Foreground="#FFBBBBBB">
-            <TextBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBox.RenderTransform>
-        </TextBox>
-        <Label Content="ID" HorizontalAlignment="Left" Margin="162,25,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="34" HorizontalContentAlignment="Center">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>
+        <Button Content="ANNULER" HorizontalAlignment="Left" Margin="118,185,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Height="39" Width="97"/>
 
     </Grid>
 </Window>

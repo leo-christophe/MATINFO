@@ -23,10 +23,5 @@ namespace MATINFO
         {
             InitializeComponent();
         }
-
-        private void Button_ClickCreationOK(object sender, RoutedEventArgs e)
-        {
-            this.Hide();
-        }
     }
 }

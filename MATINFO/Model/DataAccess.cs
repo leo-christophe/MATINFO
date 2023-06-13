@@ -35,7 +35,7 @@ namespace MATINFO.Model /// A MODIFIER SI VOTRE PROJET A UN AUTRE NOM
               {
                   ConnectionString = "" +
                   "Server=postgresql-leochristophe.alwaysdata.net;" +
-                  "port=5433;" +
+                  "port=5432;" +
                   "Database=leochristophe_romainbajorek_matinfo;" +
                   "Search Path=public;" +
                   "uid=leochristophe_romainbajorek;" +

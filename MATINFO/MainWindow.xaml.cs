@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MATINFO;
+using MATINFO.Model;
 
 namespace MATINFO
 {
@@ -40,6 +41,11 @@ namespace MATINFO
         public MainWindow()
         {
             InitializeComponent();
+
+            DataAccess accesBD = new DataAccess();
+            bool res = accesBD.OpenConnection();
+            MessageBox.Show("Résultat de la connexion : " + res);
+
             /*
             CategoriesMateriel = new List<CategorieMateriel> { };
             Personnels = new List<Personnel> { };

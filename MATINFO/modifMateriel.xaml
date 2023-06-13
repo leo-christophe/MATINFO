@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MATINFO"
         mc:Ignorable="d"
-        Title="Modification de matériel" Height="250" Width="225" ResizeMode="NoResize" Icon="/ressources/laptop.png" WindowStartupLocation="CenterScreen">
+        Title="Modification de matériel" Height="249" Width="247" ResizeMode="NoResize" Icon="/ressources/laptop.png" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Button Content="OK" HorizontalAlignment="Left" Margin="173,184,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618"/>
+        <Button Content="VALIDER" HorizontalAlignment="Left" Margin="10,167,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Height="36" Width="85"/>
         <Label Content="Reference Constructeur" HorizontalAlignment="Left" Margin="18,69,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="169" HorizontalContentAlignment="Center"/>
         <Label Content="Nom du matériel" HorizontalAlignment="Left" Margin="11,28,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="113" HorizontalContentAlignment="Center"/>
         <TextBox HorizontalAlignment="Left" Margin="12,96,0,0" TextWrapping="Wrap" Text="Nouvelle référence" VerticalAlignment="Top" Width="181" Foreground="#FFA6A6A6"/>
@@ -24,8 +24,7 @@
         </TextBox>
         <Label Content="Code Barre Inventaire" HorizontalAlignment="Left" Margin="18,118,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="169" HorizontalContentAlignment="Center"/>
         <TextBox Text="Selection" HorizontalAlignment="Left" Margin="12,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Foreground="#FF9D9D9D" Background="#FFC3FFFF"/>
-        <Button Content="ANNULER" HorizontalAlignment="Left" Margin="108,184,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Width="59"/>
-        <TextBox Margin="131,51,0,0" TextWrapping="Wrap" Text="Nouv. Cat" VerticalAlignment="Top" HorizontalAlignment="Left" Width="62" RenderTransformOrigin="0.5,0.5" Background="White" Foreground="#FFB5B5B5">
+        <TextBox Margin="131,51,0,0" TextWrapping="Wrap" Text="Nouv. Cat" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84" RenderTransformOrigin="0.5,0.5" Background="White" Foreground="#FFB5B5B5">
             <TextBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="1"/>
@@ -35,7 +34,7 @@
                 </TransformGroup>
             </TextBox.RenderTransform>
         </TextBox>
-        <Label Content="Code Catégorie" HorizontalAlignment="Left" Margin="114,28,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="101" HorizontalContentAlignment="Center" Height="26">
+        <Label Content="Nom Catégorie" HorizontalAlignment="Left" Margin="114,28,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="101" HorizontalContentAlignment="Center" Height="26">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="1"/>
@@ -45,6 +44,7 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
+        <Button Content="ANNULER" HorizontalAlignment="Left" Margin="130,167,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Height="36" Width="85"/>
 
     </Grid>
 </Window>

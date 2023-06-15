@@ -33,6 +33,22 @@ namespace MATINFO.Model
             this.CodeBarreInventaire = codeBarreInventaire;
         }
 
+        public Materiel(int fK_idCategorie, string nomMateriel, string referenceConstructeur, string codeBarreInventaire, CategorieMateriel uneCategorieM)
+        {
+            FK_idCategorie = fK_idCategorie;
+            NomMateriel = nomMateriel;
+            ReferenceConstructeur = referenceConstructeur;
+            CodeBarreInventaire = codeBarreInventaire;
+            UneCategorieM = uneCategorieM;
+
+            IdMateriel = this.CalculerNouvelId();
+        }
+
+        public int CalculerNouvelId()
+        {
+            ObservableCollection<Materiel> nouvelIdList = this.FindAll();
+            return nouvelIdList.Count;
+        }
         public int IdMateriel
         {
             get
@@ -113,7 +129,14 @@ namespace MATINFO.Model
 
         public void Create()
         {
-            throw new NotImplementedException();
+            DataAccess accesBD = new DataAccess();
+            String requete = $"" +
+                $"INSERT INTO MATERIEL " +
+                $"(IdMateriel, IdCategorie, NomMateriel, ReferenceConstructeur, CodeBarreInventaire) " +
+                $"VALUES " +
+                $"({this.IdMateriel}, {this.fK_idCategorie}, {this.NomMateriel}, {this.ReferenceConstructeur}, {this.CodeBarreInventaire});";
+            int datas = accesBD.SetData(requete);
+            Console.WriteLine(datas);
         }
 
         public void Delete()

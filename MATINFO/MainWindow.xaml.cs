@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -37,8 +38,6 @@ namespace MATINFO
         modifAttributions modificationAtt;
         modifCategorie modificationCat;
 
-        confirmation fenetreConfirmation;
-
         DataAccess accesBD;
         bool res;
         public MainWindow()
@@ -50,7 +49,7 @@ namespace MATINFO
 
             creationWinPers = new creerPersonnel();
             creationWinMat = new creerMateriel();
-            creationWinCat = new creerCategorie();
+            
             creationWinAtt = new creerAttribution();
 
             modificationPers = new modifPersonnel();
@@ -58,7 +57,6 @@ namespace MATINFO
             modificationAtt = new modifAttributions();
             modificationCat = new modifCategorie();
 
-            fenetreConfirmation = new confirmation();
 
             modificationPers.Hide();
             modificationMat.Hide();
@@ -66,11 +64,11 @@ namespace MATINFO
             modificationAtt.Hide();
 
             creationWinPers.Hide();
-            creationWinCat.Hide();
+
             creationWinMat.Hide();
             creationWinAtt.Hide();
 
-            fenetreConfirmation.Hide();
+
 
         }
 
@@ -86,7 +84,15 @@ namespace MATINFO
                     }
                 case "btCreerMat":
                     {
-                        creationWinMat.Show();
+                        creationWinMat = new creerMateriel();
+                        creationWinMat.ShowDialog();
+                        if (creationWinMat.NouveauMateriel != null)
+                        {
+                            applicationdata.LesMateriaux.Add(creationWinMat.NouveauMateriel);
+                            creationWinMat.NouveauMateriel.Create();
+                            creationWinMat.NouveauMateriel = null;
+                            listViewMateriel.Items.Refresh();
+                        }
                         break;
                     }
                 case "btCreerAtt":
@@ -96,7 +102,16 @@ namespace MATINFO
                     }
                 case "btCreerCat":
                     {
-                        creationWinCat.Show();
+                        creationWinCat = new creerCategorie();
+                        creationWinCat.ShowDialog();
+                        if (creationWinCat.NouvelleCategorie != null)
+                        {
+                            applicationdata.LesCategoriesMateriel.Add(creationWinCat.NouvelleCategorie);
+                            creationWinCat.NouvelleCategorie.Create();
+                            creationWinCat.NouvelleCategorie = null;
+                            listViewCategories.Items.Refresh();
+                            listViewMateriel.Items.Refresh();
+                        }
                         break;
                     }
             }
@@ -132,34 +147,60 @@ namespace MATINFO
 
         private void ButtonClickSuppression(object sender, RoutedEventArgs e)
         {
-            switch ( ( (Button)(sender) ).Name )
+            confirmation fenetreConfirm = new confirmation();
+            fenetreConfirm.ShowDialog();
+
+            if ( fenetreConfirm.Supprimer )
             {
-                case "btSupprimerMat":
-                { 
-                    applicationdata.LesMateriaux[listViewMateriel.SelectedIndex].Delete();
-                    applicationdata.LesMateriaux.RemoveAt(listViewMateriel.SelectedIndex);
-                    listViewMateriel.Items.Refresh();
-                    fenetreConfirmation.Supprimer = false;
-                    break;
-                }
 
-                case "btSupprimerCat":
+                switch (((Button)(sender)).Name)
                 {
-                    applicationdata.LesCategoriesMateriel[listViewCategories.SelectedIndex].Delete();
-                    applicationdata.LesCategoriesMateriel.RemoveAt(listViewCategories.SelectedIndex);
-                    listViewCategories.Items.Refresh();
-                    fenetreConfirmation.Supprimer = false;
-                    break;
-                }
+                    case "btSupprimerMat":
+                        {
+                            applicationdata.LesMateriaux[listViewMateriel.SelectedIndex].Delete();
+                            applicationdata.LesMateriaux.RemoveAt(listViewMateriel.SelectedIndex);
+                            listViewMateriel.Items.Refresh();
+                            break;
+                        }
 
-                case "btSupprimerPers":
-                {
-                    applicationdata.LesPersonnels[listViewPersonnel.SelectedIndex].Delete();
-                    applicationdata.LesPersonnels.RemoveAt(listViewPersonnel.SelectedIndex);
-                    listViewPersonnel.Items.Refresh();
-                    fenetreConfirmation.Supprimer = false;
-                    break;
+                    case "btSupprimerCat":
+                        {
+                            int indexselected = listViewCategories.SelectedIndex;
+                            int idchoisi = applicationdata.LesCategoriesMateriel[indexselected].IdCategorie;
+                            applicationdata.LesCategoriesMateriel[indexselected].Delete();
+                            applicationdata.LesCategoriesMateriel.RemoveAt(listViewCategories.SelectedIndex);
+                            listViewCategories.Items.Refresh();
+
+                            int cpt = applicationdata.LesMateriaux.Count;
+
+                            // Supprimer les materiaux correspondant à la catégorie
+                            for (int i = 0; i<= cpt+1; i++)
+                            {
+
+                                if (applicationdata.LesMateriaux[i].FK_idCategorie == idchoisi)
+                                {
+
+                                    applicationdata.LesMateriaux[i].Delete();
+
+                                    applicationdata.LesMateriaux.RemoveAt(i);
+
+                                    listViewMateriel.Items.Refresh();
+
+                                    cpt--;
+                                }
+                            }
+                            break;
+                        }
+
+                    case "btSupprimerPers":
+                        {
+                            applicationdata.LesPersonnels[listViewPersonnel.SelectedIndex].Delete();
+                            applicationdata.LesPersonnels.RemoveAt(listViewPersonnel.SelectedIndex);
+                            listViewPersonnel.Items.Refresh();
+                            break;
+                        }
                 }
+                fenetreConfirm.Supprimer = false;
             }
         }
     }

@@ -107,6 +107,11 @@ namespace MATINFO.Model
 
         }
 
+        public override bool Equals(object? obj)
+        {
+            return base.Equals(obj);
+        }
+
         public ObservableCollection<Personnel> FindAll()
         {
             ObservableCollection<Personnel> lesPersonnels = new ObservableCollection<Personnel>();
@@ -134,9 +139,19 @@ namespace MATINFO.Model
             throw new NotImplementedException();
         }
 
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         public void Read()
         {
             throw new NotImplementedException();
+        }
+
+        public override string? ToString()
+        {
+            return $"Id : {this.IdPersonnel} \nNom : {this.NomPersonnel} \nPrenom : {this.PrenomPersonnel} \nMail : {this.EmailPersonnel}";
         }
 
         public void Update()

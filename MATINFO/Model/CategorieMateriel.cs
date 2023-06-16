@@ -13,7 +13,6 @@ namespace MATINFO.Model
     {
         private ObservableCollection<Materiel> lesMateriauxCM;
         private int idCategorie;
-        private static int _idCompteur ;
         private string nomCategorie;
 
         public CategorieMateriel()
@@ -34,8 +33,7 @@ namespace MATINFO.Model
 
         public int CalculerNouvelId( )
         {
-            ObservableCollection<CategorieMateriel> nouvelIdList = this.FindBySelection(" GROUP BY idCategorie, nomCategorie HAVING idCategorie = max(idCategorie) ; ");
-            return nouvelIdList.Count;
+            return this.FindAll().Count;
         }
 
         public int IdCategorie
@@ -142,7 +140,12 @@ namespace MATINFO.Model
 
         public void Update()
         {
-            throw new NotImplementedException();
+            DataAccess accesBD = new DataAccess();
+            String requete = $"" +
+                $"UPDATE CATEGORIE_MATERIEL" +
+                $"SET IdCategorie = {this.IdCategorie} " +
+                $"SET NomCategorie = '{this.NomCategorie}';";
+            int datas = accesBD.SetData(requete);
         }
     }
 }

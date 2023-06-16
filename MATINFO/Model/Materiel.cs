@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -84,7 +85,10 @@ namespace MATINFO.Model
 
             set
             {
-                nomMateriel = value;
+                if (!String.IsNullOrEmpty(value))
+                    nomMateriel = value;
+                else
+                    nomMateriel = value;
             }
         }
 
@@ -97,7 +101,10 @@ namespace MATINFO.Model
 
             set
             {
-                referenceConstructeur = value;
+                if (!String.IsNullOrEmpty(value))
+                    referenceConstructeur = value;
+                else
+                    throw new ArgumentNullException("La référence constructeur ne doit pas être null ou vide !");
             }
         }
 
@@ -110,7 +117,10 @@ namespace MATINFO.Model
 
             set
             {
-                codeBarreInventaire = value;
+                if (!String.IsNullOrEmpty(value))
+                    codeBarreInventaire = value;
+                else
+                    throw new ArgumentNullException("Le code barre ne doit pas être null ou vide !");
             }
         }
 
@@ -132,11 +142,10 @@ namespace MATINFO.Model
             DataAccess accesBD = new DataAccess();
             String requete = $"" +
                 $"INSERT INTO MATERIEL " +
-                $"(IdMateriel, IdCategorie, NomMateriel, ReferenceConstructeur, CodeBarreInventaire) " +
+                $"(IdMateriel, IdCategorie, NomMateriel, ReferenceConstructeurMateriel, CodeBarreInventaire) " +
                 $"VALUES " +
-                $"({this.IdMateriel}, {this.fK_idCategorie}, {this.NomMateriel}, {this.ReferenceConstructeur}, {this.CodeBarreInventaire});";
+                $"({this.IdMateriel}, {this.FK_idCategorie}, '{this.NomMateriel}', '{this.ReferenceConstructeur}', '{this.CodeBarreInventaire}');";
             int datas = accesBD.SetData(requete);
-            Console.WriteLine(datas);
         }
 
         public void Delete()

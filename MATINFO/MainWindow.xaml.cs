@@ -112,6 +112,7 @@ namespace MATINFO
                 case "btCreerCat":
                     {
                         creationWinCat = new creerCategorie();
+                        creationWinCat.Owner = this;
                         creationWinCat.ShowDialog();
                         if ( (bool)creationWinCat.DialogResult == true )
                         {

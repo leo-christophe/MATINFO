@@ -101,6 +101,12 @@ namespace MATINFO
                     }
             }
         }
+        private void creerCategorieAuto(CategorieMateriel Cat)
+        {
+            applicationdata.LesCategoriesMateriel.Add(Cat);
+            Cat.Create();
+            listViewCategories.Items.Refresh();
+        }
 
         private void ButtonClickModification(object sender, RoutedEventArgs e)
         {

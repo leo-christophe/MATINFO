@@ -49,7 +49,7 @@
                         DisplayMemberBinding="{Binding PrenomPersonnel}"
                         Header="Prenom" />
                     <GridViewColumn
-                        Width="120"
+                        Width="Auto"
                         DisplayMemberBinding="{Binding EmailPersonnel}"
                         Header="Mail" />
                 </GridView>

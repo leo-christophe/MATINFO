@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         Title="Création d'une catégorie" Height="155" Width="236" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/ressources/add-folder.png">
     <Grid Margin="0,0,0,-1">
-        <Button Content="AJOUTER" HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Height="33" Width="97"/>
+        <Button Content="AJOUTER" HorizontalAlignment="Left" Margin="10,74,0,33" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Width="97"/>
         <Label Content="Nom de la catégorie" HorizontalAlignment="Center" Margin="0,26,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="169" HorizontalContentAlignment="Center"/>
-        <TextBox HorizontalAlignment="Center" Margin="0,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169"/>
-        <Button Content="ANNULER" HorizontalAlignment="Left" Margin="118,74,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Height="33" Width="97"/>
+        <TextBox x:Name="tbNomCategorieCreation" HorizontalAlignment="Center" Margin="0,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169"/>
+        <Button Content="ANNULER" Margin="118,74,21,33" Click="Button_ClickCreationAnnuler" RenderTransformOrigin="1.045,-1.618" IsCancel="True"/>
 
     </Grid>
 </Window>

@@ -13,6 +13,7 @@ namespace MATINFO.Model
     {
         private ObservableCollection<Materiel> lesMateriauxCM;
         private int idCategorie;
+        private static int _idCompteur ;
         private string nomCategorie;
 
         public CategorieMateriel()
@@ -23,6 +24,18 @@ namespace MATINFO.Model
         {
             this.IdCategorie = idCategorie;
             this.NomCategorie = nomCategorie;
+        }
+
+        public CategorieMateriel(string nomCategorie)
+        {
+            this.IdCategorie = this.CalculerNouvelId();
+            this.NomCategorie = nomCategorie;
+        }
+
+        public int CalculerNouvelId( )
+        {
+            ObservableCollection<CategorieMateriel> nouvelIdList = this.FindBySelection(" GROUP BY idCategorie, nomCategorie HAVING idCategorie = max(idCategorie) ; ");
+            return nouvelIdList.Count;
         }
 
         public int IdCategorie
@@ -66,7 +79,14 @@ namespace MATINFO.Model
 
         public void Create()
         {
-            throw new NotImplementedException();
+            DataAccess accesBD = new DataAccess();
+            String requete = $"" +
+                $"INSERT INTO CATEGORIE_MATERIEL " +
+                $"(IdCategorie, NomCategorie) " +
+                $"VALUES " +
+                $"({this.IdCategorie}, {this.NomCategorie});";
+            int datas = accesBD.SetData(requete);
+            Console.WriteLine(datas );
         }
 
         public void Delete()
@@ -98,7 +118,22 @@ namespace MATINFO.Model
 
         public ObservableCollection<CategorieMateriel> FindBySelection(string criteres)
         {
-            throw new NotImplementedException();
+            ObservableCollection<CategorieMateriel> lesCategories = new ObservableCollection<CategorieMateriel>();
+            DataAccess accesBD = new DataAccess();
+            String requete = $"select * from categorie_Materiel {criteres};";
+            DataTable datas = accesBD.GetData(requete);
+            if (datas != null)
+            {
+                foreach (DataRow row in datas.Rows)
+                {
+                    CategorieMateriel e = new CategorieMateriel(
+                         int.Parse(row["idCategorie"].ToString()),
+                        (String)row["nomCategorie"]
+                        );
+                    lesCategories.Add(e);
+                }
+            }
+            return lesCategories;
         }
 
         public void Read()

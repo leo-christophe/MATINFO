@@ -20,14 +20,26 @@ namespace MATINFO
     /// </summary>
     public partial class creerCategorie : Window
     {
+        CategorieMateriel nouvelleCategorie;
+
+        public CategorieMateriel NouvelleCategorie { get => nouvelleCategorie; set => nouvelleCategorie = value; }
+
         public creerCategorie()
         {
             InitializeComponent();
+            NouvelleCategorie = null;
         }
-
+        
         private void Button_ClickCreationOK(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            NouvelleCategorie = new CategorieMateriel(tbNomCategorieCreation.Text);
+            this.Close();
+        }
+
+        private void Button_ClickCreationAnnuler(object sender, RoutedEventArgs e)
+        {
+            NouvelleCategorie = null;
+            this.Close();
         }
     }
 }

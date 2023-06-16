@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MATINFO.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,9 @@ namespace MATINFO
 
         private void Button_ClickCreationOK(object sender, RoutedEventArgs e)
         {
+            Personnel p = new Personnel();
             this.Hide();
         }
+
     }
 }

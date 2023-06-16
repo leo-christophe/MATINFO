@@ -1,20 +1,84 @@
-﻿<Window x:Class="MATINFO.creerPersonnel"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MATINFO"
-        mc:Ignorable="d"
-        Title="Création de personnel" Height="255" Width="243" Icon="/ressources/addPerson.png" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+﻿<Window
+    x:Class="MATINFO.creerPersonnel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MATINFO"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Création de personnel"
+    Width="243"
+    Height="255"
+    Icon="/ressources/addPerson.png"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <Grid>
-        <Button Content="AJOUTER" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Height="35" Width="86"/>
-        <Label Content="Nom du personnel" HorizontalAlignment="Center" Margin="0,26,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="169" HorizontalContentAlignment="Center"/>
-        <Label Content="Prénom du personnel" HorizontalAlignment="Center" Margin="0,72,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="169" HorizontalContentAlignment="Center"/>
-        <TextBox HorizontalAlignment="Center" Margin="0,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169"/>
-        <TextBox Margin="0,98,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" HorizontalAlignment="Center" Width="169"/>
-        <Label Content="Mail du personnel" HorizontalAlignment="Center" Margin="0,117,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="169" HorizontalContentAlignment="Center"/>
-        <TextBox HorizontalAlignment="Center" Margin="0,143,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169"/>
-        <Button Content="ANNULER" HorizontalAlignment="Left" Margin="129,170,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Height="35" Width="86"/>
+        <Button
+            Width="86"
+            Height="35"
+            Margin="10,170,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Button_ClickCreationOK"
+            Content="AJOUTER"
+            RenderTransformOrigin="1.045,-1.618" />
+        <Label
+            Width="169"
+            Margin="0,26,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            Content="Nom du personnel"
+            RenderTransformOrigin="0.758,0.591" />
+        <Label
+            Width="169"
+            Margin="0,72,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            Content="Prénom du personnel"
+            RenderTransformOrigin="0.758,0.591" />
+        <TextBox
+            x:Name="tbNomPersonnel"
+            Width="169"
+            Margin="0,52,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Text=""
+            TextWrapping="Wrap" />
+        <TextBox
+            x:Name="tbPrenomPersonnel"
+            Width="169"
+            Margin="0,98,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Text=""
+            TextWrapping="Wrap" />
+        <Label
+            Width="169"
+            Margin="0,117,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            Content="Mail du personnel"
+            RenderTransformOrigin="0.758,0.591" />
+        <TextBox
+            x:Name="tbMailPersonnel"
+            Width="169"
+            Margin="0,143,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Text=""
+            TextWrapping="Wrap" />
+        <Button
+            Width="86"
+            Height="35"
+            Margin="129,170,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Button_ClickCreationOK"
+            Content="ANNULER"
+            RenderTransformOrigin="1.045,-1.618" />
 
     </Grid>
 </Window>

@@ -162,5 +162,15 @@ namespace MATINFO
                 }
             }
         }
+
+        private void creerPersonnelConf(Personnel p)
+        {
+            applicationdata.LesPersonnels.Add(p);
+            p.Create();
+        }
+        public int PrendreDernierIdPersonnel()
+        {
+            return applicationdata.LesPersonnels[-1].IdPersonnel;
+        }
     }
 }

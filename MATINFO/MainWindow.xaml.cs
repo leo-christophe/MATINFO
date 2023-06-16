@@ -104,12 +104,13 @@ namespace MATINFO
                     {
                         creationWinCat = new creerCategorie();
                         creationWinCat.ShowDialog();
-                        if (creationWinCat.NouvelleCategorie != null)
+                        if ( (bool)creationWinCat.DialogResult == true )
                         {
-                            applicationdata.LesCategoriesMateriel.Add(creationWinCat.NouvelleCategorie);
+                            applicationdata.LesCategoriesMateriel.Add(creationWinCat.NouvelleCategorie);     
                             creationWinCat.NouvelleCategorie.Create();
-                            creationWinCat.NouvelleCategorie = null;
+
                             listViewCategories.Items.Refresh();
+
                             listViewMateriel.Items.Refresh();
                         }
                         break;
@@ -180,9 +181,9 @@ namespace MATINFO
                             int cpt = applicationdata.LesMateriaux.Count;
 
                             // Supprimer les materiaux correspondant à la catégorie
-                            for (int i = 0; i<= cpt+1; i++)
+                            for (int i = 0; i < cpt; i++)
                             {
-
+                                Console.WriteLine(idchoisi);
                                 if (applicationdata.LesMateriaux[i].FK_idCategorie == idchoisi)
                                 {
 
@@ -192,7 +193,6 @@ namespace MATINFO
 
                                     listViewMateriel.Items.Refresh();
 
-                                    cpt--;
                                 }
                             }
                             break;

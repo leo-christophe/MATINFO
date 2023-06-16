@@ -84,9 +84,8 @@ namespace MATINFO.Model
                 $"INSERT INTO CATEGORIE_MATERIEL " +
                 $"(IdCategorie, NomCategorie) " +
                 $"VALUES " +
-                $"({this.IdCategorie}, {this.NomCategorie});";
+                $"({this.IdCategorie}, '{this.NomCategorie}');";
             int datas = accesBD.SetData(requete);
-            Console.WriteLine(datas );
         }
 
         public void Delete()

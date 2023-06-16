@@ -27,6 +27,7 @@ namespace MATINFO
         public creerMateriel()
         {
             InitializeComponent();
+            
         }
         
         private void Button_ClickCreationOK(object sender, RoutedEventArgs e)
@@ -36,14 +37,13 @@ namespace MATINFO
             string codeBarreInventaire = tbCodeBarreCreation.Text;
             CategorieMateriel categorie = (CategorieMateriel)cbCategorieChoix.SelectionBoxItem;
             this.NouveauMateriel = new Materiel(categorie.IdCategorie, nomMateriel, referenceConstructeur, codeBarreInventaire, categorie);
-            DialogResult = false;
-            this.Close();
+            
+            DialogResult = true;
         }
 
         private void Button_ClickCreationAnnuler(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
-            this.Close();
+            DialogResult = false;
         }
     }
 }

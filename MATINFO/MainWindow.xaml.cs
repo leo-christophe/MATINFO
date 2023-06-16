@@ -79,7 +79,8 @@ namespace MATINFO
             {
                 case "btCreerPers":
                     {
-                        creationWinPers.Show();
+                        creationWinPers = new creerPersonnel();
+                        creationWinPers.ShowDialog();
                         break;
                     }
                 case "btCreerMat":
@@ -90,7 +91,6 @@ namespace MATINFO
                         {
                             applicationdata.LesMateriaux.Add(creationWinMat.NouveauMateriel);
                             creationWinMat.NouveauMateriel.Create();
-                            creationWinMat.NouveauMateriel = null;
                             listViewMateriel.Items.Refresh();
                         }
                         break;
@@ -209,6 +209,16 @@ namespace MATINFO
                 }
                 fenetreConfirm.Supprimer = false;
             }
+        }
+
+        private void creerPersonnelConf(Personnel p)
+        {
+            applicationdata.LesPersonnels.Add(p);
+            p.Create();
+        }
+        public int PrendreDernierIdPersonnel()
+        {
+            return applicationdata.LesPersonnels[-1].IdPersonnel;
         }
     }
 }

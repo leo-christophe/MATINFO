@@ -44,13 +44,13 @@ namespace MATINFO
 
         private void ButtonClickAnnuler(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            this.Close();
             this.Supprimer = false; 
         }
 
         private void ButtonClickConfirmer(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            this.Close();
             this.Supprimer = true;
         }
     }

@@ -21,10 +21,18 @@ namespace MATINFO.Model
 
         public Personnel(int idPersonnel, string nomPersonnel, string prenomPersonnel, string emailPersonnel)
         {
-            this.IdPersonnel = idPersonnel;
             this.NomPersonnel = nomPersonnel;
             this.PrenomPersonnel = prenomPersonnel;
             this.EmailPersonnel = emailPersonnel;
+            this.IdPersonnel = idPersonnel;
+        }
+
+        public Personnel(string nomPersonnel, string prenomPersonnel, string emailPersonnel)
+        {
+            this.NomPersonnel = nomPersonnel;
+            this.PrenomPersonnel = prenomPersonnel;
+            this.EmailPersonnel = emailPersonnel;
+            this.IdPersonnel = this.CalculerNouvelId();
         }
 
         public int IdPersonnel
@@ -78,10 +86,17 @@ namespace MATINFO.Model
                 emailPersonnel = value;
             }
         }
+        public int CalculerNouvelId()
+        {
+            ObservableCollection<Personnel> nouvelIdList = this.FindAll();
+            return nouvelIdList.Count+1;
+        }
 
         public void Create()
         {
-            throw new NotImplementedException();
+            DataAccess accesBD = new DataAccess();
+            String requete = $"INSERT INTO personnel (idpersonnel, emailpersonnel, nompersonnel, prenompersonnel) VALUES ({this.IdPersonnel}, '{this.EmailPersonnel}', '{this.NomPersonnel}', '{this.PrenomPersonnel}');";
+            int datas = accesBD.SetData(requete);
         }
 
         public void Delete()

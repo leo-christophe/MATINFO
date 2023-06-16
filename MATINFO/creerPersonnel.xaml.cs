@@ -20,16 +20,35 @@ namespace MATINFO
     /// </summary>
     public partial class creerPersonnel : Window
     {
+        Personnel nouveauPersonnel;
+
         public creerPersonnel()
         {
             InitializeComponent();
         }
 
-        private void Button_ClickCreationOK(object sender, RoutedEventArgs e)
+        public Personnel NouveauPersonnel
         {
-            Personnel p = new Personnel();
-            this.Hide();
+            get
+            {
+                return nouveauPersonnel;
+            }
+
+            set
+            {
+                nouveauPersonnel = value;
+            }
         }
 
+        private void Button_ClickCreationOK(object sender, RoutedEventArgs e)
+        {
+            NouveauPersonnel = new Personnel(tbNomPersonnel.Text, tbPrenomPersonnel.Text, tbMailPersonnel.Text);
+            DialogResult = true;
+        }
+        private void Button_ClickCreationAnnuler(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+
+        }
     }
 }

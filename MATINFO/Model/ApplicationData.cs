@@ -32,7 +32,6 @@ namespace MATINFO.Model
                     LesMateriaux.ToList().FindAll(e => e.FK_idCategorie == uneCategorie.IdCategorie));
             }
 
-
         }
     }
 }

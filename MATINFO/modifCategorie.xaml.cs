@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MATINFO.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +21,21 @@ namespace MATINFO
     /// </summary>
     public partial class modifCategorie : Window
     {
+        CategorieMateriel catAmodifier;
+
+        public CategorieMateriel CatAmodifier
+        {
+            get
+            {
+                return catAmodifier;
+            }
+
+            set
+            {
+                catAmodifier = value;
+            }
+        }
+
         public modifCategorie()
         {
             InitializeComponent();
@@ -26,7 +43,16 @@ namespace MATINFO
 
         private void Button_ClickCreationOK(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            CategorieMateriel categorieTemporaire = new CategorieMateriel();
+            ObservableCollection<CategorieMateriel> catMateriel = categorieTemporaire.FindBySelection($"WHERE idCategorie = {((CategorieMateriel)cbCategorieChoix.SelectionBoxItem).IdCategorie}");
+            CatAmodifier = new CategorieMateriel(catMateriel[0].IdCategorie, tbNouveauNom.Text);
+            Console.WriteLine(CatAmodifier.IdCategorie);
+            DialogResult = true;
+        }
+
+        private void Button_ClickCreationAnnuler(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
         }
     }
 }

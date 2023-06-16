@@ -33,7 +33,7 @@ namespace MATINFO.Model
 
         public int CalculerNouvelId( )
         {
-            return this.FindAll().Count;
+            return this.FindAll().Count + 1;
         }
 
         public int IdCategorie
@@ -143,8 +143,8 @@ namespace MATINFO.Model
             DataAccess accesBD = new DataAccess();
             String requete = $"" +
                 $"UPDATE CATEGORIE_MATERIEL" +
-                $"SET IdCategorie = {this.IdCategorie} " +
-                $"SET NomCategorie = '{this.NomCategorie}';";
+                $"SET NomCategorie = '{this.NomCategorie}'" +
+                $"WHERE IdCategorie = {this.IdCategorie};";
             int datas = accesBD.SetData(requete);
         }
     }

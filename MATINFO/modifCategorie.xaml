@@ -4,12 +4,30 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MATINFO"
+        xmlns:model="clr-namespace:MATINFO.Model"
         mc:Ignorable="d"
-        Title="Modification de catégorie" Height="170" Width="245" ResizeMode="NoResize" Icon="/ressources/folder.png" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Button Content="VALIDER" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Height="36" Width="90"/>
-        <Label Content="Nom de la catégorie" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="126" HorizontalContentAlignment="Center"/>
-        <TextBox Margin="10,53,0,0" TextWrapping="Wrap" Text="Nouveau nom cat." VerticalAlignment="Top" HorizontalAlignment="Left" Width="205" RenderTransformOrigin="0.5,0.5" Foreground="#FFAEABAB">
+        Title="Modification de catégorie" Height="222" Width="226" ResizeMode="NoResize" Icon="/ressources/folder.png" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <model:ApplicationData x:Name="applicationData"></model:ApplicationData>
+    </Window.DataContext>
+    <Grid Margin="0,0,0,-6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="24*"/>
+            <ColumnDefinition Width="25*"/>
+        </Grid.ColumnDefinitions>
+        <ComboBox x:Name="cbCategorieChoix" Margin="15,61,0,0" SelectedIndex="-1"  ItemsSource="{Binding LesCategoriesMateriel}" DisplayMemberPath="NomCategorie" SelectedValuePath="IdCategorie" HorizontalAlignment="Left" VerticalAlignment="Top" Width="205" Height="21" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
+            <ComboBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ComboBox.RenderTransform>
+        </ComboBox>
+        <Button Content="VALIDER" HorizontalAlignment="Left" Margin="15,142,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Height="36" Width="90"/>
+        <Label Content="Nouveau nom" HorizontalAlignment="Left" Margin="55,77,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="126" HorizontalContentAlignment="Center" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="tbNouveauNom" Margin="15,103,0,0" TextWrapping="Wrap" Text="Nouveau nom cat." VerticalAlignment="Top" HorizontalAlignment="Left" Width="205" RenderTransformOrigin="0.5,0.5" Foreground="#FFAEABAB" Grid.ColumnSpan="2">
             <TextBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="1"/>
@@ -20,7 +38,8 @@
                 </TransformGroup>
             </TextBox.RenderTransform>
         </TextBox>
-        <Button Content="ANNULER" HorizontalAlignment="Left" Margin="125,85,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Height="36" Width="90"/>
+        <Button Content="ANNULER" HorizontalAlignment="Left" Margin="10,142,0,0" VerticalAlignment="Top" Click="Button_ClickCreationAnnuler" RenderTransformOrigin="1.045,-1.618" Height="36" Width="90" Grid.Column="1"/>
+        <Label Content="Categorie à modifier" HorizontalAlignment="Left" Margin="55,35,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="126" HorizontalContentAlignment="Center" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Window>

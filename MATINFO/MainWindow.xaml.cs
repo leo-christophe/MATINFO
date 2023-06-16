@@ -55,12 +55,12 @@ namespace MATINFO
             modificationPers = new modifPersonnel();
             modificationMat = new modifMateriel();
             modificationAtt = new modifAttributions();
-            modificationCat = new modifCategorie();
+            
 
 
             modificationPers.Hide();
             modificationMat.Hide();
-            modificationCat.Hide();
+
             modificationAtt.Hide();
 
             creationWinPers.Hide();
@@ -103,7 +103,6 @@ namespace MATINFO
                 case "btCreerCat":
                     {
                         creationWinCat = new creerCategorie();
-                        creationWinCat.Owner = this;
                         creationWinCat.ShowDialog();
                         if ( (bool)creationWinCat.DialogResult == true )
                         {
@@ -111,7 +110,6 @@ namespace MATINFO
                             creationWinCat.NouvelleCategorie.Create();
 
                             listViewCategories.Items.Refresh();
-
                             listViewMateriel.Items.Refresh();
                         }
                         break;
@@ -147,7 +145,18 @@ namespace MATINFO
                     }
                 case "btModifierCat":
                     {
-                        modificationCat.Show();
+                        modificationCat = new modifCategorie();
+                        modificationCat.ShowDialog();
+                        if ((bool)modificationCat.DialogResult)
+                        {
+                            List<CategorieMateriel> ListCategories = new List<CategorieMateriel>(applicationdata.LesCategoriesMateriel);
+
+                            int index = ListCategories.FindIndex(x => x.IdCategorie == modificationCat.CatAmodifier.IdCategorie);
+
+                            applicationdata.LesCategoriesMateriel[index] = modificationCat.CatAmodifier;
+                            applicationdata.LesCategoriesMateriel[index].Update();
+                            listViewCategories.Items.Refresh();
+                        }
                         break;
                     }
             }

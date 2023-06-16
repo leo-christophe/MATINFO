@@ -32,6 +32,7 @@ namespace MATINFO
         private void Button_ClickCreationOK(object sender, RoutedEventArgs e)
         {
             NouvelleCategorie = new CategorieMateriel(tbNomCategorieCreation.Text);
+            Console.WriteLine(NouvelleCategorie.IdCategorie);
             DialogResult = true;
 
         }

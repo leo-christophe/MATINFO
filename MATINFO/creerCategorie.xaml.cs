@@ -27,19 +27,19 @@ namespace MATINFO
         public creerCategorie()
         {
             InitializeComponent();
-            NouvelleCategorie = null;
         }
         
         private void Button_ClickCreationOK(object sender, RoutedEventArgs e)
         {
             NouvelleCategorie = new CategorieMateriel(tbNomCategorieCreation.Text);
-            this.Close();
+            DialogResult = true;
+
         }
 
         private void Button_ClickCreationAnnuler(object sender, RoutedEventArgs e)
         {
-            NouvelleCategorie = null;
-            this.Close();
+            DialogResult = false;
+
         }
     }
 }

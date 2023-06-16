@@ -81,6 +81,15 @@ namespace MATINFO
                     {
                         creationWinPers = new creerPersonnel();
                         creationWinPers.ShowDialog();
+                        if ((bool)creationWinPers.DialogResult == true)
+                        {
+
+                            applicationdata.LesPersonnels.Add(creationWinPers.NouveauPersonnel);
+
+                            creationWinPers.NouveauPersonnel.Create();
+
+                            listViewPersonnel.Items.Refresh();
+                        }
                         break;
                     }
                 case "btCreerMat":

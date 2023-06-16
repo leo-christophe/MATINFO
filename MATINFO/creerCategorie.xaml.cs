@@ -22,7 +22,18 @@ namespace MATINFO
     {
         CategorieMateriel nouvelleCategorie;
 
-        public CategorieMateriel NouvelleCategorie { get => nouvelleCategorie; set => nouvelleCategorie = value; }
+        public CategorieMateriel NouvelleCategorie
+        {
+            get
+            {
+                return nouvelleCategorie;
+            }
+
+            set
+            {
+                nouvelleCategorie = value;
+            }
+        }
 
         public creerCategorie()
         {

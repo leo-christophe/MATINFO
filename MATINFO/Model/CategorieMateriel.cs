@@ -45,7 +45,10 @@ namespace MATINFO.Model
 
             set
             {
-                idCategorie = value;
+                if (!string.IsNullOrEmpty(value.ToString()) && value.GetType() == typeof(int) && value > 0)
+                    idCategorie = value;
+                else
+                    throw new ArgumentException("L'ID de catégorie matériel doit être un entier supérieur à 0 et non null!");
             }
         }
 
@@ -58,7 +61,10 @@ namespace MATINFO.Model
 
             set
             {
-                nomCategorie = value;
+                if (!string.IsNullOrEmpty(value.ToString()) && value.GetType() == typeof(string))
+                    nomCategorie = value;
+                else
+                    throw new ArgumentException("Le nom de la catégorie doit être une chaîne de caractères non nulle ! ");
             }
         }
 
@@ -71,9 +77,13 @@ namespace MATINFO.Model
 
             set
             {
-                lesMateriauxCM = value;
+                if (value.GetType() == typeof(ObservableCollection<Materiel>) && value != null)
+                    lesMateriauxCM = value;
+                else
+                    throw new ArgumentException("lesMateriauxCM doit être non null et de type ObservableCollection<Materiel>!");
             }
         }
+
 
         public void Create()
         {
@@ -82,7 +92,7 @@ namespace MATINFO.Model
                 $"INSERT INTO CATEGORIE_MATERIEL " +
                 $"(IdCategorie, NomCategorie) " +
                 $"VALUES " +
-                $"({this.IdCategorie}, '{this.NomCategorie}');";
+                $"(nextval('categorie_materiel_idcategorie_seq'::regclass), '{this.NomCategorie}');";
             int datas = accesBD.SetData(requete);
         }
 
@@ -143,8 +153,8 @@ namespace MATINFO.Model
             DataAccess accesBD = new DataAccess();
             String requete = $"" +
                 $"UPDATE CATEGORIE_MATERIEL" +
-                $"SET NomCategorie = '{this.NomCategorie}'" +
-                $"WHERE IdCategorie = {this.IdCategorie};";
+                $" SET NomCategorie = '{this.NomCategorie}'" +
+                $" WHERE IdCategorie = {this.IdCategorie};";
             int datas = accesBD.SetData(requete);
         }
     }

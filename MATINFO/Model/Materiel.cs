@@ -47,8 +47,7 @@ namespace MATINFO.Model
 
         public int CalculerNouvelId()
         {
-            ObservableCollection<Materiel> nouvelIdList = this.FindAll();
-            return nouvelIdList.Count;
+            return this.FindAll().Count + 1;
         }
         public int IdMateriel
         {
@@ -59,7 +58,11 @@ namespace MATINFO.Model
 
             set
             {
-                idMateriel = value;
+                // Si l'ID n'existe pas, et est un entier non null ou vide > 0.
+                if (!String.IsNullOrEmpty(value.ToString()) && value.GetType() == typeof(int) && value > 0)
+                    idMateriel = value;
+                else
+                    throw new ArgumentException("L'ID_MATERIEL doit être un entier > 0 non null ou vide qui ne doit pas exister.");
             }
         }
 
@@ -72,11 +75,15 @@ namespace MATINFO.Model
 
             set
             {
-                fK_idCategorie = value;
+                // Si l'ID catégorie existe bien, n'est pas null et est un entier : 
+                if (this.FindBySelection($"WHERE IdCategorie = {value}") != null && !String.IsNullOrEmpty(value.ToString()) && value.GetType() == typeof(int) && value > 0)
+                    fK_idCategorie = value;
+                else
+                    throw new Exception("La clé étrangère doit exister, ne doit pas être null ou vide et doit être un entier > 0.");
             }
         }
 
-        public string NomMateriel
+        public string? NomMateriel
         {
             get
             {
@@ -85,14 +92,14 @@ namespace MATINFO.Model
 
             set
             {
-                if (!String.IsNullOrEmpty(value))
+                if (!String.IsNullOrEmpty(value) && value.GetType() == typeof(string))
                     nomMateriel = value;
                 else
-                    nomMateriel = value;
+                    throw new ArgumentException("Le nom du matériel doit être une chaîne de caractères non nulle ou vide");
             }
         }
 
-        public string ReferenceConstructeur
+        public string? ReferenceConstructeur
         {
             get
             {
@@ -108,7 +115,7 @@ namespace MATINFO.Model
             }
         }
 
-        public string CodeBarreInventaire
+        public string? CodeBarreInventaire
         {
             get
             {

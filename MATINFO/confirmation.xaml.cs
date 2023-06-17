@@ -20,38 +20,19 @@ namespace MATINFO
     /// </summary>
     public partial class confirmation : Window
     {
-
-        private bool supprimer;
         public confirmation()
         {
-            this.Supprimer = false;
             InitializeComponent();
-            
-        }
-
-        public bool Supprimer
-        {
-            get
-            {
-                return supprimer;
-            }
-
-            set
-            {
-                supprimer = value;
-            }
         }
 
         private void ButtonClickAnnuler(object sender, RoutedEventArgs e)
         {
-            this.Close();
-            this.Supprimer = false; 
+            this.DialogResult = false;
         }
 
         private void ButtonClickConfirmer(object sender, RoutedEventArgs e)
         {
-            this.Close();
-            this.Supprimer = true;
+            this.DialogResult = true;
         }
     }
 }

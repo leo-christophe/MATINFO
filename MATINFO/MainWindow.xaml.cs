@@ -162,7 +162,9 @@ namespace MATINFO
 
                             int index = ListCategories.FindIndex(x => x.IdCategorie == modificationCat.CatAmodifier.IdCategorie);
 
-                            applicationdata.LesCategoriesMateriel[index] = modificationCat.CatAmodifier;
+                            applicationdata.LesCategoriesMateriel[index].NomCategorie = modificationCat.CatAmodifier.NomCategorie;
+                            
+                            // Mettre à jour avec la bd
                             applicationdata.LesCategoriesMateriel[index].Update();
                             listViewCategories.Items.Refresh();
                         }
@@ -173,10 +175,10 @@ namespace MATINFO
 
         private void ButtonClickSuppression(object sender, RoutedEventArgs e)
         {
-            confirmation fenetreConfirm = new confirmation();
-            fenetreConfirm.ShowDialog();
+            confirmation fenetreConfirmation = new confirmation();
+            fenetreConfirmation.ShowDialog();
 
-            if ( fenetreConfirm.Supprimer )
+            if ( (bool)fenetreConfirmation.DialogResult )
             {
 
                 switch (((Button)(sender)).Name)
@@ -191,31 +193,28 @@ namespace MATINFO
 
                     case "btSupprimerCat":
                         {
-                            int indexselected = listViewCategories.SelectedIndex;
-                            int idchoisi = applicationdata.LesCategoriesMateriel[indexselected].IdCategorie;
-                            applicationdata.LesCategoriesMateriel[indexselected].Delete();
+                            int selectedIndex = listViewCategories.SelectedIndex;
+                            CategorieMateriel selectedItem = (CategorieMateriel)listViewCategories.SelectedItem;
+
+                            // suppression de la catégorie
+                            applicationdata.LesCategoriesMateriel[selectedIndex].Delete();
                             applicationdata.LesCategoriesMateriel.RemoveAt(listViewCategories.SelectedIndex);
-                            listViewCategories.Items.Refresh();
+                            listViewCategories.Items.Refresh(); 
 
-                            int cpt = applicationdata.LesMateriaux.Count;
+                            // Suppression des materiaux correspondant à la catégorie
+                            List<Materiel> TemporaryList = new List<Materiel>( applicationdata.LesMateriaux );
 
-                            // Supprimer les materiaux correspondant à la catégorie
-                            for (int i = 0; i < cpt; i++)
-                            {
-                                Console.WriteLine(idchoisi);
-                                if (applicationdata.LesMateriaux[i].FK_idCategorie == idchoisi)
+                            foreach( Materiel materiel in TemporaryList )
                                 {
-
-                                    applicationdata.LesMateriaux[i].Delete();
-
-                                    applicationdata.LesMateriaux.RemoveAt(i);
-
-                                    listViewMateriel.Items.Refresh();
-
+                                    if (materiel.FK_idCategorie == selectedItem.IdCategorie )
+                                    {
+                                        applicationdata.LesMateriaux.Remove(materiel);
+                                        materiel.Delete();
+                                    }
                                 }
-                            }
+                            listViewMateriel.Items.Refresh();
                             break;
-                        }
+                        }                
 
                     case "btSupprimerPers":
                         {
@@ -225,7 +224,6 @@ namespace MATINFO
                             break;
                         }
                 }
-                fenetreConfirm.Supprimer = false;
             }
         }
 

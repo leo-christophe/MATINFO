@@ -6,16 +6,15 @@
         xmlns:local="clr-namespace:MATINFO"
         xmlns:model="clr-namespace:MATINFO.Model"
         mc:Ignorable="d"
-        Title="Modification de catégorie" Height="222" Width="226" ResizeMode="NoResize" Icon="/ressources/folder.png" WindowStartupLocation="CenterScreen">
+        Title="Modification de catégorie" Height="233" Width="237" ResizeMode="NoResize" Icon="/ressources/folder.png" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <model:ApplicationData x:Name="applicationData"></model:ApplicationData>
     </Window.DataContext>
-    <Grid Margin="0,0,0,-6">
+    <Grid Margin="0,0,0,1">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="24*"/>
-            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ComboBox x:Name="cbCategorieChoix" Margin="15,61,0,0" SelectedIndex="-1"  ItemsSource="{Binding LesCategoriesMateriel}" DisplayMemberPath="NomCategorie" SelectedValuePath="IdCategorie" HorizontalAlignment="Left" VerticalAlignment="Top" Width="205" Height="21" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
+        <ComboBox x:Name="cbCategorieChoix" Margin="0,61,0,0" SelectedIndex="-1"  ItemsSource="{Binding LesCategoriesMateriel}" DisplayMemberPath="NomCategorie" SelectedValuePath="IdCategorie" HorizontalAlignment="Center" VerticalAlignment="Top" Width="205" Height="21" RenderTransformOrigin="0.5,0.5">
             <ComboBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleY="1"/>
@@ -26,8 +25,8 @@
             </ComboBox.RenderTransform>
         </ComboBox>
         <Button Content="VALIDER" HorizontalAlignment="Left" Margin="15,142,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Height="36" Width="90"/>
-        <Label Content="Nouveau nom" HorizontalAlignment="Left" Margin="55,77,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="126" HorizontalContentAlignment="Center" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="tbNouveauNom" Margin="15,103,0,0" TextWrapping="Wrap" Text="Nouveau nom cat." VerticalAlignment="Top" HorizontalAlignment="Left" Width="205" RenderTransformOrigin="0.5,0.5" Foreground="#FFAEABAB" Grid.ColumnSpan="2">
+        <Label Content="Nouveau nom" HorizontalAlignment="Center" Margin="0,82,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="126" HorizontalContentAlignment="Center" Height="30"/>
+        <TextBox x:Name="tbNouveauNom" TextWrapping="Wrap" Text="Nouveau nom cat." VerticalAlignment="Top" HorizontalAlignment="Center" Width="205" RenderTransformOrigin="0.5,0.5" Foreground="#FFAEABAB" Margin="0,112,0,0">
             <TextBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="1"/>
@@ -38,8 +37,8 @@
                 </TransformGroup>
             </TextBox.RenderTransform>
         </TextBox>
-        <Button Content="ANNULER" HorizontalAlignment="Left" Margin="10,142,0,0" VerticalAlignment="Top" Click="Button_ClickCreationAnnuler" RenderTransformOrigin="1.045,-1.618" Height="36" Width="90" Grid.Column="1"/>
-        <Label Content="Categorie à modifier" HorizontalAlignment="Left" Margin="55,35,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="126" HorizontalContentAlignment="Center" Grid.ColumnSpan="2"/>
+        <Button Content="ANNULER" HorizontalAlignment="Left" Margin="126,142,0,0" VerticalAlignment="Top" Click="Button_ClickCreationAnnuler" RenderTransformOrigin="1.045,-1.618" Height="36" Width="90"/>
+        <Label Content="Categorie à modifier" HorizontalAlignment="Center" Margin="0,35,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="126" HorizontalContentAlignment="Center"/>
 
     </Grid>
 </Window>

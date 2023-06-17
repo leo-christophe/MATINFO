@@ -23,11 +23,7 @@ namespace MATINFO
     /// </summary>
     public partial class MainWindow : Window
     {
-        /*
-        public List<CategorieMateriel> CategoriesMateriel;
-        public List<Personnel> Personnels;
-        public List<Materiel> Materiels;
-        public List<Attribution> Attributions;*/
+
         creerPersonnel creationWinPers;
         creerMateriel creationWinMat;
         creerCategorie creationWinCat;
@@ -46,31 +42,6 @@ namespace MATINFO
 
             accesBD = new DataAccess();
             res = accesBD.OpenConnection();
-
-            creationWinPers = new creerPersonnel();
-            creationWinMat = new creerMateriel();
-
-            creationWinAtt = new creerAttribution();
-
-            modificationPers = new modifPersonnel();
-            modificationMat = new modifMateriel();
-            modificationAtt = new modifAttributions();
-
-
-
-
-            modificationPers.Hide();
-            modificationMat.Hide();
-
-            modificationAtt.Hide();
-
-            creationWinPers.Hide();
-
-            creationWinMat.Hide();
-            creationWinAtt.Hide();
-
-
-
         }
 
         private void ButtonClickCreate(object sender, RoutedEventArgs e)
@@ -95,14 +66,25 @@ namespace MATINFO
                     }
                 case "btCreerMat":
                     {
-                        creationWinMat = new creerMateriel();
-                        creationWinMat.ShowDialog();
-                        if (creationWinMat.NouveauMateriel != null)
+
+                        creerMateriel creationWinMat = new creerMateriel();
+                        creationWinMat.Owner = this;
+                        creationWinMat.DataContext = applicationdata;
+
+                        bool? confirm = creationWinMat.ShowDialog();
+
+                        if (confirm == true)
                         {
+                            
                             applicationdata.LesMateriaux.Add(creationWinMat.NouveauMateriel);
+                            
+                            
                             creationWinMat.NouveauMateriel.Create();
+                            
                             listViewMateriel.Items.Refresh();
+                            listViewCategories.Items.Refresh();
                         }
+
                         break;
                     }
                 case "btCreerAtt":

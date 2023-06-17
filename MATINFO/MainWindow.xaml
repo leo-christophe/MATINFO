@@ -67,7 +67,7 @@
                     <GridViewColumn
                         Width="Auto"
                         DisplayMemberBinding="{Binding Path=NomMateriel}"
-                        Header="nomMateriel" />
+                        Header="NomMateriel" />
 
                     <GridViewColumn
                         Width="Auto"
@@ -77,13 +77,12 @@
                     <GridViewColumn
                         Width="Auto"
                         DisplayMemberBinding="{Binding Path=CodeBarreInventaire}"
-                        Header="codeBarre" />
-
+                        Header="Code Barre" />
 
                     <GridViewColumn
                         Width="Auto"
                         DisplayMemberBinding="{Binding Path=ReferenceConstructeur}"
-                        Header="referenceConstructeur" />
+                        Header="Reference Constructeur" />
                 </GridView>
             </ListView.View>
         </ListView>

@@ -26,29 +26,14 @@ namespace MATINFO
             
         }
 
-        public bool Supprimer
-        {
-            DialogResult = false;
-            {
-                return supprimer;
-            }
-
-            DialogResult = true;
-            {
-                supprimer = value;
-            }
-        }
-
         private void ButtonClickAnnuler(object sender, RoutedEventArgs e)
         {
-            this.Close();
-            this.Supprimer = false; 
+            DialogResult = false;
         }
 
         private void ButtonClickConfirmer(object sender, RoutedEventArgs e)
         {
-            this.Close();
-            this.Supprimer = true;
+            DialogResult = true;
         }
     }
 }

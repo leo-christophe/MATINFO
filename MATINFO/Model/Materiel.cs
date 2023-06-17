@@ -36,13 +36,13 @@ namespace MATINFO.Model
 
         public Materiel(int fK_idCategorie, string nomMateriel, string referenceConstructeur, string codeBarreInventaire, CategorieMateriel uneCategorieM)
         {
-            FK_idCategorie = fK_idCategorie;
-            NomMateriel = nomMateriel;
-            ReferenceConstructeur = referenceConstructeur;
-            CodeBarreInventaire = codeBarreInventaire;
-            UneCategorieM = uneCategorieM;
+            this.FK_idCategorie = fK_idCategorie;
+            this.NomMateriel = nomMateriel;
+            this.ReferenceConstructeur = referenceConstructeur;
+            this.CodeBarreInventaire = codeBarreInventaire;
+            this.UneCategorieM = uneCategorieM;
 
-            IdMateriel = this.CalculerNouvelId();
+            this.IdMateriel = this.CalculerNouvelId();
         }
 
         public int CalculerNouvelId()
@@ -76,7 +76,7 @@ namespace MATINFO.Model
             set
             {
                 // Si l'ID catégorie existe bien, n'est pas null et est un entier : 
-                if (this.FindBySelection($"WHERE IdCategorie = {value}") != null && !String.IsNullOrEmpty(value.ToString()) && value.GetType() == typeof(int) && value > 0)
+                if (!String.IsNullOrEmpty(value.ToString()) && value.GetType() == typeof(int) && value > 0)
                     fK_idCategorie = value;
                 else
                     throw new Exception("La clé étrangère doit exister, ne doit pas être null ou vide et doit être un entier > 0.");
@@ -153,6 +153,7 @@ namespace MATINFO.Model
                 $"VALUES " +
                 $"({this.IdMateriel}, {this.FK_idCategorie}, '{this.NomMateriel}', '{this.ReferenceConstructeur}', '{this.CodeBarreInventaire}');";
             int datas = accesBD.SetData(requete);
+            // nextval('materiel_idmateriel_seq'::regclass)
         }
 
         public void Delete()

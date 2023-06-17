@@ -14,7 +14,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ComboBox x:Name="cbCategorieChoix" Margin="0,61,0,0" SelectedIndex="-1"  ItemsSource="{Binding LesCategoriesMateriel}" DisplayMemberPath="NomCategorie" SelectedValuePath="IdCategorie" HorizontalAlignment="Center" VerticalAlignment="Top" Width="205" Height="21" RenderTransformOrigin="0.5,0.5">
+        <ComboBox x:Name="cbCategorieChoix" Margin="0,61,0,0" SelectedIndex="0"  ItemsSource="{Binding LesCategoriesMateriel}" DisplayMemberPath="NomCategorie" SelectedValuePath="IdCategorie" HorizontalAlignment="Center" VerticalAlignment="Top" Width="205" Height="21" RenderTransformOrigin="0.5,0.5">
             <ComboBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleY="1"/>

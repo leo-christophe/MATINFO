@@ -1,6 +1,7 @@
 ﻿using MATINFO.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,24 +21,40 @@ namespace MATINFO
     /// </summary>
     public partial class creerMateriel : Window
     {
-        Materiel nouveauMateriel;
-
-        public Materiel NouveauMateriel { get => nouveauMateriel; set => nouveauMateriel = value; }
+        private Materiel nouveauMateriel;
 
         public creerMateriel()
         {
             InitializeComponent();
-            
+
         }
+        public Materiel NouveauMateriel
+        {
+            get
+            {
+                return this.nouveauMateriel;
+            }
+
+            set
+            {
+                this.nouveauMateriel = value;
+            }
+        }
+
+
         
         private void Button_ClickCreationOK(object sender, RoutedEventArgs e)
         {
+
             string nomMateriel = tbNomMaterielCreation.Text;
             string referenceConstructeur = tbReferenceConstructeurCreation.Text;
             string codeBarreInventaire = tbCodeBarreCreation.Text;
-            CategorieMateriel categorie = (CategorieMateriel)cbCategorieChoix.SelectionBoxItem;
+
+            CategorieMateriel categorie = (CategorieMateriel)cbCategorieChoixMat.SelectionBoxItem;
+            Console.WriteLine(categorie.IdCategorie);
+
             this.NouveauMateriel = new Materiel(categorie.IdCategorie, nomMateriel, referenceConstructeur, codeBarreInventaire, categorie);
-            
+
             DialogResult = true;
         }
 

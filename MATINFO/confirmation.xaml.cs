@@ -23,16 +23,32 @@ namespace MATINFO
         public confirmation()
         {
             InitializeComponent();
+            
+        }
+
+        public bool Supprimer
+        {
+            DialogResult = false;
+            {
+                return supprimer;
+            }
+
+            DialogResult = true;
+            {
+                supprimer = value;
+            }
         }
 
         private void ButtonClickAnnuler(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
+            this.Close();
+            this.Supprimer = false; 
         }
 
         private void ButtonClickConfirmer(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            this.Close();
+            this.Supprimer = true;
         }
     }
 }

@@ -55,7 +55,7 @@ namespace MATINFO
             modificationPers = new modifPersonnel();
             modificationMat = new modifMateriel();
             modificationAtt = new modifAttributions();
-            
+
 
 
 

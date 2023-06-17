@@ -61,10 +61,10 @@ namespace MATINFO.Model
 
             set
             {
-                if (!string.IsNullOrEmpty(value.ToString()) && value.GetType() == typeof(string))
+                if ( !string.IsNullOrEmpty(value.ToString()) && value.GetType() == typeof(string) && value.Length <= 50 )
                     nomCategorie = value;
                 else
-                    throw new ArgumentException("Le nom de la catégorie doit être une chaîne de caractères non nulle ! ");
+                    throw new ArgumentException("Le nom de la catégorie doit être une chaîne de caractères non nulle de taille <= 50! ");
             }
         }
 

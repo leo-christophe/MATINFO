@@ -49,13 +49,14 @@ namespace MATINFO
 
             creationWinPers = new creerPersonnel();
             creationWinMat = new creerMateriel();
-            
+
             creationWinAtt = new creerAttribution();
 
             modificationPers = new modifPersonnel();
             modificationMat = new modifMateriel();
             modificationAtt = new modifAttributions();
             
+
 
 
             modificationPers.Hide();
@@ -113,9 +114,9 @@ namespace MATINFO
                     {
                         creationWinCat = new creerCategorie();
                         creationWinCat.ShowDialog();
-                        if ( (bool)creationWinCat.DialogResult == true )
+                        if ((bool)creationWinCat.DialogResult == true)
                         {
-                            applicationdata.LesCategoriesMateriel.Add(creationWinCat.NouvelleCategorie);     
+                            applicationdata.LesCategoriesMateriel.Add(creationWinCat.NouvelleCategorie);
                             creationWinCat.NouvelleCategorie.Create();
 
                             listViewCategories.Items.Refresh();
@@ -163,7 +164,7 @@ namespace MATINFO
                             int index = ListCategories.FindIndex(x => x.IdCategorie == modificationCat.CatAmodifier.IdCategorie);
 
                             applicationdata.LesCategoriesMateriel[index].NomCategorie = modificationCat.CatAmodifier.NomCategorie;
-                            
+
                             // Mettre à jour avec la bd
                             applicationdata.LesCategoriesMateriel[index].Update();
                             listViewCategories.Items.Refresh();
@@ -178,7 +179,7 @@ namespace MATINFO
             confirmation fenetreConfirmation = new confirmation();
             fenetreConfirmation.ShowDialog();
 
-            if ( (bool)fenetreConfirmation.DialogResult )
+            if ((bool)fenetreConfirmation.DialogResult)
             {
 
                 switch (((Button)(sender)).Name)
@@ -202,16 +203,16 @@ namespace MATINFO
                             listViewCategories.Items.Refresh(); 
 
                             // Suppression des materiaux correspondant à la catégorie
-                            List<Materiel> TemporaryList = new List<Materiel>( applicationdata.LesMateriaux );
+                            List<Materiel> TemporaryList = new List<Materiel>(applicationdata.LesMateriaux);
 
-                            foreach( Materiel materiel in TemporaryList )
+                            foreach (Materiel materiel in TemporaryList)
+                            {
+                                if (materiel.FK_idCategorie == selectedItem.IdCategorie)
                                 {
-                                    if (materiel.FK_idCategorie == selectedItem.IdCategorie )
-                                    {
-                                        applicationdata.LesMateriaux.Remove(materiel);
-                                        materiel.Delete();
-                                    }
+                                    applicationdata.LesMateriaux.Remove(materiel);
+                                    materiel.Delete();
                                 }
+                            }
                             listViewMateriel.Items.Refresh();
                             break;
                         }                

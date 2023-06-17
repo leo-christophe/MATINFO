@@ -19,7 +19,7 @@ namespace MATINFO.Model
         private string? codeBarreInventaire;
 
         private CategorieMateriel uneCategorieM;
-        
+
 
         public Materiel()
         {
@@ -173,8 +173,8 @@ namespace MATINFO.Model
                 foreach (DataRow row in datas.Rows)
                 {
                     Materiel e = new Materiel(
-                        int.Parse(row["idmateriel"].ToString()), 
-                        int.Parse(row["idcategorie"].ToString()), 
+                        int.Parse(row["idmateriel"].ToString()),
+                        int.Parse(row["idcategorie"].ToString()),
                         (String)row["nommateriel"],
                         (String)row["referenceconstructeurmateriel"],
                         (String)row["codebarreinventaire"]
@@ -223,7 +223,7 @@ namespace MATINFO.Model
             {
                 foreach (DataRow row in datas.Rows)
                 {
-                    Console.WriteLine($"{ int.Parse(row["idmateriel"].ToString())} { int.Parse(row["idcategorie"].ToString())} { (String)row["nommateriel"]} { (String)row["referenceconstructeurmateriel"]} { (String)row["codebarreinventaire"]}");
+                    Console.WriteLine($"{int.Parse(row["idmateriel"].ToString())} {int.Parse(row["idcategorie"].ToString())} {(String)row["nommateriel"]} {(String)row["referenceconstructeurmateriel"]} {(String)row["codebarreinventaire"]}");
                 }
             }
         }

@@ -16,7 +16,7 @@
         <Button
             Width="86"
             Height="35"
-            Margin="10,170,0,0"
+            Margin="36,170,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="Button_ClickCreationOK"

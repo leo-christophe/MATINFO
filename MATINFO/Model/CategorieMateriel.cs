@@ -31,7 +31,7 @@ namespace MATINFO.Model
             this.NomCategorie = nomCategorie;
         }
 
-        public int CalculerNouvelId( )
+        public int CalculerNouvelId()
         {
             return this.FindAll().Count + 1;
         }

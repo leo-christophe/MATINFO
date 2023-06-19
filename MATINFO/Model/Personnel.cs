@@ -103,7 +103,13 @@ namespace MATINFO.Model
         }
         public int CalculerNouvelId()
         {
-            return this.FindAll().Count + 1;
+            DataAccess accesBD = new DataAccess();
+            String requete = "SELECT MAX(idPersonnel) + 1 AS \"E\" FROM personnel;";
+            DataTable datas = accesBD.GetData(requete);
+            if (datas != null)
+                return int.Parse(datas.Rows[0]["E"].ToString());
+            else
+                return 1;
         }
 
         public void Create()

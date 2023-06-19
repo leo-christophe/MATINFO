@@ -7,9 +7,61 @@ namespace MATINFO.Model
 {
     public class ApplicationData
     {
-        public ObservableCollection<CategorieMateriel> LesCategoriesMateriel { get; set; }
-        public ObservableCollection<Materiel> LesMateriaux { get; set; }
-        public ObservableCollection<Personnel> LesPersonnels { get; set; }
+        private ObservableCollection<CategorieMateriel> lesCategoriesMateriel;
+        private ObservableCollection<Materiel> lesMateriaux;
+        private ObservableCollection<Personnel> lesPersonnels;
+        private ObservableCollection<Attributions> lesAttributions;
+        public ObservableCollection<Attributions> LesAttributions
+        {
+            get
+            {
+                return lesAttributions;
+            }
+
+            set
+            {
+                lesAttributions = value;
+            }
+        }
+
+        public ObservableCollection<Personnel> LesPersonnels
+        {
+            get
+            {
+                return lesPersonnels;
+            }
+
+            set
+            {
+                lesPersonnels = value;
+            }
+        }
+
+        public ObservableCollection<Materiel> LesMateriaux
+        {
+            get
+            {
+                return lesMateriaux;
+            }
+
+            set
+            {
+                lesMateriaux = value;
+            }
+        }
+
+        public ObservableCollection<CategorieMateriel> LesCategoriesMateriel
+        {
+            get
+            {
+                return lesCategoriesMateriel;
+            }
+
+            set
+            {
+                lesCategoriesMateriel = value;
+            }
+        }
         public ApplicationData()
         {
             CategorieMateriel categorieMateriel = new CategorieMateriel();

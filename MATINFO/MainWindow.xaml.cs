@@ -25,12 +25,10 @@ namespace MATINFO
     {
 
         creerPersonnel creationWinPers;
-        creerMateriel creationWinMat;
         creerCategorie creationWinCat;
         creerAttribution creationWinAtt;
 
         modifPersonnel modificationPers;
-        modifMateriel modificationMat;
         modifAttributions modificationAtt;
         modifCategorie modificationCat;
 
@@ -227,8 +225,8 @@ namespace MATINFO
                             listViewCategories.Items.Refresh(); 
 
                             // Suppression des materiaux correspondant à la catégorie
+                            // On créé une list temporaire pour pouvoir supprimer.
                             List<Materiel> TemporaryList = new List<Materiel>(applicationdata.LesMateriaux);
-
                             foreach (Materiel materiel in TemporaryList)
                             {
                                 if (materiel.FK_idCategorie == selectedItem.IdCategorie)
@@ -250,16 +248,6 @@ namespace MATINFO
                         }
                 }
             }
-        }
-
-        private void creerPersonnelConf(Personnel p)
-        {
-            applicationdata.LesPersonnels.Add(p);
-            p.Create();
-        }
-        public int PrendreDernierIdPersonnel()
-        {
-            return applicationdata.LesPersonnels[-1].IdPersonnel;
         }
     }
 }

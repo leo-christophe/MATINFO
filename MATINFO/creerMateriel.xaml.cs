@@ -32,13 +32,23 @@ namespace MATINFO
         private void Button_ClickCreationOK(object sender, RoutedEventArgs e)
         {
             CategorieMateriel categorie = (CategorieMateriel)cbCategorieChoixMat.SelectionBoxItem;
+            if ( !string.IsNullOrEmpty( cbCategorieChoixMat.SelectionBoxItem.ToString() ) && !string.IsNullOrEmpty(cbCategorieChoixMat.SelectionBoxItem.ToString()) 
+                && !string.IsNullOrEmpty(tbNomMaterielCreation.Text) && !string.IsNullOrEmpty( tbReferenceConstructeurCreation.Text ) && !string.IsNullOrEmpty( tbCodeBarreCreation.Text ))
+            { 
+                
 
-            this.NouveauMateriel = new Materiel(categorie.IdCategorie,
-                tbNomMaterielCreation.Text,
-                tbReferenceConstructeurCreation.Text,
-                tbCodeBarreCreation.Text, categorie);
+                this.NouveauMateriel = new Materiel(categorie.IdCategorie,
+                    tbNomMaterielCreation.Text,
+                    tbReferenceConstructeurCreation.Text,
+                    tbCodeBarreCreation.Text, categorie);
 
-            DialogResult = true;
+            
+                DialogResult = true;
+            }
+            else
+            {
+                MessageBox.Show("Tous les champs doivent être renseignés.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Button_ClickCreationAnnuler(object sender, RoutedEventArgs e)

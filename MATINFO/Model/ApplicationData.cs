@@ -2,6 +2,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace MATINFO.Model
 {
@@ -67,23 +68,54 @@ namespace MATINFO.Model
             CategorieMateriel categorieMateriel = new CategorieMateriel();
             Personnel personnel = new Personnel();
             Materiel materiel = new Materiel();
+            Attributions attributions = new Attributions();
 
             LesCategoriesMateriel = categorieMateriel.FindAll();
             LesMateriaux = materiel.FindAll();
             LesPersonnels = personnel.FindAll();
+            LesAttributions = attributions.FindAll();
 
+            //pour chaque matériel, on affecte une catégorie matériel.
             foreach ( Materiel leMateriel in LesMateriaux.ToList())
             {
                 leMateriel.UneCategorieM = LesCategoriesMateriel.ToList().Find(g => g.IdCategorie == leMateriel.FK_idCategorie);
 
             }
 
+            //pour chaques catégorie matériel on affecte un matériel.
             foreach ( CategorieMateriel uneCategorie in LesCategoriesMateriel.ToList())
             {
                 uneCategorie.LesMateriauxCM = new ObservableCollection<Materiel>(
                     LesMateriaux.ToList().FindAll(e => e.FK_idCategorie == uneCategorie.IdCategorie));
             }
 
+
+
+
+
+            //POUR LES ATTRIBUTIONS
+            // pour chaque attributions, on affecte son personnel
+            foreach (Attributions uneAttribution in LesAttributions.ToList())
+            {
+                uneAttribution.APersonnel = LesPersonnels.ToList().Find(g => g.IdPersonnel == uneAttribution.FK_idPersonnel);
+            }
+            // pour chaque personnel, on affecte sont attributions
+            foreach (Personnel unPersonnel in LesPersonnels.ToList())
+            {
+                unPersonnel.SesAttributions = new ObservableCollection<Attributions>(
+                    LesAttributions.ToList().FindAll(e => e.FK_idPersonnel == unPersonnel.IdPersonnel));
+            }
+            // pour chaque attributions, on affecte son matériel
+            foreach (Attributions uneAttribution in LesAttributions.ToList())
+            {
+                uneAttribution.AMateriel = LesMateriaux.ToList().Find(g => g.IdMateriel == uneAttribution.FK_idMateriel);
+            }
+            // pour chaque matériel, on affecte ses attributions
+            foreach (Materiel unMateriel in LesMateriaux.ToList())
+            {
+                unMateriel.SesAttributions = new ObservableCollection<Attributions>(
+                    LesAttributions.ToList().FindAll(e => e.FK_idMateriel == unMateriel.IdMateriel));
+            }
         }
     }
 }

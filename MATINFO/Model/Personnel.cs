@@ -16,6 +16,8 @@ namespace MATINFO.Model
         private string prenomPersonnel;
         private string emailPersonnel;
 
+        private ObservableCollection<Attributions> sesAttributions;
+
         public Personnel()
         {
         }
@@ -101,6 +103,23 @@ namespace MATINFO.Model
                     throw new ArgumentException("Le mail du personnel doit être une chaine de caractère non nulle de longueur inférieur à 30 de format correct.");
             }
         }
+
+        public ObservableCollection<Attributions> SesAttributions
+        {
+            get
+            {
+                return sesAttributions;
+            }
+
+            set
+            {
+                if (value.GetType() == typeof(ObservableCollection<Attributions>) && value != null)
+                    sesAttributions = value;
+                else
+                    throw new ArgumentException("sesAttributions doit être non null et de type ObservableCollection<Attributions>!");
+            }
+        }
+
         public int CalculerNouvelId()
         {
             DataAccess accesBD = new DataAccess();

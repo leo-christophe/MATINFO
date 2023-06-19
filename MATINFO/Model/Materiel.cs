@@ -19,6 +19,7 @@ namespace MATINFO.Model
         private string? codeBarreInventaire;
 
         private CategorieMateriel uneCategorieM;
+        private ObservableCollection<Attributions> sesAttributions;
 
         public static int cptId = 1;
 
@@ -139,6 +140,19 @@ namespace MATINFO.Model
             set
             {
                 uneCategorieM = value;
+            }
+        }
+
+        public ObservableCollection<Attributions> SesAttributions
+        {
+            get
+            {
+                return sesAttributions;
+            }
+
+            set
+            {
+                sesAttributions = value;
             }
         }
 

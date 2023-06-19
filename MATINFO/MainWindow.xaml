@@ -91,6 +91,7 @@
             x:Name="listViewAttributions"
             Grid.Row="1"
             Grid.Column="2"
+            ItemsSource= "{Binding LesAttributions}"
             Margin="10,23,10,99">
             <ListView.View>
                 <GridView>

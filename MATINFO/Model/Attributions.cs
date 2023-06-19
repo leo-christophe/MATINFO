@@ -18,17 +18,15 @@ namespace MATINFO.Model
         private Materiel aMateriel;
         private Personnel aPersonnel;
 
-        public Attributions(DateTime dateAttribution, string commentaire, int fK_idMateriel, int fK_idPersonnel, Materiel aMateriel, Personnel aPersonnel)
+        public Attributions(DateTime dateAttribution, string commentaire, int fK_idMateriel, int fK_idPersonnel)
         {
             this.DateAttribution = dateAttribution;
             this.Commentaire = commentaire;
             this.FK_idMateriel = fK_idMateriel;
             this.FK_idPersonnel = fK_idPersonnel;
-
-            this.AMateriel = aMateriel;
-            this.APersonnel = aPersonnel;
-
         }
+        public Attributions()
+        { }
 
         public DateTime DateAttribution
         {
@@ -71,10 +69,11 @@ namespace MATINFO.Model
 
             set
             {
-                if (value > 0)
+                // Si l'ID catégorie existe bien, n'est pas null et est un entier : 
+                if (!String.IsNullOrEmpty(value.ToString()) && value.GetType() == typeof(int) && value > 0)
                     fK_idMateriel = value;
                 else
-                    throw new ArgumentException("La clé étrangère d'ID matériel ne peut pas être <= 0!");
+                    throw new Exception("La clé étrangère doit exister, ne doit pas être null ou vide et doit être un entier > 0.");
             }
         }
 
@@ -87,7 +86,11 @@ namespace MATINFO.Model
 
             set
             {
-                fK_idPersonnel = value;
+                // Si l'ID catégorie existe bien, n'est pas null et est un entier : 
+                if (!String.IsNullOrEmpty(value.ToString()) && value.GetType() == typeof(int) && value > 0)
+                    fK_idPersonnel = value;
+                else
+                    throw new Exception("La clé étrangère doit exister, ne doit pas être null ou vide et doit être un entier > 0.");
             }
         }
 
@@ -120,8 +123,12 @@ namespace MATINFO.Model
         public void Create()
         {
             DataAccess accesBD = new DataAccess();
-            String requete = $"DELETE FROM est_attribue WHERE idPersonnel = {this.FK_idPersonnel} AND idMateriel = {this.FK_idMateriel};";
-            DataTable datas = accesBD.GetData(requete);
+            String requete = $"" +
+                $"INSERT INTO attribution " +
+                $"(idpersonnel, idmateriel, dateattribution, commentaireattribution) " +
+                $"VALUES " +
+                $"({this.FK_idPersonnel}, '{this.FK_idMateriel}', '{this.DateAttribution}', '{this.Commentaire}');";
+            int datas = accesBD.SetData(requete);
         }
 
         public void Delete()
@@ -133,27 +140,70 @@ namespace MATINFO.Model
 
         public ObservableCollection<Attributions> FindAll()
         {
-            throw new NotImplementedException();
+            ObservableCollection<Attributions> lesAttributions = new ObservableCollection<Attributions>();
+            DataAccess accesBD = new DataAccess();
+            String requete = "select * from est_attribue ;";
+            DataTable datas = accesBD.GetData(requete);
+            if (datas != null)
+            {
+                foreach (DataRow row in datas.Rows)
+                {
+                    Attributions e = new Attributions((DateTime)row["dateattribution"], (String)row["commentaireattribution"], int.Parse(row["idmateriel"].ToString()), int.Parse(row["idpersonnel"].ToString()));
+                    lesAttributions.Add(e);
+                }
+            }
+            return lesAttributions;
         }
 
+        /// <summary>
+        /// FindBySelection permet d'affiner les résultats d'une recherche complète. Elle est composées au minimum d'une clause (WHERE, HAVE, ORDER...) 
+        /// </summary>
+        /// <param name="criteres"></param>
+        /// <returns></returns>
         public ObservableCollection<Attributions> FindBySelection(string criteres)
         {
-            throw new NotImplementedException();
+            ObservableCollection<Attributions> lesAttributions = new ObservableCollection<Attributions>();
+            DataAccess accesBD = new DataAccess();
+            String requete = $"select * from est_attribue {criteres};";
+            DataTable datas = accesBD.GetData(requete);
+            if (datas != null)
+            {
+                foreach (DataRow row in datas.Rows)
+                {
+                    Attributions e = new Attributions((DateTime)row["dateattribution"], (String)row["commentaireattribution"], int.Parse(row["idmateriel"].ToString()), int.Parse(row["idpersonnel"].ToString()));
+                    lesAttributions.Add(e);
+                }
+            }
+            return lesAttributions;
         }
 
         public bool Read()
         {
-            return true;
+            DataAccess accesBD = new DataAccess();
+            String requete = $"select idMateriel, idPersonnel from attribution where idMateriel = {this.FK_idMateriel}, idPersonnel = {this.FK_idPersonnel};";
+            DataTable datas = accesBD.GetData(requete);
+
+            //si datas est null ou vide
+            if (datas != null || datas.Rows.Count <= 0)
+            {
+                //l'attribution n'existe pas
+                return true;
+            }
+            else
+                //l'attribution existe
+                return false;
         }
 
         public void Update()
         {
             DataAccess accesBD = new DataAccess();
             String requete = $"" +
-                $"UPDATE est_attribue" +
-                $" SET DateAttribution = '{this.DateAttribution}', " +
-                $"      CommentaireAttribution = {this.Commentaire} " +
-                $" WHERE IdPersonnel = {this.FK_idPersonnel} AND IdMateriel = {this.FK_idMateriel};";
+                $"UPDATE attribution" +
+                $" SET dateattribution = '{this.DateAttribution}', " +
+                $"      commenaireattribution = '{this.Commentaire}' " +
+                $" WHERE idPersonnel = {this.FK_idPersonnel};" +
+                $" AND idMateriel = {this.FK_idMateriel}" +
+                $"AND dateattribution = {this.DateAttribution};";
             int datas = accesBD.SetData(requete);
         }
     }

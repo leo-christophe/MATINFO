@@ -90,7 +90,18 @@ namespace MATINFO
                     }
                 case "btCreerAtt":
                     {
-                        creationWinAtt.Show();
+                        creerAttribution creationWinAtt = new creerAttribution();
+                        
+                        creationWinAtt.ShowDialog();
+                        if ((bool)creationWinAtt.DialogResult == true)
+                        {
+
+                            applicationdata.LesAttributions.Add(creationWinAtt.NouvelAttribu);
+
+                            creationWinAtt.NouvelAttribu.Create();
+
+                            listViewAttributions.Items.Refresh();
+                        }
                         break;
                     }
                 case "btCreerCat":
@@ -244,6 +255,13 @@ namespace MATINFO
                             applicationdata.LesPersonnels[listViewPersonnel.SelectedIndex].Delete();
                             applicationdata.LesPersonnels.RemoveAt(listViewPersonnel.SelectedIndex);
                             listViewPersonnel.Items.Refresh();
+                            break;
+                        }
+                    case "btSupprimerAtt":
+                        {
+                            applicationdata.LesAttributions[listViewAttributions.SelectedIndex].Delete();
+                            applicationdata.LesAttributions.RemoveAt(listViewAttributions.SelectedIndex);
+                            listViewAttributions.Items.Refresh();
                             break;
                         }
                 }

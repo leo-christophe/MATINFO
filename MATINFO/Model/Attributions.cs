@@ -25,6 +25,15 @@ namespace MATINFO.Model
             this.FK_idMateriel = fK_idMateriel;
             this.FK_idPersonnel = fK_idPersonnel;
         }
+        public Attributions(DateTime dateAttribution, string commentaire, Materiel materiel, Personnel personnel)
+        {
+            this.DateAttribution = dateAttribution;
+            this.Commentaire = commentaire;
+            this.AMateriel = materiel;
+            this.APersonnel = personnel;
+            this.FK_idMateriel = materiel.IdMateriel;
+            this.FK_idPersonnel = personnel.IdPersonnel;
+        }
         public Attributions()
         { }
 
@@ -124,17 +133,18 @@ namespace MATINFO.Model
         {
             DataAccess accesBD = new DataAccess();
             String requete = $"" +
-                $"INSERT INTO attribution " +
+                $"INSERT INTO est_attribue " +
                 $"(idpersonnel, idmateriel, dateattribution, commentaireattribution) " +
                 $"VALUES " +
-                $"({this.FK_idPersonnel}, '{this.FK_idMateriel}', '{this.DateAttribution}', '{this.Commentaire}');";
+                $"({this.FK_idPersonnel}, {this.FK_idMateriel}, '{this.DateAttribution}', '{this.Commentaire}');";
             int datas = accesBD.SetData(requete);
         }
 
         public void Delete()
         {
+            Console.WriteLine(this.DateAttribution.ToString("yyyy'-'MM'-'dd"));
             DataAccess accesBD = new DataAccess();
-            String requete = $"DELETE FROM est_attribue WHERE idPersonnel = {this.FK_idPersonnel} AND idMateriel = {this.FK_idMateriel};";
+            String requete = $"DELETE FROM est_attribue WHERE idPersonnel = {this.FK_idPersonnel} AND idMateriel = {this.FK_idMateriel} AND dateattribution = '{this.DateAttribution.ToString("yyyy'-'MM'-'dd")}';";
             DataTable datas = accesBD.GetData(requete);
         }
 
@@ -180,7 +190,7 @@ namespace MATINFO.Model
         public bool Read()
         {
             DataAccess accesBD = new DataAccess();
-            String requete = $"select idMateriel, idPersonnel from attribution where idMateriel = {this.FK_idMateriel}, idPersonnel = {this.FK_idPersonnel};";
+            String requete = $"select idMateriel, idPersonnel from est_attribue where idMateriel = {this.FK_idMateriel}, idPersonnel = {this.FK_idPersonnel};";
             DataTable datas = accesBD.GetData(requete);
 
             //si datas est null ou vide
@@ -198,7 +208,7 @@ namespace MATINFO.Model
         {
             DataAccess accesBD = new DataAccess();
             String requete = $"" +
-                $"UPDATE attribution" +
+                $"UPDATE est_attribue" +
                 $" SET dateattribution = '{this.DateAttribution}', " +
                 $"      commenaireattribution = '{this.Commentaire}' " +
                 $" WHERE idPersonnel = {this.FK_idPersonnel};" +

@@ -4,72 +4,62 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:MATINFO"
+    xmlns:model="clr-namespace:MATINFO.Model"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Création d'une attribution"
-    Width="246"
+    Width="414"
     Height="312"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Grid Margin="0,0,0,-6">
+    <Window.DataContext>
+        <model:ApplicationData x:Name="applicationData"></model:ApplicationData>
+    </Window.DataContext>
+        <Grid Margin="0,0,0,-6">
         <Label
             Width="169"
-            Margin="0,26,0,0"
-            HorizontalAlignment="Center"
+            Margin="10,10,0,0"
+            HorizontalAlignment="Left"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
-            Content="Code Barre du matériel"
+            Content="Personnel"
             RenderTransformOrigin="0.758,0.591" />
-        <TextBox
-            Width="169"
-            Margin="0,52,0,0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Text=""
-            TextWrapping="Wrap" />
         <Label
             Width="169"
-            Margin="0,70,0,0"
-            HorizontalAlignment="Center"
+            Margin="184,10,0,0"
+            HorizontalAlignment="Left"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
-            Content="Numéro du personnel"
+            Content="Matériel"
             RenderTransformOrigin="0.758,0.591" />
-        <TextBox
-            Width="169"
-            Margin="0,96,0,0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Text=""
-            TextWrapping="Wrap" />
         <Label
-            Width="169"
-            Margin="0,114,0,0"
-            HorizontalAlignment="Center"
+            Width="170"
+            Margin="10,68,0,0"
+            HorizontalAlignment="Left"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
             Content="Commentaire"
             RenderTransformOrigin="0.758,0.591" />
-        <TextBox
+        <TextBox x:Name="tbCreerAttributionCommentaire"
             Width="169"
-            Margin="0,140,0,0"
-            HorizontalAlignment="Center"
+            Margin="10,99,0,0"
+            HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Text=""
-            TextWrapping="Wrap" />
+            Text="Entrez un commentaire"
+            TextWrapping="Wrap" Height="131" />
         <Label
             Width="169"
-            Margin="0,158,0,0"
-            HorizontalAlignment="Center"
+            Margin="184,68,0,0"
+            HorizontalAlignment="Left"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
             Content="Date"
             RenderTransformOrigin="0.758,0.591" />
-        <DatePicker
-            Width="167"
-            Height="25"
-            Margin="0,185,0,0"
-            HorizontalAlignment="Center"
+        <DatePicker x:Name="tbCreerAttributionDate"
+            Width="169"
+            Height="131"
+            Margin="184,99,0,0"
+            HorizontalAlignment="Left"
             VerticalAlignment="Top"
             RenderTransformOrigin="0.5,0.5">
             <DatePicker.RenderTransform>
@@ -84,19 +74,21 @@
         <Button
             Width="91"
             Height="33"
-            Margin="10,235,0,0"
+            Margin="49,235,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="AJOUTER"
-            RenderTransformOrigin="1.045,-1.618" />
+            RenderTransformOrigin="1.045,-1.618" Click="Button_Click" />
         <Button
             Width="91"
             Height="33"
-            Margin="124,235,0,0"
+            Margin="223,235,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="ANNULER"
-            RenderTransformOrigin="1.045,-1.618" />
+            RenderTransformOrigin="1.045,-1.618" Click="Button_Click_1" />
+        <ComboBox x:Name="cbCreerAttributionIdPersonnel" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="169" SelectedIndex="0"  ItemsSource="{Binding Path=LesPersonnels}" DisplayMemberPath="NomPersonnel" SelectedValuePath="IdPersonnel"/>
+        <ComboBox x:Name="cbCreerAttributionIdMateriel" HorizontalAlignment="Left" Margin="184,41,0,0" VerticalAlignment="Top" Width="169" SelectedIndex="0"  ItemsSource="{Binding Path=LesMateriaux}" DisplayMemberPath="NomMateriel" SelectedValuePath="IdMateriel"/>
 
     </Grid>
 </Window>

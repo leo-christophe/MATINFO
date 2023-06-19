@@ -22,8 +22,8 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="311*" />
-            <ColumnDefinition Width="500*" />
-            <ColumnDefinition Width="272*" />
+            <ColumnDefinition Width="471*" />
+            <ColumnDefinition Width="301*" />
             <ColumnDefinition Width="217*" />
         </Grid.ColumnDefinitions>
         <ListView
@@ -268,11 +268,11 @@
             x:Name="btModifierPers"
             Grid.Row="1"
             Width="80"
-            Margin="0,0,0,34"
+            Margin="0,280,0,0"
             HorizontalAlignment="Center"
             Background="{x:Null}"
             Click="ButtonClickModification"
-            Content="Modifier" Height="50" VerticalAlignment="Bottom">
+            Content="Modifier" Height="50" VerticalAlignment="Top">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -291,11 +291,11 @@
             Grid.Row="1"
             Grid.Column="1"
             Width="80"
-            Margin="0,0,0,34"
+            Margin="0,280,0,0"
             HorizontalAlignment="Center"
             Background="{x:Null}"
             Click="ButtonClickModification"
-            Content="Modifier" Height="50" VerticalAlignment="Bottom">
+            Content="Modifier" Height="50" VerticalAlignment="Top">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -314,11 +314,11 @@
             Grid.Row="1"
             Grid.Column="2"
             Width="80"
-            Margin="0,0,0,34"
+            Margin="0,280,0,0"
             HorizontalAlignment="Center"
             Background="{x:Null}"
             Click="ButtonClickModification"
-            Content="Modifier" Height="50" VerticalAlignment="Bottom">
+            Content="Modifier" Height="50" VerticalAlignment="Top">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -337,11 +337,11 @@
             Grid.Row="1"
             Grid.Column="3"
             Width="60"
-            Margin="0,0,0,34"
+            Margin="0,280,0,0"
             HorizontalAlignment="Center"
             Background="{x:Null}"
             Click="ButtonClickModification"
-            Content="Modifier" Height="50" VerticalAlignment="Bottom">
+            Content="Modifier" Height="50" VerticalAlignment="Top">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -448,8 +448,8 @@
         <Rectangle
             Grid.ColumnSpan="4"
             Height="72"
-            VerticalAlignment="Top"
-            Fill="LightGray" Grid.RowSpan="2" />
+            VerticalAlignment="Center"
+            Fill="LightGray" />
         <Image
             Width="83"
             Height="70"
@@ -487,7 +487,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             RenderTransformOrigin="0.5,0.5"
-            Source="/ressources/teacher.png" Width="50">
+            Source="/ressources/teacher.png" Width="50" Height="50">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />

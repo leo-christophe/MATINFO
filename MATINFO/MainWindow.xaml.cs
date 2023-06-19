@@ -25,12 +25,10 @@ namespace MATINFO
     {
 
         creerPersonnel creationWinPers;
-        creerMateriel creationWinMat;
         creerCategorie creationWinCat;
         creerAttribution creationWinAtt;
 
         modifPersonnel modificationPers;
-        modifMateriel modificationMat;
         modifAttributions modificationAtt;
         modifCategorie modificationCat;
 

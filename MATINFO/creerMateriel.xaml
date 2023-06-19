@@ -8,7 +8,13 @@
         mc:Ignorable="d"
         Title="Création de matériel" Height="310" Width="254" ResizeMode="NoResize" Icon="/ressources/desktop.png" WindowStartupLocation="CenterScreen">
 
-
+    <Window.Resources>
+        <Style x:Key="Obligatoire" TargetType="TextBox">
+            <Setter Property="BorderBrush" Value="Red"/>
+        </Style>
+    </Window.Resources>
+    
+    
     <Grid Margin="0,0,0,-6">
        
         <Label Content="Nom du materiel" HorizontalAlignment="Center" Margin="0,15,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="169" HorizontalContentAlignment="Center"/>

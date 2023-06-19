@@ -21,8 +21,10 @@ namespace MATINFO.Model
 
         public CategorieMateriel(int idCategorie, string nomCategorie)
         {
+
             this.IdCategorie = idCategorie;
             this.NomCategorie = nomCategorie;
+            
         }
 
         public CategorieMateriel(string nomCategorie)
@@ -31,9 +33,20 @@ namespace MATINFO.Model
             this.NomCategorie = nomCategorie;
         }
 
+
         public int CalculerNouvelId()
         {
-            return this.FindAll().Count + 1;
+            // Accès à la base de données
+            DataAccess accesBD = new DataAccess();
+
+            // On récupère l'ID max et on rajoute 1 pour avoir un nouvel id. On le renomme en E pour pouvoir le récupérer.
+            String requete = "SELECT MAX(idcategorie) + 1 AS \"E\" FROM categorie_materiel;";
+            DataTable datas = accesBD.GetData(requete);
+            if (datas != null)
+                // On récupère la ligne 1 (la seule puisque l'ID est unique) et on prend la colonne E : le maximum
+                return int.Parse(datas.Rows[0]["E"].ToString());
+            else
+                return 1;
         }
 
         public int IdCategorie
@@ -145,7 +158,17 @@ namespace MATINFO.Model
 
         public bool Read()
         {
-            return true;
+            DataAccess accesBD = new DataAccess();
+            String requete = $"" +
+                $"SELECT idCategorie FROM categorie_materiel WHERE idCategorie = {this.IdCategorie}";
+            DataTable datas = accesBD.GetData(requete);
+
+            // si datas est null ou vide
+            if (datas == null || datas.Rows.Count <= 0)
+                return true;
+                // n'existe pas
+            return false;
+            // existe
         }
 
         public void Update()

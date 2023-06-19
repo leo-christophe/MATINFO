@@ -20,8 +20,6 @@ namespace MATINFO.Model
 
         private CategorieMateriel uneCategorieM;
 
-        public static int cptId = 1;
-
         public Materiel()
         {
         }
@@ -43,8 +41,22 @@ namespace MATINFO.Model
             this.CodeBarreInventaire = codeBarreInventaire;
             this.UneCategorieM = uneCategorieM;
 
-            this.IdMateriel = cptId;
-            cptId++;
+            this.IdMateriel = this.CalculNouvelId();
+        }
+
+        public int CalculNouvelId()
+        {
+            // Accès à la base de données
+            DataAccess accesBD = new DataAccess();
+
+            // On récupère l'ID max et on rajoute 1 pour avoir un nouvel id. On le renomme en E pour pouvoir le récupérer.
+            String requete = "SELECT MAX(idMateriel) + 1 AS \"E\" FROM materiel;";
+            DataTable datas = accesBD.GetData(requete);
+            if (datas != null)
+                // On récupère la ligne 1 (la seule puisque l'ID est unique) et on prend la colonne E : le maximum
+                return int.Parse(datas.Rows[0]["E"].ToString());
+            else
+                return 1;
         }
 
         public int IdMateriel

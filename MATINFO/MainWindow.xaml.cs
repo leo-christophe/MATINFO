@@ -122,7 +122,25 @@ namespace MATINFO
             {
                 case "btModifierPers":
                     {
-                        modificationPers.Show();
+                        modificationPers = new modifPersonnel();
+                        modificationPers.DataContext = this.applicationdata;
+
+                        //on rentre les données dans la fenêtre de modification par défault
+                        modificationPers.cbNomPersonnelModification.SelectedIndex = listViewPersonnel.SelectedIndex;
+                        modificationPers.tbPrenomPersonnelModification.Text = ((Personnel)listViewPersonnel.SelectedItem).PrenomPersonnel;
+                        modificationPers.tbMailPersonnelModification.Text = ((Personnel)listViewPersonnel.SelectedItem).EmailPersonnel;
+
+                        modificationPers.ShowDialog();
+                        if ((bool)modificationPers.DialogResult == true)
+                        {
+                            List<Personnel> lePersonnel = new List<Personnel>(applicationdata.LesPersonnels);
+                            int index = lePersonnel.FindIndex(x => x.IdPersonnel == modificationPers.NouveauPersonnel.IdPersonnel);
+                            applicationdata.LesPersonnels[index] = new Personnel(index, modificationPers.NouveauPersonnel.NomPersonnel, modificationPers.NouveauPersonnel.PrenomPersonnel, modificationPers.NouveauPersonnel.EmailPersonnel);
+                            
+                            // Mettre à jour avec la bd
+                            applicationdata.LesPersonnels[index].Update();
+                            listViewPersonnel.Items.Refresh();
+                        }
                         break;
                     }
                 case "btModifierMat":

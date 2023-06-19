@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MATINFO.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,14 +20,39 @@ namespace MATINFO
     /// </summary>
     public partial class modifPersonnel : Window
     {
+        Personnel nouveauPersonnel;
         public modifPersonnel()
         {
             InitializeComponent();
         }
 
+        private void Button_ClickModifOK(object sender, RoutedEventArgs e)
+        {
+            string nomPersonnel = tbNouveauNomPersonnelModifier.Text;
+            string prenomPersonnel = tbPrenomPersonnelModification.Text;
+            string mailNouveau = tbMailPersonnelModification.Text;
+
+            Personnel personnel = (Personnel)cbNomPersonnelModification.SelectionBoxItem;
+            this.nouveauPersonnel = new Personnel(personnel.IdPersonnel, nomPersonnel, prenomPersonnel, mailNouveau);
+
+            DialogResult = true;
+        }
+
         private void Button_ClickCreationOK(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            DialogResult = false;
+        }
+        public Personnel NouveauPersonnel
+        {
+            get
+            {
+                return this.nouveauPersonnel;
+            }
+
+            set
+            {
+                this.nouveauPersonnel = value;
+            }
         }
     }
 }

@@ -175,6 +175,7 @@ namespace MATINFO.Model
                     }
                 }
             }
+            return true;
         }
 
         public override string? ToString()

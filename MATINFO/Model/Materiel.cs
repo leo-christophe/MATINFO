@@ -247,7 +247,8 @@ namespace MATINFO.Model
         {
             ObservableCollection<Materiel> lesMateriaux = new ObservableCollection<Materiel>();
             DataAccess accesBD = new DataAccess();
-            String requete = "select idmateriel, idcategorie, nommateriel, referenceconstructeurmateriel, codebarreinventaire from materiel ;";
+            // Requête
+            String requete = "select * from materiel ;";
             DataTable datas = accesBD.GetData(requete);
             if (datas != null)
             {

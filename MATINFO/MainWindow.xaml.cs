@@ -71,6 +71,9 @@ namespace MATINFO
                         creationWinMat.Owner = this;
                         creationWinMat.DataContext = applicationdata;
 
+
+
+
                         bool? confirm = creationWinMat.ShowDialog();
 
                         if (confirm == true)
@@ -130,6 +133,7 @@ namespace MATINFO
                         modifMateriel modificationMat = new modifMateriel();
                         modificationMat.Owner = this;
                         modificationMat.DataContext = this.applicationdata;
+
                         modificationMat.ShowDialog();
                         if ((bool)modificationMat.DialogResult)
                         {
@@ -137,9 +141,6 @@ namespace MATINFO
                             List<CategorieMateriel> ListCategories = new List<CategorieMateriel>(applicationdata.LesCategoriesMateriel);
 
                             int index = ListMaterials.FindIndex(x => x.IdMateriel == modificationMat.NouveauMateriel.IdMateriel);
-                            Console.WriteLine(ListMaterials[0].IdMateriel);
-                            Console.WriteLine(ListMaterials[1].IdMateriel);
-                            Console.WriteLine(modificationMat.NouveauMateriel.IdMateriel);
 
                             applicationdata.LesMateriaux[index].NomMateriel = modificationMat.NouveauMateriel.NomMateriel;
                             applicationdata.LesMateriaux[index].FK_idCategorie = modificationMat.NouveauMateriel.FK_idCategorie;

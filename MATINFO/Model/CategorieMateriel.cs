@@ -143,9 +143,9 @@ namespace MATINFO.Model
             return lesCategories;
         }
 
-        public void Read()
+        public bool Read()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public void Update()

@@ -23,6 +23,11 @@ namespace MATINFO
     {
         CategorieMateriel catAmodifier;
 
+        public modifCategorie()
+        {
+            InitializeComponent();
+        }
+
         public CategorieMateriel CatAmodifier
         {
             get
@@ -36,17 +41,12 @@ namespace MATINFO
             }
         }
 
-        public modifCategorie()
-        {
-            InitializeComponent();
-        }
 
         private void Button_ClickCreationOK(object sender, RoutedEventArgs e)
         {
             CategorieMateriel categorieTemporaire = new CategorieMateriel();
             ObservableCollection<CategorieMateriel> catMateriel = categorieTemporaire.FindBySelection($"WHERE idCategorie = {((CategorieMateriel)cbCategorieChoix.SelectionBoxItem).IdCategorie}");
             CatAmodifier = new CategorieMateriel(catMateriel[0].IdCategorie, tbNouveauNom.Text);
-            Console.WriteLine(CatAmodifier.IdCategorie);
             DialogResult = true;
         }
 

@@ -11,7 +11,7 @@ namespace MATINFO.Model
    {
       void Create();
       
-      void Read();
+      bool Read();
       
       void Update();
       

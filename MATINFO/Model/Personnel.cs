@@ -158,9 +158,9 @@ namespace MATINFO.Model
             return base.GetHashCode();
         }
 
-        public void Read()
+        public bool Read()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public override string? ToString()

@@ -141,9 +141,9 @@ namespace MATINFO.Model
             throw new NotImplementedException();
         }
 
-        public void Read()
+        public bool Read()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public void Update()

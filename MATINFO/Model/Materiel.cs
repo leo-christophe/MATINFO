@@ -20,6 +20,7 @@ namespace MATINFO.Model
 
         private CategorieMateriel uneCategorieM;
 
+        public static int cptId = 1;
 
         public Materiel()
         {
@@ -42,13 +43,10 @@ namespace MATINFO.Model
             this.CodeBarreInventaire = codeBarreInventaire;
             this.UneCategorieM = uneCategorieM;
 
-            this.IdMateriel = this.CalculerNouvelId();
+            this.IdMateriel = cptId;
+            cptId++;
         }
 
-        public int CalculerNouvelId()
-        {
-            return this.FindAll().Count + 1;
-        }
         public int IdMateriel
         {
             get
@@ -149,9 +147,9 @@ namespace MATINFO.Model
             DataAccess accesBD = new DataAccess();
             String requete = $"" +
                 $"INSERT INTO MATERIEL " +
-                $"(IdMateriel, IdCategorie, NomMateriel, ReferenceConstructeurMateriel, CodeBarreInventaire) " +
+                $"(IdCategorie, NomMateriel, ReferenceConstructeurMateriel, CodeBarreInventaire) " +
                 $"VALUES " +
-                $"({this.IdMateriel}, {this.FK_idCategorie}, '{this.NomMateriel}', '{this.ReferenceConstructeur}', '{this.CodeBarreInventaire}');";
+                $"({this.FK_idCategorie}, '{this.NomMateriel}', '{this.ReferenceConstructeur}', '{this.CodeBarreInventaire}');";
             int datas = accesBD.SetData(requete);
             // nextval('materiel_idmateriel_seq'::regclass)
         }
@@ -214,19 +212,31 @@ namespace MATINFO.Model
             return lesMateriaux;
         }
 
-        public void Read()
+        public bool Read()
         {
             ObservableCollection<Materiel> lesMateriaux = new ObservableCollection<Materiel>();
             DataAccess accesBD = new DataAccess();
-            String requete = $"select * from materiel;";
+            String requete = $"select idMateriel from materiel where codeBarreinventaire = {this.codeBarreInventaire};";
             DataTable datas = accesBD.GetData(requete);
 
+            int cpt = 0;
             if (datas != null)
             {
                 foreach (DataRow row in datas.Rows)
                 {
-                    Console.WriteLine($"{int.Parse(row["idmateriel"].ToString())} {int.Parse(row["idcategorie"].ToString())} {(String)row["nommateriel"]} {(String)row["referenceconstructeurmateriel"]} {(String)row["codebarreinventaire"]}");
+                    cpt += 1;
                 }
+            }
+
+            if (cpt > 0)
+            { 
+                Console.WriteLine("CPT > 0");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("CPT <= 0");
+                return true;
             }
         }
 

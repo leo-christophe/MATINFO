@@ -59,5 +59,6 @@ namespace MATINFO
                 this.nouveauMateriel = value;
             }
         }
+
     }
 }

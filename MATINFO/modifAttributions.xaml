@@ -6,103 +6,62 @@
     xmlns:local="clr-namespace:MATINFO"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Modification d'attributions"
-    Width="241"
-    Height="274"
+    Width="269"
+    Height="529"
     Icon="/ressources/attributes.png"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Label
-            Width="169"
-            Margin="0,63,0,0"
+            Width="182"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
             Content="Commentaire"
-            RenderTransformOrigin="0.758,0.591" />
+            RenderTransformOrigin="0.758,0.591" Height="26" Margin="0,188,0,0" />
         <Label
-            Width="88"
-            Margin="28,23,0,0"
+            Width="180"
+            Margin="42,140,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
             Content="Nom personnel"
-            FontSize="11"
-            RenderTransformOrigin="0.758,0.591" />
+            RenderTransformOrigin="0.758,0.591" Height="26" />
         <TextBox
-            Width="181"
-            Margin="0,90,0,0"
-            HorizontalAlignment="Center"
+            Width="182"
+            HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Foreground="#FFA6A6A6"
             Text="Nouveau commentaire"
-            TextWrapping="Wrap" />
-        <TextBox
-            Width="85"
-            Height="18"
-            Margin="30,48,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Background="#FFC8FDFF"
-            Foreground="#FFAEABAB"
-            RenderTransformOrigin="0.5,0.5"
-            Text="Selection"
-            TextWrapping="Wrap">
-            <TextBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="1" />
-
-                    <SkewTransform />
-                    <RotateTransform />
-                    <TranslateTransform />
-                </TransformGroup>
-            </TextBox.RenderTransform>
-        </TextBox>
+            TextWrapping="Wrap" Margin="42,214,0,0" Height="128" />
         <Label
-            Width="169"
-            Margin="0,112,0,0"
-            HorizontalAlignment="Center"
+            Width="182"
+            Margin="42,342,0,0"
+            HorizontalAlignment="Left"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
             Content="Date"
             RenderTransformOrigin="0.758,0.591" />
         <Button
-            Width="90"
+            Width="86"
             Height="36"
-            Margin="125,188,0,0"
+            Margin="136,404,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="ANNULER"
             RenderTransformOrigin="1.045,-1.618" />
-        <TextBox
-            Width="86"
-            Margin="125,48,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Background="#FFD9FFFF"
-            Foreground="#FFB5B5B5"
-            RenderTransformOrigin="0.5,0.5"
-            Text="Selection"
-            TextWrapping="Wrap">
-            <TextBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="1" />
-                    <SkewTransform />
-                    <RotateTransform />
-                    <TranslateTransform />
-                </TransformGroup>
-            </TextBox.RenderTransform>
-        </TextBox>
         <Label
-            Width="98"
+            Width="178"
             Height="26"
-            Margin="121,24,0,0"
+            Margin="42,87,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
             Content="Nom matériel"
-            FontSize="10"
             RenderTransformOrigin="0.758,0.591">
             <Label.RenderTransform>
                 <TransformGroup>
@@ -114,18 +73,23 @@
             </Label.RenderTransform>
         </Label>
         <DatePicker
-            Width="181"
-            Margin="0,138,0,0"
-            HorizontalAlignment="Center"
+            Width="182"
+            Margin="42,368,0,0"
+            HorizontalAlignment="Left"
             VerticalAlignment="Top" />
         <Button
-            Width="90"
+            Width="84"
             Height="36"
-            Margin="10,188,0,0"
+            Margin="40,404,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="VALIDER"
             RenderTransformOrigin="1.045,-1.618" />
+        <ComboBox HorizontalAlignment="Left" Margin="43,113,0,0" VerticalAlignment="Top" Width="180"/>
+        <ComboBox HorizontalAlignment="Center" Margin="0,166,0,0" VerticalAlignment="Top" Width="180"/>
+        <Image Margin="44,29,165,431" Source="/ressources/attributes.png" Stretch="Fill"/>
+        <Label Content="Modification des" HorizontalAlignment="Left" Margin="109,30,0,0" VerticalAlignment="Top" Width="111" FontWeight="Bold" FontSize="14"/>
+        <Label Content="attributions" HorizontalAlignment="Left" Margin="109,56,0,0" VerticalAlignment="Top" Width="111" FontSize="14" FontWeight="Bold"/>
 
     </Grid>
 </Window>

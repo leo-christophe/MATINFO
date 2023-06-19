@@ -9,15 +9,20 @@
     Title="Matinfo"
     Width="1300"
     Height="450"
+    MinWidth="1300"
+    MinHeight="450"
     Icon="/ressources/desktop.png"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d" MinWidth="1300" MinHeight="450">
+    mc:Ignorable="d">
     <Window.DataContext>
         <model:ApplicationData x:Name="applicationdata" />
     </Window.DataContext>
     <Grid Background="#FFEDEDED">
         <Grid.RowDefinitions>
-            <RowDefinition Height="70*" MaxHeight="70" MinHeight="70" />
+            <RowDefinition
+                Height="70*"
+                MinHeight="70"
+                MaxHeight="70" />
             <RowDefinition Height="365*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -28,9 +33,9 @@
         </Grid.ColumnDefinitions>
         <ListView
             x:Name="listViewPersonnel"
-            ItemsSource ="{Binding Path=LesPersonnels}"
             Grid.Row="1"
-            Margin="10,23,9,99">
+            Margin="10,23,9,99"
+            ItemsSource="{Binding Path=LesPersonnels}">
             <ListView.Background>
                 <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
                     <GradientStop Color="Black" />
@@ -91,17 +96,17 @@
             x:Name="listViewAttributions"
             Grid.Row="1"
             Grid.Column="2"
-            ItemsSource= "{Binding LesAttributions}"
-            Margin="10,23,10,99">
+            Margin="10,23,10,99"
+            ItemsSource="{Binding LesAttributions}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn
                         Width="50"
-                        DisplayMemberBinding="{Binding IdPersonnel}"
+                        DisplayMemberBinding="{Binding APersonnel.NomPersonnel}"
                         Header="Nom Personnel" />
                     <GridViewColumn
                         Width="50"
-                        DisplayMemberBinding="{Binding CodeBarre}"
+                        DisplayMemberBinding="{Binding AMateriel.NomMateriel}"
                         Header="IdMat." />
                     <GridViewColumn
                         Width="85"
@@ -137,9 +142,11 @@
             Margin="0,2,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
             Content="Gestion du Personnel"
             FontFamily="Segoe UI Variable Small Semibold"
-            FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            FontWeight="Bold" />
         <Label
             Grid.Row="1"
             Grid.Column="1"
@@ -148,9 +155,11 @@
             Margin="0,2,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
             Content="Gestion du Materiel"
             FontFamily="Segoe UI Variable Small Semibold"
-            FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            FontWeight="Bold" />
         <Label
             Grid.Row="1"
             Grid.Column="2"
@@ -159,10 +168,12 @@
             Margin="0,2,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
             Content="Gestion des Attributions"
             FontFamily="Segoe UI Variable Small Semibold"
             FontWeight="Bold"
-            RenderTransformOrigin="0.49,0.515" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+            RenderTransformOrigin="0.49,0.515" />
         <Label
             Grid.Row="1"
             Grid.Column="3"
@@ -171,19 +182,23 @@
             Margin="0,2,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
             Content="Gestion des Catégories"
             FontFamily="Segoe UI Variable Small Semibold"
-            FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            FontWeight="Bold" />
         <Button
             x:Name="btCreerMat"
             Grid.Row="1"
             Grid.Column="1"
             Width="80"
+            Height="50"
             Margin="110,0,0,34"
             HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
             Background="{x:Null}"
             Click="ButtonClickCreate"
-            Content="Créer" Height="50" VerticalAlignment="Bottom">
+            Content="Créer">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -201,11 +216,13 @@
             x:Name="btCreerPers"
             Grid.Row="1"
             Width="80"
+            Height="50"
             Margin="10,0,0,34"
             HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
             Background="{x:Null}"
             Click="ButtonClickCreate"
-            Content="Créer" Height="50" VerticalAlignment="Bottom">
+            Content="Créer">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -224,11 +241,14 @@
             Grid.Row="1"
             Grid.Column="2"
             Width="80"
+            Height="50"
             Margin="10,0,0,34"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
             Background="{x:Null}"
             BorderBrush="#FF707070"
             Click="ButtonClickCreate"
-            Content="Créer" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            Content="Créer">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -247,11 +267,13 @@
             Grid.Row="1"
             Grid.Column="3"
             Width="60"
+            Height="50"
             Margin="10,0,0,34"
             HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
             Background="{x:Null}"
             Click="ButtonClickCreate"
-            Content="Créer" Height="50" VerticalAlignment="Bottom">
+            Content="Créer">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -269,11 +291,13 @@
             x:Name="btModifierPers"
             Grid.Row="1"
             Width="80"
+            Height="50"
             Margin="0,280,0,0"
             HorizontalAlignment="Center"
+            VerticalAlignment="Top"
             Background="{x:Null}"
             Click="ButtonClickModification"
-            Content="Modifier" Height="50" VerticalAlignment="Top">
+            Content="Modifier">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -292,11 +316,13 @@
             Grid.Row="1"
             Grid.Column="1"
             Width="80"
+            Height="50"
             Margin="0,280,0,0"
             HorizontalAlignment="Center"
+            VerticalAlignment="Top"
             Background="{x:Null}"
             Click="ButtonClickModification"
-            Content="Modifier" Height="50" VerticalAlignment="Top">
+            Content="Modifier">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -315,11 +341,13 @@
             Grid.Row="1"
             Grid.Column="2"
             Width="80"
+            Height="50"
             Margin="0,280,0,0"
             HorizontalAlignment="Center"
+            VerticalAlignment="Top"
             Background="{x:Null}"
             Click="ButtonClickModification"
-            Content="Modifier" Height="50" VerticalAlignment="Top">
+            Content="Modifier">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -338,11 +366,13 @@
             Grid.Row="1"
             Grid.Column="3"
             Width="60"
+            Height="50"
             Margin="0,280,0,0"
             HorizontalAlignment="Center"
+            VerticalAlignment="Top"
             Background="{x:Null}"
             Click="ButtonClickModification"
-            Content="Modifier" Height="50" VerticalAlignment="Top">
+            Content="Modifier">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -360,11 +390,13 @@
             x:Name="btSupprimerPers"
             Grid.Row="1"
             Width="80"
+            Height="50"
             Margin="0,0,10,34"
             HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
             Background="{x:Null}"
             Click="ButtonClickSuppression"
-            Content="Supprimer" Height="50" VerticalAlignment="Bottom">
+            Content="Supprimer">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -382,10 +414,14 @@
             x:Name="btSupprimerMat"
             Grid.Row="1"
             Grid.Column="1"
+            Width="80"
+            Height="50"
             Margin="0,0,110,34"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
             Background="{x:Null}"
             Click="ButtonClickSuppression"
-            Content="Supprimer" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="80">
+            Content="Supprimer">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -404,11 +440,13 @@
             Grid.Row="1"
             Grid.Column="2"
             Width="80"
+            Height="50"
             Margin="0,0,10,34"
             HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
             Background="{x:Null}"
             Click="ButtonClickSuppression"
-            Content="Supprimer" Height="50" VerticalAlignment="Bottom">
+            Content="Supprimer">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -427,11 +465,13 @@
             Grid.Row="1"
             Grid.Column="3"
             Width="60"
+            Height="50"
             Margin="0,0,10,34"
             HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
             Background="{x:Null}"
             Click="ButtonClickSuppression"
-            Content="Supprimer" Height="50" VerticalAlignment="Bottom">
+            Content="Supprimer">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -460,35 +500,45 @@
             Stretch="Fill" />
         <Image
             Grid.Column="3"
+            Width="25"
+            Height="25"
             Margin="0,5,10,0"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             Source="/ressources/interrogation-mark.png"
-            Stretch="Fill" Width="25" Height="25" />
+            Stretch="Fill" />
         <Image
             Grid.Column="3"
+            Width="50"
+            Height="50"
             Margin="0,5,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Source="/ressources/folder.png" Height="50" Width="50" />
+            Source="/ressources/folder.png" />
         <Image
             Grid.Column="2"
+            Width="50"
+            Height="50"
             Margin="0,5,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Source="/ressources/attributes.png" Width="50" Height="50" />
+            Source="/ressources/attributes.png" />
         <Image
             Grid.Column="1"
+            Width="50"
+            Height="50"
             Margin="0,5,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Source="/ressources/laptop.png" Width="50" Height="50" />
+            Source="/ressources/laptop.png" />
         <Image
+            Width="50"
+            Height="50"
             Margin="0,5,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             RenderTransformOrigin="0.5,0.5"
-            Source="/ressources/teacher.png" Width="50" Height="50">
+            Source="/ressources/teacher.png">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />

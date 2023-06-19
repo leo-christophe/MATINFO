@@ -160,14 +160,28 @@ namespace MATINFO.Model
 
         public bool Read()
         {
-            return true;
+            DataAccess accesBD = new DataAccess();
+            String requete = $"SELECT MAX(idPersonnel) + 1 FROM Personnel;";
+            DataTable datas = accesBD.GetData(requete);
+
+
+            if (datas != null)
+            {
+                foreach (DataRow row in datas.Rows)
+                {
+                    if (int.Parse(row["idpersonnel"].ToString()) == idPersonnel)
+                    {
+
+                    }
+                }
+            }
         }
 
         public override string? ToString()
         {
             return $"Id : {this.IdPersonnel} \nNom : {this.NomPersonnel} \nPrenom : {this.PrenomPersonnel} \nMail : {this.EmailPersonnel}";
         }
-
+        
         public void Update()
         {
             DataAccess accesBD = new DataAccess();

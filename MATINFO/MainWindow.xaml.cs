@@ -127,7 +127,30 @@ namespace MATINFO
                     }
                 case "btModifierMat":
                     {
-                        modificationMat.Show();
+                        modifMateriel modificationMat = new modifMateriel();
+                        modificationMat.Owner = this;
+                        modificationMat.DataContext = this.applicationdata;
+                        modificationMat.ShowDialog();
+                        if ((bool)modificationMat.DialogResult)
+                        {
+                            List<Materiel> ListMaterials = new List<Materiel>(applicationdata.LesMateriaux);
+                            List<CategorieMateriel> ListCategories = new List<CategorieMateriel>(applicationdata.LesCategoriesMateriel);
+
+                            int index = ListMaterials.FindIndex(x => x.IdMateriel == modificationMat.NouveauMateriel.IdMateriel);
+                            Console.WriteLine(ListMaterials[0].IdMateriel);
+                            Console.WriteLine(ListMaterials[1].IdMateriel);
+                            Console.WriteLine(modificationMat.NouveauMateriel.IdMateriel);
+
+                            applicationdata.LesMateriaux[index].NomMateriel = modificationMat.NouveauMateriel.NomMateriel;
+                            applicationdata.LesMateriaux[index].FK_idCategorie = modificationMat.NouveauMateriel.FK_idCategorie;
+                            applicationdata.LesMateriaux[index].ReferenceConstructeur = modificationMat.NouveauMateriel.ReferenceConstructeur;
+                            applicationdata.LesMateriaux[index].CodeBarreInventaire = modificationMat.NouveauMateriel.CodeBarreInventaire;
+                            applicationdata.LesMateriaux[index].UneCategorieM = ListCategories.Find(x => x.IdCategorie == modificationMat.NouveauMateriel.FK_idCategorie);
+
+                            // Mettre à jour avec la bd
+                            applicationdata.LesMateriaux[index].Update();
+                            listViewMateriel.Items.Refresh();
+                        }
                         break;
                     }
                 case "btModifierAtt":

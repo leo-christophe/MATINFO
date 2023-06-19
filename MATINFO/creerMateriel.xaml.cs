@@ -51,7 +51,6 @@ namespace MATINFO
             string codeBarreInventaire = tbCodeBarreCreation.Text;
 
             CategorieMateriel categorie = (CategorieMateriel)cbCategorieChoixMat.SelectionBoxItem;
-            Console.WriteLine(categorie.IdCategorie);
 
             this.NouveauMateriel = new Materiel(categorie.IdCategorie, nomMateriel, referenceConstructeur, codeBarreInventaire, categorie);
 

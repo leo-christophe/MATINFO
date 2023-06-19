@@ -18,6 +18,7 @@
     <None Remove="ressources\laptop.png" />
     <None Remove="ressources\MATINFO.png" />
     <None Remove="ressources\teacher.png" />
+    <None Remove="ressources\technical-support.png" />
     <None Remove="ressources\warning.png" />
   </ItemGroup>
 
@@ -53,6 +54,7 @@
     <Resource Include="ressources\teacher.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="ressources\technical-support.png" />
     <Resource Include="ressources\warning.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

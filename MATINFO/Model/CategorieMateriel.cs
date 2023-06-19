@@ -92,7 +92,7 @@ namespace MATINFO.Model
                 $"INSERT INTO CATEGORIE_MATERIEL " +
                 $"(IdCategorie, NomCategorie) " +
                 $"VALUES " +
-                $"(nextval('categorie_materiel_idcategorie_seq'::regclass), '{this.NomCategorie}');";
+                $"(DEFAULT, '{this.NomCategorie}');";
             int datas = accesBD.SetData(requete);
         }
 

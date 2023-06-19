@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MATINFO.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,9 @@ namespace MATINFO
     /// </summary>
     public partial class modifMateriel : Window
     {
+        Materiel nouveauMateriel;
+
+
         public modifMateriel()
         {
             InitializeComponent();
@@ -26,7 +30,34 @@ namespace MATINFO
 
         private void Button_ClickCreationOK(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            string nomMateriel = tbNomMaterielModificationMateriel.Text;
+            string referenceConstructeur = tbReferenceConstructeurModificationMateriel.Text;
+            string codeBarreInventaire = tbCodeBarreModificationMateriel.Text;
+
+            CategorieMateriel categorie = (CategorieMateriel)cbNomCategorieModificationMateriel.SelectionBoxItem;
+            Materiel materiel = (Materiel)cbNomMaterielModificationMateriel.SelectionBoxItem;
+
+            this.NouveauMateriel = new Materiel(materiel.IdMateriel, categorie.IdCategorie, nomMateriel, referenceConstructeur, codeBarreInventaire);
+
+            DialogResult = true;
+        }
+
+        private void Button_ClickCreationAnnuler(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+        }
+
+        public Materiel NouveauMateriel
+        {
+            get
+            {
+                return this.nouveauMateriel;
+            }
+
+            set
+            {
+                this.nouveauMateriel = value;
+            }
         }
     }
 }

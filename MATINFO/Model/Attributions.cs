@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,20 +12,22 @@ namespace MATINFO.Model
     {
         private DateTime dateAttribution;
         private String commentaire;
-        private int FK_idMateriel;
-        private int FK_idPersonnel;
+        private int fK_idMateriel;
+        private int fK_idPersonnel;
 
-        private Materiel AMateriel;
-        private Personnel APersonnel;
+        private Materiel aMateriel;
+        private Personnel aPersonnel;
 
-        public Attributions(DateTime dateAttribution, string commentaire, int fK_idMateriel1, int fK_idPersonnel1, Materiel aMateriel1, Personnel aPersonnel1)
+        public Attributions(DateTime dateAttribution, string commentaire, int fK_idMateriel, int fK_idPersonnel, Materiel aMateriel, Personnel aPersonnel)
         {
             this.DateAttribution = dateAttribution;
             this.Commentaire = commentaire;
-            this.FK_idMateriel1 = fK_idMateriel1;
-            this.FK_idPersonnel1 = fK_idPersonnel1;
-            this.AMateriel1 = aMateriel1;
-            this.APersonnel1 = aPersonnel1;
+            this.FK_idMateriel = fK_idMateriel;
+            this.FK_idPersonnel = fK_idPersonnel;
+
+            this.AMateriel = aMateriel;
+            this.APersonnel = aPersonnel;
+
         }
 
         public DateTime DateAttribution
@@ -36,7 +39,10 @@ namespace MATINFO.Model
 
             set
             {
-                dateAttribution = value;
+                if (value <= DateTime.Today.AddYears(50) && value >= DateTime.Today.AddYears(-50))
+                    dateAttribution = value;
+                else
+                    throw new ArgumentException("Date incohérente !");
             }
         }
 
@@ -49,70 +55,80 @@ namespace MATINFO.Model
 
             set
             {
-                commentaire = value;
+                if (!String.IsNullOrEmpty(value) && value.Length <= 1000)
+                    commentaire = value;
+                else
+                    throw new Exception("La chaîne de caractère doit être non nulle et <= 1000 caractères.");
             }
         }
 
-        public int FK_idMateriel1
+        public int FK_idMateriel
         {
             get
             {
-                return FK_idMateriel;
+                return fK_idMateriel;
             }
 
             set
             {
-                FK_idMateriel = value;
+                if (value > 0)
+                    fK_idMateriel = value;
+                else
+                    throw new ArgumentException("La clé étrangère d'ID matériel ne peut pas être <= 0!");
             }
         }
 
-        public int FK_idPersonnel1
+        public int FK_idPersonnel
         {
             get
             {
-                return FK_idPersonnel;
+                return fK_idPersonnel;
             }
 
             set
             {
-                FK_idPersonnel = value;
+                fK_idPersonnel = value;
             }
         }
 
-        public Materiel AMateriel1
+        public Materiel AMateriel
         {
             get
             {
-                return AMateriel;
+                return aMateriel;
             }
 
             set
             {
-                AMateriel = value;
+                aMateriel = value;
             }
         }
 
-        public Personnel APersonnel1
+        public Personnel APersonnel
         {
             get
             {
-                return APersonnel;
+                return this.aPersonnel;
             }
 
             set
             {
-                APersonnel = value;
+                this.aPersonnel = value;
             }
         }
 
         public void Create()
         {
-            throw new NotImplementedException();
+            DataAccess accesBD = new DataAccess();
+            String requete = $"DELETE FROM est_attribue WHERE idPersonnel = {this.FK_idPersonnel} AND idMateriel = {this.FK_idMateriel};";
+            DataTable datas = accesBD.GetData(requete);
         }
 
         public void Delete()
         {
-            throw new NotImplementedException();
+            DataAccess accesBD = new DataAccess();
+            String requete = $"DELETE FROM est_attribue WHERE idPersonnel = {this.FK_idPersonnel} AND idMateriel = {this.FK_idMateriel};";
+            DataTable datas = accesBD.GetData(requete);
         }
 
         public ObservableCollection<Attributions> FindAll()
@@ -132,7 +148,13 @@ namespace MATINFO.Model
 
         public void Update()
         {
-            throw new NotImplementedException();
+            DataAccess accesBD = new DataAccess();
+            String requete = $"" +
+                $"UPDATE est_attribue" +
+                $" SET DateAttribution = '{this.DateAttribution}', " +
+                $"      CommentaireAttribution = {this.Commentaire} " +
+                $" WHERE IdPersonnel = {this.FK_idPersonnel} AND IdMateriel = {this.FK_idMateriel};";
+            int datas = accesBD.SetData(requete);
         }
     }
 }

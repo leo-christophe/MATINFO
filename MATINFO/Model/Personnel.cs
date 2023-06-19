@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace MATINFO.Model
@@ -32,6 +33,7 @@ namespace MATINFO.Model
             this.NomPersonnel = nomPersonnel;
             this.PrenomPersonnel = prenomPersonnel;
             this.EmailPersonnel = emailPersonnel;
+
             this.IdPersonnel = this.CalculerNouvelId();
         }
 
@@ -44,7 +46,10 @@ namespace MATINFO.Model
 
             set
             {
-                idPersonnel = value;
+                if (value > 0)
+                    idPersonnel = value;
+                else
+                    throw new ArgumentException("l'ID du personnel doit être > 0");
             }
         }
 
@@ -57,7 +62,10 @@ namespace MATINFO.Model
 
             set
             {
-                nomPersonnel = value;
+                if (value.Length <= 20 && !string.IsNullOrEmpty(value))
+                    nomPersonnel = value;
+                else
+                    throw new ArgumentException("Le nom du personnel doit être une chaîne de caractères non nulle de taille <= 20");
             }
         }
 
@@ -70,7 +78,10 @@ namespace MATINFO.Model
 
             set
             {
-                prenomPersonnel = value;
+                if (value.Length <= 20 && !string.IsNullOrEmpty(value))
+                    prenomPersonnel = value;
+                else
+                    throw new ArgumentException("Le prénom du personnel doit être une chaîne de caractères non nulle de taille <= 20");
             }
         }
 
@@ -83,13 +94,16 @@ namespace MATINFO.Model
 
             set
             {
-                emailPersonnel = value;
+                // Regex verifEmail = new Regex("^[a-z]@[a-z].[a-z]$");
+                if (!string.IsNullOrEmpty(value) && value.Length <= 30 && value.GetType() == typeof(string))
+                    emailPersonnel = value;
+                else
+                    throw new ArgumentException("Le mail du personnel doit être une chaine de caractère non nulle de longueur inférieur à 30 de format correct.");
             }
         }
         public int CalculerNouvelId()
         {
-            ObservableCollection<Personnel> nouvelIdList = this.FindAll();
-            return nouvelIdList.Count+1;
+            return this.FindAll().Count + 1;
         }
 
         public void Create()
@@ -156,7 +170,9 @@ namespace MATINFO.Model
 
         public void Update()
         {
-            throw new NotImplementedException();
+            DataAccess accesBD = new DataAccess();
+            String requete = $"UPDATE Personnel SET nomPersonnel = '{this.NomPersonnel}', prenomPersonnel = '{this.PrenomPersonnel}', emailPersonnel = '{this.EmailPersonnel}' WHERE idPersonnel = {this.idPersonnel};";
+            int datas = accesBD.SetData(requete);
         }
     }
 }

@@ -92,7 +92,7 @@ namespace MATINFO.Model
 
             set
             {
-                if (!String.IsNullOrEmpty(value) && value.GetType() == typeof(string))
+                if (!String.IsNullOrEmpty(value) && value.GetType() == typeof(string) && value.Length <= 100)
                     nomMateriel = value;
                 else
                     throw new ArgumentException("Le nom du matériel doit être une chaîne de caractères non nulle ou vide");
@@ -108,7 +108,7 @@ namespace MATINFO.Model
 
             set
             {
-                if (!String.IsNullOrEmpty(value))
+                if (!String.IsNullOrEmpty(value) && value.GetType() == typeof(string) && value.Length <= 100)
                     referenceConstructeur = value;
                 else
                     throw new ArgumentNullException("La référence constructeur ne doit pas être null ou vide !");
@@ -124,7 +124,7 @@ namespace MATINFO.Model
 
             set
             {
-                if (!String.IsNullOrEmpty(value))
+                if (!String.IsNullOrEmpty(value) && value.GetType() == typeof(string) && value.Length <= 100)
                     codeBarreInventaire = value;
                 else
                     throw new ArgumentNullException("Le code barre ne doit pas être null ou vide !");
@@ -220,6 +220,7 @@ namespace MATINFO.Model
             DataAccess accesBD = new DataAccess();
             String requete = $"select * from materiel;";
             DataTable datas = accesBD.GetData(requete);
+
             if (datas != null)
             {
                 foreach (DataRow row in datas.Rows)
@@ -232,8 +233,14 @@ namespace MATINFO.Model
         public void Update()
         {
             DataAccess accesBD = new DataAccess();
-            String requete = $"select * from materiel;";
-            DataTable datas = accesBD.GetData(requete);
+            String requete = $"" +
+                $"UPDATE MATERIEL" +
+                $" SET NomMateriel = '{this.NomMateriel}', " +
+                $"      IdCategorie = {this.FK_idCategorie}, " +
+                $"      ReferenceConstructeurMateriel = '{this.ReferenceConstructeur}', " +
+                $"      CodeBarreInventaire = '{this.CodeBarreInventaire}' " +
+                $" WHERE IdMateriel = {this.IdMateriel};";
+            int datas = accesBD.SetData(requete);
         }
     }
 }

@@ -97,7 +97,7 @@
                     <GridViewColumn
                         Width="50"
                         DisplayMemberBinding="{Binding IdPersonnel}"
-                        Header="IdPers." />
+                        Header="Nom Personnel" />
                     <GridViewColumn
                         Width="50"
                         DisplayMemberBinding="{Binding CodeBarre}"

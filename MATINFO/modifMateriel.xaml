@@ -5,36 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MATINFO"
         mc:Ignorable="d"
-        Title="Modification de matériel" Height="249" Width="247" ResizeMode="NoResize" Icon="/ressources/laptop.png" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Button Content="VALIDER" HorizontalAlignment="Left" Margin="10,167,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Height="36" Width="85"/>
-        <Label Content="Reference Constructeur" HorizontalAlignment="Left" Margin="18,69,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="169" HorizontalContentAlignment="Center"/>
-        <Label Content="Nom du matériel" HorizontalAlignment="Left" Margin="11,28,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="113" HorizontalContentAlignment="Center"/>
-        <TextBox HorizontalAlignment="Left" Margin="12,96,0,0" TextWrapping="Wrap" Text="Nouvelle référence" VerticalAlignment="Top" Width="181" Foreground="#FFA6A6A6"/>
-        <TextBox Margin="12,51,0,0" TextWrapping="Wrap" Text="Nouveau nom" VerticalAlignment="Top" HorizontalAlignment="Left" Width="111" RenderTransformOrigin="0.5,0.5" Foreground="#FFAEABAB">
-            <TextBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="1"/>
-
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBox.RenderTransform>
-        </TextBox>
-        <Label Content="Code Barre Inventaire" HorizontalAlignment="Left" Margin="18,118,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="169" HorizontalContentAlignment="Center"/>
-        <TextBox Text="Selection" HorizontalAlignment="Left" Margin="12,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Foreground="#FF9D9D9D" Background="#FFC3FFFF"/>
-        <TextBox Margin="131,51,0,0" TextWrapping="Wrap" Text="Nouv. Cat" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84" RenderTransformOrigin="0.5,0.5" Background="White" Foreground="#FFB5B5B5">
-            <TextBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBox.RenderTransform>
-        </TextBox>
-        <Label Content="Nom Catégorie" HorizontalAlignment="Left" Margin="114,28,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="101" HorizontalContentAlignment="Center" Height="26">
+        Title="Modification de matériel" Height="452" Width="247" ResizeMode="NoResize" Icon="/ressources/laptop.png" WindowStartupLocation="CenterScreen">
+    <Grid Margin="0,0,0,-6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button Content="VALIDER" HorizontalAlignment="Left" Margin="26,361,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Height="36" Width="85"/>
+        <Label Content="Reference Constructeur" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="246" HorizontalContentAlignment="Center" Margin="0,230,0,0"/>
+        <Label Content="Nom du matériel" HorizontalAlignment="Left" Margin="26,71,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="181" HorizontalContentAlignment="Center" FontWeight="Bold"/>
+        <TextBox x:Name="tbReferenceConstructeurModificationMateriel" HorizontalAlignment="Left" Margin="26,255,0,0" TextWrapping="Wrap" Text="Nouvelle référence" VerticalAlignment="Top" Width="180" Foreground="#FFA6A6A6"/>
+        <Label Content="Code Barre Inventaire" HorizontalAlignment="Center" Margin="0,281,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="247" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="tbCodeBarreModificationMateriel" Text="Nouveau Code Barre" HorizontalAlignment="Left" Margin="26,307,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Foreground="#FF9D9D9D"/>
+        <Label Content="Nom Catégorie" HorizontalAlignment="Left" Margin="26,177,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="180" HorizontalContentAlignment="Center" Height="26" FontWeight="Bold">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="1"/>
@@ -44,7 +29,32 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Button Content="ANNULER" HorizontalAlignment="Left" Margin="130,167,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Height="36" Width="85"/>
+        <Button Content="ANNULER" HorizontalAlignment="Left" Margin="121,361,0,0" VerticalAlignment="Top" Click="Button_ClickCreationAnnuler" RenderTransformOrigin="1.045,-1.618" Height="36" Width="85"/>
+        <ComboBox x:Name="cbNomCategorieModificationMateriel" SelectedIndex="0"  ItemsSource="{Binding LesCategoriesMateriel}" DisplayMemberPath="NomCategorie" SelectedValuePath="IdCategorie" HorizontalAlignment="Left" Margin="27,204,0,0" VerticalAlignment="Top" Width="179" RenderTransformOrigin="0.5,0.5">
+            <ComboBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.134"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ComboBox.RenderTransform>
+        </ComboBox>
+        <ComboBox x:Name="cbNomMaterielModificationMateriel" SelectedIndex="0"  ItemsSource="{Binding LesMateriaux}" DisplayMemberPath="NomMateriel" SelectedValuePath="IdMateriel" HorizontalAlignment="Left" Margin="27,97,0,0" VerticalAlignment="Top" Width="179" RenderTransformOrigin="0.5,0.5">
+            <ComboBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.134"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ComboBox.RenderTransform>
+        </ComboBox>
+        <Image Margin="26,10,0,0" Source="/ressources/technical-support.png" Stretch="Fill" Height="51" Width="51" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Modification du" HorizontalAlignment="Left" Margin="82,10,0,0" VerticalAlignment="Top" Height="26" Width="135" FontFamily="Microsoft YaHei UI" FontSize="15" FontWeight="Bold"/>
+        <Label Content="Matériel" HorizontalAlignment="Left" Margin="82,35,0,0" VerticalAlignment="Top" Height="26" Width="135" FontFamily="Microsoft YaHei UI" FontSize="16" FontWeight="Bold"/>
+        <Label Content="Nouveau nom" HorizontalAlignment="Left" Margin="26,127,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="181" HorizontalContentAlignment="Center" FontWeight="Bold"/>
+        <TextBox x:Name="tbNomMaterielModificationMateriel" HorizontalAlignment="Left" Margin="26,153,0,0" TextWrapping="Wrap" Text="Nouveau nom" VerticalAlignment="Top" Width="180" Foreground="#FFA6A6A6"/>
 
     </Grid>
 </Window>

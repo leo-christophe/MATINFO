@@ -21,7 +21,8 @@ namespace MATINFO
     /// </summary>
     public partial class modifCategorie : Window
     {
-        CategorieMateriel catAmodifier;
+        // Catégorie à modifier, communiquant avec la MainWindow
+        private CategorieMateriel catAmodifier;
 
         public modifCategorie()
         {
@@ -42,14 +43,30 @@ namespace MATINFO
         }
 
 
+        /// <summary>
+        /// Méthode déclenchée lorsque l'utilisateur confirme qu'il veut modifier une catégorie.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickCreationOK(object sender, RoutedEventArgs e)
         {
-            CategorieMateriel categorieTemporaire = new CategorieMateriel();
-            ObservableCollection<CategorieMateriel> catMateriel = categorieTemporaire.FindBySelection($"WHERE idCategorie = {((CategorieMateriel)cbCategorieChoix.SelectionBoxItem).IdCategorie}");
-            CatAmodifier = new CategorieMateriel(catMateriel[0].IdCategorie, tbNouveauNom.Text);
-            DialogResult = true;
+            if (cbCategorieChoix.SelectedItem != "" && tbNouveauNom.Text != "")
+            {
+                CategorieMateriel categorieTemporaire = new CategorieMateriel();
+                // On recherche l'ID à modifier
+                ObservableCollection<CategorieMateriel> catMateriel = categorieTemporaire.FindBySelection($"WHERE idCategorie = {((CategorieMateriel)cbCategorieChoix.SelectionBoxItem).IdCategorie}");
+                CatAmodifier = new CategorieMateriel(catMateriel[0].IdCategorie, tbNouveauNom.Text);
+                DialogResult = true;
+            }
+            else
+                MessageBox.Show("Veuillez renseigner tous les champs!", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
+        /// <summary>
+        /// Méthode déclenchée lorsque l'utilisateur confirme qu'il veut annuler la modification d'une catégorie.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickCreationAnnuler(object sender, RoutedEventArgs e)
         {
             DialogResult = false;

@@ -179,6 +179,7 @@ namespace MATINFO
                 // Bouton modifier un matériel
                 case "btModifierMat":
                 {
+                    // Définition de la fenêtre avec son data context
                     modifMateriel modificationMat = new modifMateriel();
                     modificationMat.DataContext = this.applicationdata;
 
@@ -188,8 +189,10 @@ namespace MATINFO
                         List<Materiel> ListMaterials = new List<Materiel>(applicationdata.LesMateriaux);
                         List<CategorieMateriel> ListCategories = new List<CategorieMateriel>(applicationdata.LesCategoriesMateriel);
 
+                        // Trouver l'indice de l'élément à modifier
                         int index = ListMaterials.FindIndex(x => x.IdMateriel == modificationMat.NouveauMateriel.IdMateriel);
 
+                        // Modification de ses propriétés une par une
                         applicationdata.LesMateriaux[index].NomMateriel = modificationMat.NouveauMateriel.NomMateriel;
                         applicationdata.LesMateriaux[index].FK_idCategorie = modificationMat.NouveauMateriel.FK_idCategorie;
                         applicationdata.LesMateriaux[index].ReferenceConstructeur = modificationMat.NouveauMateriel.ReferenceConstructeur;
@@ -198,6 +201,7 @@ namespace MATINFO
 
                         // Mettre à jour avec la bd
                         applicationdata.LesMateriaux[index].Update();
+                        // Rafraichissement
                         listViewMateriel.Items.Refresh();
                     }
                     break;
@@ -206,25 +210,21 @@ namespace MATINFO
                 // Bouton modifier un attribut
                 case "btModifierAtt":
                 {
+                    // Création de la fenêtre avec son datacontext et ses itemsources
                     modifAttributions modificationAtt = new modifAttributions();
                     modificationAtt.Owner = this;
 
                     modificationAtt.DataContext = this.applicationdata;
 
+                    // Les matériaux et les personnels pour ensuite les attributions
                     modificationAtt.cbModificationAttributionMateriel.ItemsSource = applicationdata.LesMateriaux;
                     modificationAtt.cbModificationAttributionPersonnel.ItemsSource = applicationdata.LesPersonnels;
-
-                    //on rentre les données dans la fenêtre de modification par défault
-                    //Console.WriteLine(listViewAttributions.SelectedItems);
-                    //modificationAtt.cbModificationAttributionMateriel.SelectedItem = ((Attributions)listViewAttributions.SelectedItems).AMateriel;
-                    //modificationAtt.cbModificationAttributionPersonnel.SelectedItem = ((Attributions)listViewAttributions.SelectedItems).APersonnel;
-                    //modificationAtt.tbModificationAttributionCommentaire.Text = ((Attributions)listViewAttributions.SelectedItem).Commentaire;
-                    //modificationAtt.tbModificationAttributionDate.Text = ((Attributions)listViewAttributions.SelectedItem).DateAttribution.ToString();
 
                     modificationAtt.ShowDialog();
                     if ((bool)modificationAtt.DialogResult == true)
                     {
                         int index = 0;
+                        // On modifie la dataapplication par la nouvelle attribution
                         foreach (Attributions attribut in applicationdata.LesAttributions)
                         {
                             if (attribut.FK_idMateriel == modificationAtt.NouvelAttribut.FK_idMateriel && attribut.FK_idPersonnel == modificationAtt.NouvelAttribut.FK_idPersonnel && attribut.DateAttribution == modificationAtt.NouvelAttribut.DateAttribution)
@@ -236,6 +236,7 @@ namespace MATINFO
 
                         // Mettre à jour avec la bd
                         applicationdata.LesAttributions[index].Update();
+                        // Rafraichissement
                         listViewAttributions.Items.Refresh();
                     }
                     break;
@@ -245,23 +246,29 @@ namespace MATINFO
                 case "btModifierCat":
                 {
                     modifCategorie modificationCat = new modifCategorie();
+                    // Si une valeur est sélectionnée dans la liste, alors cette valeur sera pré-rentrée dans la combo box
+                    if (listViewCategories.SelectedIndex != -1)
+                            modificationCat.cbCategorieChoix.SelectedItem = (CategorieMateriel)listViewCategories.SelectedItem;
                     modificationCat.ShowDialog();
+
                     if ((bool)modificationCat.DialogResult)
                     {
                         List<CategorieMateriel> ListCategories = new List<CategorieMateriel>(applicationdata.LesCategoriesMateriel);
-
+                        // On trouve l'indice
                         int index = ListCategories.FindIndex(x => x.IdCategorie == modificationCat.CatAmodifier.IdCategorie);
-
+                        // On rajoute dans l'applicationdata
                         applicationdata.LesCategoriesMateriel[index].NomCategorie = modificationCat.CatAmodifier.NomCategorie;
 
                         // Mettre à jour avec la bd
                         applicationdata.LesCategoriesMateriel[index].Update();
+                        // Rafrachissement de la listview correspondante
                         listViewCategories.Items.Refresh();
                     }
                     break;
                 }
             }
         }
+        
 
         private void ButtonClickSuppression(object sender, RoutedEventArgs e)
         {

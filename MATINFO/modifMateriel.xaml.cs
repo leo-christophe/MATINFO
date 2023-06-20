@@ -20,28 +20,44 @@ namespace MATINFO
     /// </summary>
     public partial class modifMateriel : Window
     {
+        // Materiel à modifier communiquant avec la MainWindow
         Materiel nouveauMateriel;
-
 
         public modifMateriel()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Méthode appelée lorsque l'utilisateur décide de valider la modification d'un matériel.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickCreationOK(object sender, RoutedEventArgs e)
         {
-            string nomMateriel = tbNomMaterielModificationMateriel.Text;
-            string referenceConstructeur = tbReferenceConstructeurModificationMateriel.Text;
-            string codeBarreInventaire = tbCodeBarreModificationMateriel.Text;
+            if (tbNomMaterielModificationMateriel.Text != "" && tbReferenceConstructeurModificationMateriel.Text != "" && tbCodeBarreModificationMateriel.Text != ""
+                && cbNomCategorieModificationMateriel.SelectedItem != "" && cbNomMaterielModificationMateriel.SelectedItem != "")
+            {
+                string nomMateriel = tbNomMaterielModificationMateriel.Text;
+                string referenceConstructeur = tbReferenceConstructeurModificationMateriel.Text;
+                string codeBarreInventaire = tbCodeBarreModificationMateriel.Text;
 
-            CategorieMateriel categorie = (CategorieMateriel)cbNomCategorieModificationMateriel.SelectionBoxItem;
-            Materiel materiel = (Materiel)cbNomMaterielModificationMateriel.SelectionBoxItem;
+                CategorieMateriel categorie = (CategorieMateriel)cbNomCategorieModificationMateriel.SelectionBoxItem;
+                Materiel materiel = (Materiel)cbNomMaterielModificationMateriel.SelectionBoxItem;
 
-            this.NouveauMateriel = new Materiel(materiel.IdMateriel, categorie.IdCategorie, nomMateriel, referenceConstructeur, codeBarreInventaire);
+                this.NouveauMateriel = new Materiel(materiel.IdMateriel, categorie.IdCategorie, nomMateriel, referenceConstructeur, codeBarreInventaire);
 
-            DialogResult = true;
+                DialogResult = true;
+            }
+            else
+                MessageBox.Show("Tous les champs doivent être remplis !", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
+        /// <summary>
+        /// Méthode appelée lorsque l'utilisateur décide de valider l'annulation de la modification d'un matériel.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickCreationAnnuler(object sender, RoutedEventArgs e)
         {
             DialogResult = false;

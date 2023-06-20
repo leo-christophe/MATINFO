@@ -29,9 +29,9 @@
 
         <Button x:Name="btAjouterCreationMat" Content="AJOUTER" HorizontalAlignment="Left" Margin="27,260,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Height="43" Width="88"/>
         <Button x:Name="btAnnulerCreationMat" Content="ANNULER" HorizontalAlignment="Left" Margin="142,260,0,0" VerticalAlignment="Top" Click="Button_ClickCreationAnnuler" RenderTransformOrigin="1.045,-1.618" Height="43" Width="88"/>
-        <Image Margin="46,11,158,294" Source="/video.png" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="50"/>
-        <Label Content="Création du" HorizontalAlignment="Left" Margin="101,11,0,0" VerticalAlignment="Top" Height="26" Width="118" FontWeight="Bold"/>
-        <Label Content="Matériel" HorizontalAlignment="Left" Margin="101,35,0,0" VerticalAlignment="Top" Height="26" Width="118" FontWeight="Bold"/>
+        <Label Content="Création du" HorizontalAlignment="Left" Margin="111,11,0,0" VerticalAlignment="Top" Height="26" Width="118" FontWeight="Bold"/>
+        <Label Content="Matériel" HorizontalAlignment="Left" Margin="111,35,0,0" VerticalAlignment="Top" Height="26" Width="118" FontWeight="Bold"/>
+        <Image Margin="45,11,153,294" Source="/ressources/video.png" Stretch="Fill"/>
 
 
     </Grid>

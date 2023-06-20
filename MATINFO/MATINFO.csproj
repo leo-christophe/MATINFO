@@ -17,8 +17,12 @@
     <None Remove="ressources\folder.png" />
     <None Remove="ressources\interrogation-mark.png" />
     <None Remove="ressources\laptop.png" />
+    <None Remove="ressources\listing.png" />
     <None Remove="ressources\MATINFO.png" />
+    <None Remove="ressources\options.png" />
+    <None Remove="ressources\personnel.png" />
     <None Remove="ressources\teacher.png" />
+    <None Remove="ressources\team.png" />
     <None Remove="ressources\technical-support.png" />
     <None Remove="ressources\warning.png" />
   </ItemGroup>
@@ -50,12 +54,16 @@
     <Resource Include="ressources\laptop.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="ressources\listing.png" />
     <Resource Include="ressources\MATINFO.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="ressources\options.png" />
+    <Resource Include="ressources\personnel.png" />
     <Resource Include="ressources\teacher.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="ressources\team.png" />
     <Resource Include="ressources\technical-support.png" />
     <Resource Include="ressources\warning.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

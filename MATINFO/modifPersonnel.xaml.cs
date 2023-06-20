@@ -20,12 +20,18 @@ namespace MATINFO
     /// </summary>
     public partial class modifPersonnel : Window
     {
+        // Le nouveau personnel modifié
         Personnel nouveauPersonnel;
         public modifPersonnel()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Méthode appelée lorsque l'utilisateur décide de valider la modification d'un personnel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickModifOK(object sender, RoutedEventArgs e)
         {
             string nomPersonnel = tbNouveauNomPersonnelModifier.Text;
@@ -38,6 +44,11 @@ namespace MATINFO
             DialogResult = true;
         }
 
+        /// <summary>
+        /// Méthode appelée lorsque l'utilisateur décide d'annuler la modification de personnel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickCreationOK(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
@@ -55,8 +66,14 @@ namespace MATINFO
             }
         }
 
+        /// <summary>
+        /// Cette méthode est déclenchée lorsque la combo box du nom personnel est changée. Les différents champs du formulaires sont remplis par rapport à la personne sélectionnée
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbNomPersonnelModification_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Si un élément est sélectionné 
             if (cbNomPersonnelModification != null && cbNomPersonnelModification.SelectedItem != "") 
             {
                 Personnel personnelSelectione = ((Personnel)cbNomPersonnelModification.SelectedItem);

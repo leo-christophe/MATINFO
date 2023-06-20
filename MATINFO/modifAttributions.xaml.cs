@@ -46,7 +46,7 @@ namespace MATINFO
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_Valider(object sender, RoutedEventArgs e)
         {
             // Si tous est bien renseigné, le nouvel attribut va être créée.
             if (!String.IsNullOrEmpty(cbDate.Text) && !String.IsNullOrEmpty(cbModificationAttributionMateriel.Text) && !String.IsNullOrEmpty(cbModificationAttributionPersonnel.Text)
@@ -72,13 +72,13 @@ namespace MATINFO
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_Annuler(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
         }
 
         /// <summary>
-        /// Cette méthode permet de mettre à jour la combo box personnel selon le matériel sélectionné
+        /// Cette méthode permet de mettre à jour la combo box personnel selon le matériel sélectionné à chaque fois que la sélection de ce dernier change
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -114,12 +114,11 @@ namespace MATINFO
                     // On change la source de la combo box par les matériaux associés au personnel.
                     cbModificationAttributionPersonnel.ItemsSource = lesPersonnelsAssocies;
                 }
-
             }
         }
 
         /// <summary>
-        /// Cette méthode permet de mettre à jour la combo box matériel selon le personnel sélectionné
+        /// Cette méthode permet de mettre à jour la combo box matériel selon le personnel sélectionné à chaque fois que la sélection de ce dernier change
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

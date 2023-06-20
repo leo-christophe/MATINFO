@@ -57,7 +57,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="ANNULER"
-            RenderTransformOrigin="1.045,-1.618" Click="Button_Click_1" />
+            RenderTransformOrigin="1.045,-1.618" Click="Button_Click_Annuler" />
         <Label
             Width="178"
             Height="26"
@@ -88,7 +88,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="VALIDER"
-            RenderTransformOrigin="1.045,-1.618" Click="Button_Click" />
+            RenderTransformOrigin="1.045,-1.618" Click="Button_Click_Valider" />
         <Image Margin="46,21,0,0" Source="/ressources/attributes.png" Stretch="Fill" RenderTransformOrigin="0.675,0.776" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label Content="Modification des" HorizontalAlignment="Left" Margin="99,12,0,0" VerticalAlignment="Top" Width="120" FontWeight="Bold" FontSize="14"/>
         <Label Content="attributions" HorizontalAlignment="Left" Margin="99,38,0,0" VerticalAlignment="Top" Width="112" FontSize="14" FontWeight="Bold"/>

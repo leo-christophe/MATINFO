@@ -24,6 +24,7 @@
     <None Remove="ressources\teacher.png" />
     <None Remove="ressources\team.png" />
     <None Remove="ressources\technical-support.png" />
+    <None Remove="ressources\video.png" />
     <None Remove="ressources\warning.png" />
   </ItemGroup>
 
@@ -65,6 +66,7 @@
     </Resource>
     <Resource Include="ressources\team.png" />
     <Resource Include="ressources\technical-support.png" />
+    <Resource Include="ressources\video.png" />
     <Resource Include="ressources\warning.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

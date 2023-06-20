@@ -270,18 +270,28 @@ namespace MATINFO
         }
         
 
+        /// <summary>
+        /// Cette méthode est déclenchée à chaque fois que l'utilisateur décide de supprimer un élément d'un référentiel. Dans tous les cas,
+        /// une fenêtre de confirmation apparaît. Ainsi, il peut choisir de supprimer ou non; certains référentiels impliquent une suppression en cascade
+        /// exemple : MATERIEL => ATTRIBUTION
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickSuppression(object sender, RoutedEventArgs e)
         {
+            // Création de la fenêtre de confirmation de suppression
             confirmation fenetreConfirmation = new confirmation();
             fenetreConfirmation.ShowDialog();
 
             if ((bool)fenetreConfirmation.DialogResult)
             {
-
+                // On vérifie la provenance du bouton par son nom
                 switch (((Button)(sender)).Name)
                 {
+                    // Bouton Suppression Matériel
                     case "btSupprimerMat":
                         {
+                            // On supprime les attributions qui possèdent le matériel à supprimer
                             Materiel selectedMaterial = (Materiel)listViewMateriel.SelectedItem;
                             List<Attributions> TemporaryList = new List<Attributions>(applicationdata.LesAttributions);
                             foreach (Attributions attribution in TemporaryList)
@@ -294,20 +304,28 @@ namespace MATINFO
                             }
                             listViewAttributions.Items.Refresh();
 
+                            // On supprime le matériel
+                            // Suppression dans la BD
                             applicationdata.LesMateriaux[listViewMateriel.SelectedIndex].Delete();
+                            // Suppression dans applicationData
                             applicationdata.LesMateriaux.RemoveAt(listViewMateriel.SelectedIndex);
+                            // Rafraichissement
                             listViewMateriel.Items.Refresh();
                             break;
                         }
 
+                    // Bouton Suppression catégorie
                     case "btSupprimerCat":
                         {
                             int selectedIndex = listViewCategories.SelectedIndex;
                             CategorieMateriel selectedItem = (CategorieMateriel)listViewCategories.SelectedItem;
 
                             // suppression de la catégorie
+                            // Suppression dans la BD
                             applicationdata.LesCategoriesMateriel[selectedIndex].Delete();
+                            // Suppression dans applicationData
                             applicationdata.LesCategoriesMateriel.RemoveAt(listViewCategories.SelectedIndex);
+                            // Rafraichissement
                             listViewCategories.Items.Refresh(); 
 
                             // Suppression des materiaux correspondant à la catégorie
@@ -325,8 +343,10 @@ namespace MATINFO
                             break;
                         }                
 
+                    // Bouton Supprimer Personnel
                     case "btSupprimerPers":
                         {
+                            // Suppression d'éventuels personnels dans Attribution
                             Personnel selectedPersonnel = (Personnel)listViewPersonnel.SelectedItem;
                             List<Attributions> TemporaryList = new List<Attributions>(applicationdata.LesAttributions);
                             foreach (Attributions attribution in TemporaryList)
@@ -339,16 +359,25 @@ namespace MATINFO
                             }
                             listViewAttributions.Items.Refresh();
  
-
+                            // Suppression du personnel
+                            // Suppression dans la BD
                             applicationdata.LesPersonnels[listViewPersonnel.SelectedIndex].Delete();
+                            // Suppression dans applicationData
                             applicationdata.LesPersonnels.RemoveAt(listViewPersonnel.SelectedIndex);
+                            // Rafraichissement
                             listViewPersonnel.Items.Refresh();
                             break;
                         }
+
+                    // Bouton Supprimer Attribut
                     case "btSupprimerAtt":
                         {
+                            // Suppression de l'attribut simplement
+                            // Suppression dans la BD
                             applicationdata.LesAttributions[listViewAttributions.SelectedIndex].Delete();
+                            //Suppression dans l'applicationData
                             applicationdata.LesAttributions.RemoveAt(listViewAttributions.SelectedIndex);
+                            // Rafraichissement
                             listViewAttributions.Items.Refresh();
                             break;
                         }

@@ -248,22 +248,21 @@ namespace MATINFO.Model
 
         public bool Read()
         {
+            // Accès à la base de données
             DataAccess accesBD = new DataAccess();
-            String requete = $"SELECT MAX(idPersonnel) + 1 FROM Personnel;";
+            // La requête
+            String requete = $"select idPersonnel, emailPersonnel from personnel where emailPersonnel = '{this.EmailPersonnel}';";
+
+            // Récupération des données
             DataTable datas = accesBD.GetData(requete);
 
+            // Si la data n'est pas nulle et vide, alors c'est qu'il existe déjà un personnel avec cet id.
+            if (datas != null && datas.Rows.Count > 0)
+                return true;
+            // existe
 
-            if (datas != null)
-            {
-                foreach (DataRow row in datas.Rows)
-                {
-                    if (int.Parse(row["idpersonnel"].ToString()) == idPersonnel)
-                    {
-
-                    }
-                }
-            }
-            return true;
+            // n'existe pasg
+            return false;
         }
         
         public void Update()

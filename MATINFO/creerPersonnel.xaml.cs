@@ -42,9 +42,26 @@ namespace MATINFO
 
         private void Button_ClickCreationOK(object sender, RoutedEventArgs e)
         {
-            NouveauPersonnel = new Personnel(tbNomPersonnel.Text, tbPrenomPersonnel.Text, tbMailPersonnel.Text);
-            DialogResult = true;
+            //les champs doivent êtres remplit
+            if (!string.IsNullOrEmpty(tbNomPersonnel.Text) && !string.IsNullOrEmpty(tbPrenomPersonnel.Text) && !string.IsNullOrEmpty(tbMailPersonnel.Text))
+            {
+                NouveauPersonnel = new Personnel(tbNomPersonnel.Text, tbPrenomPersonnel.Text, tbMailPersonnel.Text);
+                //si le personnel n'existe pas déjà
+                if (!NouveauPersonnel.Read())
+                {
+                    DialogResult = true;
+                }
+                else
+                {
+                    MessageBox.Show("Il existe déjà un personnel", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Tous les champs doivent être renseignés.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
         private void Button_ClickCreationAnnuler(object sender, RoutedEventArgs e)
         {
             DialogResult = false;

@@ -58,15 +58,22 @@ namespace MATINFO
             DialogResult = false;
         }
 
+        /// <summary>
+        /// Cette méthode est déclenchée lorsque la combo box de matériel change.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbModificationAttributionMateriel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Si la combo Box de matériel n'est pas vide
             if (cbModificationAttributionMateriel.SelectedItem != "" && cbModificationAttributionMateriel.SelectedItem != null)
             { 
+                // Liste des attributions de matériel
                 List<Attributions> attributionsMateriel = new List<Attributions>(((Materiel)cbModificationAttributionMateriel.SelectedItem).SesAttributions);
 
                 List<Personnel> lesPersonnelsAssocies = new List<Personnel>();
 
+                // Associer les personnels au matériel sous forme d'attribution
                 foreach (Personnel personnel in applicationData.LesPersonnels)
                 {
                     foreach (Attributions attribution in attributionsMateriel)
@@ -76,12 +83,15 @@ namespace MATINFO
                     }
                 }
 
+                // S'il n'existe pas de personnel associé à ce matériel, on désactive la combo box de personnel
                 if (lesPersonnelsAssocies.Count == 0)
                     cbModificationAttributionPersonnel.IsEnabled = false;
                 else
                 {
+                    // sinon on l'active et on rafraichit tout
                     cbModificationAttributionPersonnel.IsEnabled = true;
                     MAJ_ChampsFormulaireSelection();
+                    // On met à jour la source de la combo box de personnel par les personnels associés au matériel précédent
                     cbModificationAttributionPersonnel.ItemsSource = lesPersonnelsAssocies;
                 }
 
@@ -115,16 +125,19 @@ namespace MATINFO
             }
         }
 
-
+        /// <summary>
+        /// Cette méthode permet en 2 parties, de faire une collection observable des Dates associés au matériel et personnel correspondant puis d'afficher le reste.
+        /// </summary>
         private void MAJ_ChampsFormulaireSelection()
         {
+            // S'il y a une valeur dans les combo box de matériel et personnel
             if (cbModificationAttributionMateriel.SelectedItem != null && cbModificationAttributionPersonnel.SelectedItem != null &&
     cbModificationAttributionMateriel.SelectedItem != "" && cbModificationAttributionPersonnel.SelectedItem != "")
             {
 
                 List<DateTime> lesDates = new List<DateTime>();
                 DataAccess accesBD = new DataAccess();
-                // Requête
+                // Requête : on prend les dates dont l'IDpersonnel et l'IDmatériel correspondent
                 String requete = $"select dateAttribution from est_attribue WHERE idPersonnel = {((Personnel)cbModificationAttributionPersonnel.SelectedItem).IdPersonnel}" +
                     $" AND idMateriel = {((Materiel)cbModificationAttributionMateriel.SelectedItem).IdMateriel};";
                 DataTable datas = accesBD.GetData(requete);
@@ -137,8 +150,10 @@ namespace MATINFO
                     }
                 }
 
+                // On change la source de la combo box de sélection de date par les dates associés au matériel et personnel déjà selectionnés.
                 cbDate.ItemsSource = lesDates;
 
+                // S'il y a une valeur dans la combo box date choisie et que les 2 référentiels sont activés.
                 if (cbDate.SelectedItem != "" && cbDate.SelectedItem != null && cbModificationAttributionPersonnel.IsEnabled == true
                     && cbModificationAttributionMateriel.IsEnabled == true)
                 { 
@@ -146,12 +161,14 @@ namespace MATINFO
                     Attributions attributionChoisi;
 
                     List<Attributions> lesAttributions = new List<Attributions>(applicationData.LesAttributions);
-
+                    
+                    // On détermine l'attribution choisi à partir des 3 identifiants
                     attributionChoisi = lesAttributions.Find(
                 g => g.FK_idMateriel == ((Materiel)cbModificationAttributionMateriel.SelectedItem).IdMateriel &&
                 g.FK_idPersonnel == ((Personnel)cbModificationAttributionPersonnel.SelectedItem).IdPersonnel &&
                 g.DateAttribution == ((DateTime)cbDate.SelectedItem));
 
+                    // On remplace le commentaire et la date par celle actuelle, pour repérer les anciennes valeurs avant modification.
                     tbModificationAttributionCommentaire.Text = attributionChoisi.Commentaire;
 
                     dpModificationAttributionDate.Text = attributionChoisi.DateAttribution.ToString();

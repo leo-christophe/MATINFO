@@ -136,7 +136,7 @@ namespace MATINFO.Model
                 $"INSERT INTO est_attribue " +
                 $"(idpersonnel, idmateriel, dateattribution, commentaireattribution) " +
                 $"VALUES " +
-                $"({this.FK_idPersonnel}, {this.FK_idMateriel}, '{this.DateAttribution}', '{this.Commentaire}');";
+                $"({this.FK_idPersonnel}, {this.FK_idMateriel}, '{this.DateAttribution.ToString("yyyy'-'MM'-'dd")}', '{this.Commentaire}');";
             int datas = accesBD.SetData(requete);
         }
 
@@ -190,11 +190,12 @@ namespace MATINFO.Model
         public bool Read()
         {
             DataAccess accesBD = new DataAccess();
-            String requete = $"select idMateriel, idPersonnel from est_attribue where idMateriel = {this.FK_idMateriel}, idPersonnel = {this.FK_idPersonnel};";
+            String requete = $"select idMateriel, idPersonnel, dateattribution from est_attribue where idMateriel = {this.FK_idMateriel} AND idPersonnel = {this.FK_idPersonnel} AND dateattribution = '{this.DateAttribution.ToString("yyyy'-'MM'-'dd")}';";
             DataTable datas = accesBD.GetData(requete);
-
+            Console.WriteLine(datas.Rows.Count);
+            Console.WriteLine(datas != null);
             //si datas est null ou vide
-            if (datas != null || datas.Rows.Count <= 0)
+            if (datas != null && datas.Rows.Count > 0)
             {
                 //l'attribution n'existe pas
                 return true;
@@ -209,11 +210,11 @@ namespace MATINFO.Model
             DataAccess accesBD = new DataAccess();
             String requete = $"" +
                 $"UPDATE est_attribue" +
-                $" SET dateattribution = '{this.DateAttribution}', " +
+                $" SET dateattribution = '{this.DateAttribution.ToString("yyyy'-'MM'-'dd")}', " +
                 $"      commenaireattribution = '{this.Commentaire}' " +
                 $" WHERE idPersonnel = {this.FK_idPersonnel};" +
                 $" AND idMateriel = {this.FK_idMateriel}" +
-                $"AND dateattribution = {this.DateAttribution};";
+                $"AND dateattribution = {this.DateAttribution.ToString("yyyy'-'MM'-'dd")};";
             int datas = accesBD.SetData(requete);
         }
     }

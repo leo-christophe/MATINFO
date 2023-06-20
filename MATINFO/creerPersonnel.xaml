@@ -76,7 +76,7 @@
             Margin="129,170,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Click="Button_ClickCreationOK"
+            Click="Button_ClickCreationAnnuler"
             Content="ANNULER"
             RenderTransformOrigin="1.045,-1.618" />
 

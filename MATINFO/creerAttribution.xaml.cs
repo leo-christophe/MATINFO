@@ -41,6 +41,7 @@ namespace MATINFO
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            //Les champs doivent êtres remplit
             if (!string.IsNullOrEmpty(tbCreerAttributionCommentaire.Text) && !string.IsNullOrEmpty(tbCreerAttributionDate.Text))
             {
                 Personnel personnel = (Personnel)cbCreerAttributionIdPersonnel.SelectionBoxItem;
@@ -50,7 +51,13 @@ namespace MATINFO
                     tbCreerAttributionCommentaire.Text,
                     materiel,
                     personnel);
-                DialogResult = true;
+                //si l'attribution n'existe pas déjà
+                if (NouvelAttribu.Read())
+                {
+                    DialogResult = true;
+                }
+                else
+                    MessageBox.Show("Il existe déjà une attribution", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
                 MessageBox.Show("Tous les champs doivent être renseignés.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);

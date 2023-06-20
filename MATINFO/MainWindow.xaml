@@ -36,15 +36,8 @@
             Grid.Row="1"
             Margin="10,23,9,133"
             ItemsSource="{Binding Path=LesPersonnels}">
-            <ListView.Background>
-                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                    <GradientStop Color="Black" />
-                    <GradientStop Offset="0" Color="White" />
-                </LinearGradientBrush>
-            </ListView.Background>
             <ListView.View>
                 <GridView>
-
                     <GridViewColumn
                         Width="60"
                         DisplayMemberBinding="{Binding NomPersonnel}"
@@ -72,12 +65,12 @@
                     <GridViewColumn
                         Width="Auto"
                         DisplayMemberBinding="{Binding Path=NomMateriel}"
-                        Header="NomMateriel" />
+                        Header="Nom Materiel" />
 
                     <GridViewColumn
                         Width="Auto"
                         DisplayMemberBinding="{Binding Path=UneCategorieM.NomCategorie}"
-                        Header="nom categorie" />
+                        Header="Nom Categorie" />
 
                     <GridViewColumn
                         Width="Auto"
@@ -101,19 +94,19 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn
-                        Width="50"
+                        Width="Auto"
                         DisplayMemberBinding="{Binding APersonnel.NomPersonnel}"
                         Header="Nom Personnel" />
                     <GridViewColumn
-                        Width="50"
+                        Width="Auto"
                         DisplayMemberBinding="{Binding AMateriel.NomMateriel}"
-                        Header="IdMat." />
+                        Header="Nom Matériel" />
                     <GridViewColumn
-                        Width="85"
+                        Width="120"
                         DisplayMemberBinding="{Binding Commentaire}"
                         Header="Commentaire" />
                     <GridViewColumn
-                        Width="66"
+                        Width="65"
                         DisplayMemberBinding="{Binding DateAttribution}"
                         Header="Date" />
                 </GridView>
@@ -131,7 +124,7 @@
                     <GridViewColumn
                         Width="Auto"
                         DisplayMemberBinding="{Binding Path=NomCategorie}"
-                        Header="nomCategorie" />
+                        Header="Nom Categorie" />
                 </GridView>
             </ListView.View>
         </ListView>

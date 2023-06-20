@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Création de personnel"
     Width="243"
-    Height="255"
+    Height="357"
     Icon="/ressources/addPerson.png"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
@@ -16,23 +16,23 @@
         <Button
             Width="86"
             Height="35"
-            Margin="36,170,0,0"
+            Margin="28,253,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="Button_ClickCreationOK"
             Content="AJOUTER"
             RenderTransformOrigin="1.045,-1.618" />
         <Label
-            Width="169"
-            Margin="0,26,0,0"
+            Width="168"
+            Margin="0,109,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
             Content="Nom du personnel"
             RenderTransformOrigin="0.758,0.591" />
         <Label
-            Width="169"
-            Margin="0,72,0,0"
+            Width="168"
+            Margin="0,155,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
@@ -40,23 +40,23 @@
             RenderTransformOrigin="0.758,0.591" />
         <TextBox
             x:Name="tbNomPersonnel"
-            Width="169"
-            Margin="0,52,0,0"
+            Width="168"
+            Margin="0,135,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Text=""
             TextWrapping="Wrap" />
         <TextBox
             x:Name="tbPrenomPersonnel"
-            Width="169"
-            Margin="0,98,0,0"
+            Width="168"
+            Margin="0,181,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Text=""
             TextWrapping="Wrap" />
         <Label
-            Width="169"
-            Margin="0,117,0,0"
+            Width="168"
+            Margin="0,200,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
@@ -64,8 +64,8 @@
             RenderTransformOrigin="0.758,0.591" />
         <TextBox
             x:Name="tbMailPersonnel"
-            Width="169"
-            Margin="0,143,0,0"
+            Width="168"
+            Margin="0,226,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Text=""
@@ -73,12 +73,15 @@
         <Button
             Width="86"
             Height="35"
-            Margin="129,170,0,0"
+            Margin="122,253,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="Button_ClickCreationOK"
             Content="ANNULER"
             RenderTransformOrigin="1.045,-1.618" />
+        <Image Margin="38,16,119,242" Source="/ressources/personnel.png" Stretch="Fill"/>
+        <Label Content="Création de" HorizontalAlignment="Left" Margin="131,30,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.518,0.425" Height="28" Width="77" FontWeight="Bold"/>
+        <Label Content="Personnel" HorizontalAlignment="Left" Margin="130,71,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.518,0.425" Height="28" Width="78" FontWeight="Bold"/>
 
     </Grid>
 </Window>

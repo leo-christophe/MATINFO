@@ -55,11 +55,11 @@ namespace MATINFO
                         creationWinPers.ShowDialog();
                         if ((bool)creationWinPers.DialogResult == true)
                         {
-
+                            // On ajoute le nouvel utilisateur dans applicationData
                             applicationdata.LesPersonnels.Add(creationWinPers.NouveauPersonnel);
-
+                            // On le créer dans la base de données
                             creationWinPers.NouveauPersonnel.Create();
-
+                            // On rafraîchit
                             listViewPersonnel.Items.Refresh();
                         }
                         break;
@@ -98,16 +98,17 @@ namespace MATINFO
                 // Bouton créer une attribution
                 case "btCreerAtt":
                     {
+                        // On créer la fenêtre
                         creerAttribution creationWinAtt = new creerAttribution();
                         
                         creationWinAtt.ShowDialog();
                         if ((bool)creationWinAtt.DialogResult == true)
                         {
-
+                            // On ajoute le nouvel attribution dans applicationData
                             applicationdata.LesAttributions.Add(creationWinAtt.NouvelAttribu);
-
+                            // On l'ajoute dans la base de données
                             creationWinAtt.NouvelAttribu.Create();
-
+                            // On rafraichit
                             listViewAttributions.Items.Refresh();
                         }
                         break;
@@ -116,13 +117,16 @@ namespace MATINFO
                 // Bouton créer une catégorie
                 case "btCreerCat":
                     {
+                        // On créer la fenêtre pour une catégorie.
                         creerCategorie creationWinCat = new creerCategorie();
                         creationWinCat.ShowDialog();
                         if ((bool)creationWinCat.DialogResult == true)
                         {
+                            // On ajoute la nouvelle catégorie dans applicationData
                             applicationdata.LesCategoriesMateriel.Add(creationWinCat.NouvelleCategorie);
+                            // On l'ajoute dans la base de données
                             creationWinCat.NouvelleCategorie.Create();
-
+                            // On rafraîchit les 2 listviews (matériel car il dépend de catégorie)
                             listViewCategories.Items.Refresh();
                             listViewMateriel.Items.Refresh();
                         }
@@ -130,121 +134,132 @@ namespace MATINFO
                     }
             }
         }
-        private void creerCategorieAuto(CategorieMateriel Cat)
-        {
-            applicationdata.LesCategoriesMateriel.Add(Cat);
-            Cat.Create();
-            listViewCategories.Items.Refresh();
-        }
 
+        /// <summary>
+        /// Cette méthode est appelée lorsque l'utilisateur clique sur un bouton modification de n'importe quelle sorte.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickModification(object sender, RoutedEventArgs e)
         {
             Button bouton = (Button)sender;
             switch (bouton.Name)
             {
+                // Bouton modifier un personnel
                 case "btModifierPers":
+                {
+                    // Création de la fenêtre de modification de personnage
+                    modifPersonnel modificationPers = new modifPersonnel();
+
+                    //on rentre les données dans la fenêtre de modification par défault
+                    modificationPers.cbNomPersonnelModification.SelectedIndex = listViewPersonnel.SelectedIndex;
+                    modificationPers.tbPrenomPersonnelModification.Text = ((Personnel)listViewPersonnel.SelectedItem).PrenomPersonnel;
+                    modificationPers.tbNouveauNomPersonnelModifier.Text = ((Personnel)listViewPersonnel.SelectedItem).NomPersonnel;
+                    modificationPers.tbMailPersonnelModification.Text = ((Personnel)listViewPersonnel.SelectedItem).EmailPersonnel;
+
+                    modificationPers.ShowDialog();
+                    if ((bool)modificationPers.DialogResult == true)
                     {
-                        modifPersonnel modificationPers = new modifPersonnel();
-                        modificationPers.DataContext = this.applicationdata;
+                        
+                        List<Personnel> lePersonnel = new List<Personnel>(applicationdata.LesPersonnels);
+                        // On trouve l'indice du personnel à modifier
+                        int index = lePersonnel.FindIndex(x => x.IdPersonnel == modificationPers.NouveauPersonnel.IdPersonnel);
 
-                        //on rentre les données dans la fenêtre de modification par défault
-                        modificationPers.cbNomPersonnelModification.SelectedIndex = listViewPersonnel.SelectedIndex;
-                        modificationPers.tbPrenomPersonnelModification.Text = ((Personnel)listViewPersonnel.SelectedItem).PrenomPersonnel;
-                        modificationPers.tbMailPersonnelModification.Text = ((Personnel)listViewPersonnel.SelectedItem).EmailPersonnel;
-
-                        modificationPers.ShowDialog();
-                        if ((bool)modificationPers.DialogResult == true)
-                        {
-                            List<Personnel> lePersonnel = new List<Personnel>(applicationdata.LesPersonnels);
-                            int index = lePersonnel.FindIndex(x => x.IdPersonnel == modificationPers.NouveauPersonnel.IdPersonnel);
-                            applicationdata.LesPersonnels[index] = new Personnel(index, modificationPers.NouveauPersonnel.NomPersonnel, modificationPers.NouveauPersonnel.PrenomPersonnel, modificationPers.NouveauPersonnel.EmailPersonnel);
+                        // On modifie le personnel dans applicationData
+                        applicationdata.LesPersonnels[index] = new Personnel(index, modificationPers.NouveauPersonnel.NomPersonnel, modificationPers.NouveauPersonnel.PrenomPersonnel, modificationPers.NouveauPersonnel.EmailPersonnel);
                             
-                            // Mettre à jour avec la bd
-                            applicationdata.LesPersonnels[index].Update();
-                            listViewPersonnel.Items.Refresh();
-                        }
-                        break;
+                        // Mettre à jour avec la bd
+                        applicationdata.LesPersonnels[index].Update();
+                        // Rafraichissement
+                        listViewPersonnel.Items.Refresh();
                     }
+                    break;
+                }
+
+                // Bouton modifier un matériel
                 case "btModifierMat":
+                {
+                    modifMateriel modificationMat = new modifMateriel();
+                    modificationMat.DataContext = this.applicationdata;
+
+                    modificationMat.ShowDialog();
+                    if ((bool)modificationMat.DialogResult)
                     {
-                        modifMateriel modificationMat = new modifMateriel();
-                        modificationMat.Owner = this;
-                        modificationMat.DataContext = this.applicationdata;
+                        List<Materiel> ListMaterials = new List<Materiel>(applicationdata.LesMateriaux);
+                        List<CategorieMateriel> ListCategories = new List<CategorieMateriel>(applicationdata.LesCategoriesMateriel);
 
-                        modificationMat.ShowDialog();
-                        if ((bool)modificationMat.DialogResult)
-                        {
-                            List<Materiel> ListMaterials = new List<Materiel>(applicationdata.LesMateriaux);
-                            List<CategorieMateriel> ListCategories = new List<CategorieMateriel>(applicationdata.LesCategoriesMateriel);
+                        int index = ListMaterials.FindIndex(x => x.IdMateriel == modificationMat.NouveauMateriel.IdMateriel);
 
-                            int index = ListMaterials.FindIndex(x => x.IdMateriel == modificationMat.NouveauMateriel.IdMateriel);
+                        applicationdata.LesMateriaux[index].NomMateriel = modificationMat.NouveauMateriel.NomMateriel;
+                        applicationdata.LesMateriaux[index].FK_idCategorie = modificationMat.NouveauMateriel.FK_idCategorie;
+                        applicationdata.LesMateriaux[index].ReferenceConstructeur = modificationMat.NouveauMateriel.ReferenceConstructeur;
+                        applicationdata.LesMateriaux[index].CodeBarreInventaire = modificationMat.NouveauMateriel.CodeBarreInventaire;
+                        applicationdata.LesMateriaux[index].UneCategorieM = ListCategories.Find(x => x.IdCategorie == modificationMat.NouveauMateriel.FK_idCategorie);
 
-                            applicationdata.LesMateriaux[index].NomMateriel = modificationMat.NouveauMateriel.NomMateriel;
-                            applicationdata.LesMateriaux[index].FK_idCategorie = modificationMat.NouveauMateriel.FK_idCategorie;
-                            applicationdata.LesMateriaux[index].ReferenceConstructeur = modificationMat.NouveauMateriel.ReferenceConstructeur;
-                            applicationdata.LesMateriaux[index].CodeBarreInventaire = modificationMat.NouveauMateriel.CodeBarreInventaire;
-                            applicationdata.LesMateriaux[index].UneCategorieM = ListCategories.Find(x => x.IdCategorie == modificationMat.NouveauMateriel.FK_idCategorie);
-
-                            // Mettre à jour avec la bd
-                            applicationdata.LesMateriaux[index].Update();
-                            listViewMateriel.Items.Refresh();
-                        }
-                        break;
+                        // Mettre à jour avec la bd
+                        applicationdata.LesMateriaux[index].Update();
+                        listViewMateriel.Items.Refresh();
                     }
+                    break;
+                }
+
+                // Bouton modifier un attribut
                 case "btModifierAtt":
+                {
+                    modifAttributions modificationAtt = new modifAttributions();
+                    modificationAtt.Owner = this;
+
+                    modificationAtt.DataContext = this.applicationdata;
+
+                    modificationAtt.cbModificationAttributionMateriel.ItemsSource = applicationdata.LesMateriaux;
+                    modificationAtt.cbModificationAttributionPersonnel.ItemsSource = applicationdata.LesPersonnels;
+
+                    //on rentre les données dans la fenêtre de modification par défault
+                    //Console.WriteLine(listViewAttributions.SelectedItems);
+                    //modificationAtt.cbModificationAttributionMateriel.SelectedItem = ((Attributions)listViewAttributions.SelectedItems).AMateriel;
+                    //modificationAtt.cbModificationAttributionPersonnel.SelectedItem = ((Attributions)listViewAttributions.SelectedItems).APersonnel;
+                    //modificationAtt.tbModificationAttributionCommentaire.Text = ((Attributions)listViewAttributions.SelectedItem).Commentaire;
+                    //modificationAtt.tbModificationAttributionDate.Text = ((Attributions)listViewAttributions.SelectedItem).DateAttribution.ToString();
+
+                    modificationAtt.ShowDialog();
+                    if ((bool)modificationAtt.DialogResult == true)
                     {
-                        modifAttributions modificationAtt = new modifAttributions();
-                        modificationAtt.Owner = this;
-
-                        modificationAtt.DataContext = this.applicationdata;
-
-                        modificationAtt.cbModificationAttributionMateriel.ItemsSource = applicationdata.LesMateriaux;
-                        modificationAtt.cbModificationAttributionPersonnel.ItemsSource = applicationdata.LesPersonnels;
-
-                        //on rentre les données dans la fenêtre de modification par défault
-                        //Console.WriteLine(listViewAttributions.SelectedItems);
-                        //modificationAtt.cbModificationAttributionMateriel.SelectedItem = ((Attributions)listViewAttributions.SelectedItems).AMateriel;
-                        //modificationAtt.cbModificationAttributionPersonnel.SelectedItem = ((Attributions)listViewAttributions.SelectedItems).APersonnel;
-                        //modificationAtt.tbModificationAttributionCommentaire.Text = ((Attributions)listViewAttributions.SelectedItem).Commentaire;
-                        //modificationAtt.tbModificationAttributionDate.Text = ((Attributions)listViewAttributions.SelectedItem).DateAttribution.ToString();
-
-                        modificationAtt.ShowDialog();
-                        if ((bool)modificationAtt.DialogResult == true)
+                        int index = 0;
+                        foreach (Attributions attribut in applicationdata.LesAttributions)
                         {
-                            int index = 0;
-                            foreach (Attributions attribut in applicationdata.LesAttributions)
+                            if (attribut.FK_idMateriel == modificationAtt.NouvelAttribut.FK_idMateriel && attribut.FK_idPersonnel == modificationAtt.NouvelAttribut.FK_idPersonnel && attribut.DateAttribution == modificationAtt.NouvelAttribut.DateAttribution)
                             {
-                                if (attribut.FK_idMateriel == modificationAtt.NouvelAttribut.FK_idMateriel && attribut.FK_idPersonnel == modificationAtt.NouvelAttribut.FK_idPersonnel && attribut.DateAttribution == modificationAtt.NouvelAttribut.DateAttribution)
-                                {
-                                    index = applicationdata.LesAttributions.IndexOf(attribut);
-                                    applicationdata.LesAttributions[index] = modificationAtt.NouvelAttribut;
-                                }
+                                index = applicationdata.LesAttributions.IndexOf(attribut);
+                                applicationdata.LesAttributions[index] = modificationAtt.NouvelAttribut;
                             }
-
-                            // Mettre à jour avec la bd
-                            applicationdata.LesAttributions[index].Update();
-                            listViewAttributions.Items.Refresh();
                         }
-                        break;
+
+                        // Mettre à jour avec la bd
+                        applicationdata.LesAttributions[index].Update();
+                        listViewAttributions.Items.Refresh();
                     }
+                    break;
+                }
+
+                // Bouton modifier une catégorie
                 case "btModifierCat":
+                {
+                    modifCategorie modificationCat = new modifCategorie();
+                    modificationCat.ShowDialog();
+                    if ((bool)modificationCat.DialogResult)
                     {
-                        modifCategorie modificationCat = new modifCategorie();
-                        modificationCat.ShowDialog();
-                        if ((bool)modificationCat.DialogResult)
-                        {
-                            List<CategorieMateriel> ListCategories = new List<CategorieMateriel>(applicationdata.LesCategoriesMateriel);
+                        List<CategorieMateriel> ListCategories = new List<CategorieMateriel>(applicationdata.LesCategoriesMateriel);
 
-                            int index = ListCategories.FindIndex(x => x.IdCategorie == modificationCat.CatAmodifier.IdCategorie);
+                        int index = ListCategories.FindIndex(x => x.IdCategorie == modificationCat.CatAmodifier.IdCategorie);
 
-                            applicationdata.LesCategoriesMateriel[index].NomCategorie = modificationCat.CatAmodifier.NomCategorie;
+                        applicationdata.LesCategoriesMateriel[index].NomCategorie = modificationCat.CatAmodifier.NomCategorie;
 
-                            // Mettre à jour avec la bd
-                            applicationdata.LesCategoriesMateriel[index].Update();
-                            listViewCategories.Items.Refresh();
-                        }
-                        break;
+                        // Mettre à jour avec la bd
+                        applicationdata.LesCategoriesMateriel[index].Update();
+                        listViewCategories.Items.Refresh();
                     }
+                    break;
+                }
             }
         }
 
@@ -260,6 +275,18 @@ namespace MATINFO
                 {
                     case "btSupprimerMat":
                         {
+                            Materiel selectedMaterial = (Materiel)listViewMateriel.SelectedItem;
+                            List<Attributions> TemporaryList = new List<Attributions>(applicationdata.LesAttributions);
+                            foreach (Attributions attribution in TemporaryList)
+                            {
+                                if (attribution.FK_idMateriel == selectedMaterial.IdMateriel)
+                                {
+                                    attribution.Delete();
+                                    applicationdata.LesAttributions.Remove(attribution);
+                                }
+                            }
+                            listViewAttributions.Items.Refresh();
+
                             applicationdata.LesMateriaux[listViewMateriel.SelectedIndex].Delete();
                             applicationdata.LesMateriaux.RemoveAt(listViewMateriel.SelectedIndex);
                             listViewMateriel.Items.Refresh();
@@ -293,6 +320,19 @@ namespace MATINFO
 
                     case "btSupprimerPers":
                         {
+                            Personnel selectedPersonnel = (Personnel)listViewPersonnel.SelectedItem;
+                            List<Attributions> TemporaryList = new List<Attributions>(applicationdata.LesAttributions);
+                            foreach (Attributions attribution in TemporaryList)
+                            {
+                                if (attribution.FK_idPersonnel == selectedPersonnel.IdPersonnel)
+                                {
+                                    attribution.Delete();
+                                    applicationdata.LesAttributions.Remove(attribution);
+                                }
+                            }
+                            listViewAttributions.Items.Refresh();
+ 
+
                             applicationdata.LesPersonnels[listViewPersonnel.SelectedIndex].Delete();
                             applicationdata.LesPersonnels.RemoveAt(listViewPersonnel.SelectedIndex);
                             listViewPersonnel.Items.Refresh();

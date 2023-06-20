@@ -6,29 +6,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:model="clr-namespace:MATINFO.Model"
         mc:Ignorable="d"
-        Title="Création de matériel" Height="310" Width="254" ResizeMode="NoResize" Icon="/ressources/desktop.png" WindowStartupLocation="CenterScreen">
+        Title="Création de matériel" Height="371" Width="254" ResizeMode="NoResize" Icon="/ressources/desktop.png" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <Style x:Key="Obligatoire" TargetType="TextBox">
             <Setter Property="BorderBrush" Value="Red"/>
         </Style>
     </Window.Resources>
-    
-    
+
+
     <Grid>
-       
-        <Label Content="Nom du materiel" HorizontalAlignment="Center" Margin="0,15,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="169" HorizontalContentAlignment="Center"/>
-        <Label Content="Code barre" HorizontalAlignment="Center" Margin="0,59,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="170" HorizontalContentAlignment="Center"/>
-        <Label Content="Catégorie" HorizontalAlignment="Center" Margin="0,146,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="169" HorizontalContentAlignment="Center"/>
-        <Label Content="Référence constructeur" HorizontalAlignment="Center" Margin="0,103,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.743,0.103" Width="170" HorizontalContentAlignment="Center"/>
 
-        <TextBox x:Name="tbNomMaterielCreation" HorizontalAlignment="Center" Margin="0,41,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169"/>
-        <TextBox x:Name="tbCodeBarreCreation" Margin="0,85,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" HorizontalAlignment="Center" Width="169"/>
-        <TextBox x:Name="tbReferenceConstructeurCreation" HorizontalAlignment="Center" Margin="0,128,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170"/>
-        <ComboBox x:Name="cbCategorieChoixMat" Margin="0,172,0,0" SelectedIndex="0"  ItemsSource="{Binding LesCategoriesMateriel}" DisplayMemberPath="NomCategorie" SelectedValuePath="IdCategorie" HorizontalAlignment="Center" VerticalAlignment="Top" Width="169"/>
+        <Label Content="Nom du materiel" HorizontalAlignment="Center" Margin="0,61,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="170" HorizontalContentAlignment="Center"/>
+        <Label Content="Code barre" HorizontalAlignment="Center" Margin="0,105,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="170" HorizontalContentAlignment="Center"/>
+        <Label Content="Catégorie" HorizontalAlignment="Center" Margin="0,192,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="170" HorizontalContentAlignment="Center"/>
+        <Label Content="Référence constructeur" HorizontalAlignment="Center" Margin="0,149,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.743,0.103" Width="170" HorizontalContentAlignment="Center"/>
 
-        <Button x:Name="btAjouterCreationMat" Content="AJOUTER" HorizontalAlignment="Left" Margin="27,223,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Height="43" Width="88"/>
-        <Button x:Name="btAnnulerCreationMat" Content="ANNULER" HorizontalAlignment="Left" Margin="142,223,0,0" VerticalAlignment="Top" Click="Button_ClickCreationAnnuler" RenderTransformOrigin="1.045,-1.618" Height="43" Width="88"/>
+        <TextBox x:Name="tbNomMaterielCreation" HorizontalAlignment="Center" Margin="0,87,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170"/>
+        <TextBox x:Name="tbCodeBarreCreation" Margin="0,131,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" HorizontalAlignment="Center" Width="170"/>
+        <TextBox x:Name="tbReferenceConstructeurCreation" HorizontalAlignment="Center" Margin="0,174,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170"/>
+        <ComboBox x:Name="cbCategorieChoixMat" Margin="0,218,0,0" SelectedIndex="0"  ItemsSource="{Binding LesCategoriesMateriel}" DisplayMemberPath="NomCategorie" SelectedValuePath="IdCategorie" HorizontalAlignment="Center" VerticalAlignment="Top" Width="170"/>
+
+        <Button x:Name="btAjouterCreationMat" Content="AJOUTER" HorizontalAlignment="Left" Margin="27,260,0,0" VerticalAlignment="Top" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Height="43" Width="88"/>
+        <Button x:Name="btAnnulerCreationMat" Content="ANNULER" HorizontalAlignment="Left" Margin="142,260,0,0" VerticalAlignment="Top" Click="Button_ClickCreationAnnuler" RenderTransformOrigin="1.045,-1.618" Height="43" Width="88"/>
+        <Image Margin="46,11,158,294" Source="/video.png" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="50"/>
+        <Label Content="Création du" HorizontalAlignment="Left" Margin="101,11,0,0" VerticalAlignment="Top" Height="26" Width="118" FontWeight="Bold"/>
+        <Label Content="Matériel" HorizontalAlignment="Left" Margin="101,35,0,0" VerticalAlignment="Top" Height="26" Width="118" FontWeight="Bold"/>
 
 
     </Grid>

@@ -54,5 +54,16 @@ namespace MATINFO
                 this.nouveauPersonnel = value;
             }
         }
+
+        private void cbNomPersonnelModification_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbNomPersonnelModification != null && cbNomPersonnelModification.SelectedItem != "") 
+            {
+                Personnel personnelSelectione = ((Personnel)cbNomPersonnelModification.SelectedItem);
+                tbMailPersonnelModification.Text = personnelSelectione.EmailPersonnel;
+                tbNouveauNomPersonnelModifier.Text = personnelSelectione.NomPersonnel;
+                tbPrenomPersonnelModification.Text = personnelSelectione.PrenomPersonnel;
+            }
+        }
     }
 }

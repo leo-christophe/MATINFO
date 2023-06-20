@@ -5,35 +5,39 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:MATINFO"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="clr-namespace:MATINFO.Model"
     Title="Modification du personnel"
     Width="244"
-    Height="324"
+    Height="374"
     Icon="/ressources/teacher.png"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Grid>
+    <Window.DataContext>
+        <model:ApplicationData x:Name="applicationData"></model:ApplicationData>
+    </Window.DataContext>
+    <Grid Margin="0,0,0,2">
         <Button
-            Width="97"
-            Height="39"
-            Margin="10,230,0,0"
-            HorizontalAlignment="Left"
+            Width="80"
+            Height="31"
+            Margin="0,257,0,0"
+            HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Click="Button_ClickModifOK"
             Content="VALIDER"
             RenderTransformOrigin="1.045,-1.618" />
         <Label
             Width="168"
-            Margin="29,68,0,0"
-            HorizontalAlignment="Left"
+            Margin="0,103,0,0"
+            HorizontalAlignment="Center"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
             Content="Nouveau nom du personnel"
             RenderTransformOrigin="0.758,0.591" />
         <Label
             Width="170"
-            Margin="26,122,0,0"
-            HorizontalAlignment="Left"
+            Margin="0,147,0,0"
+            HorizontalAlignment="Center"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
             Content="Prénom du personnel"
@@ -41,22 +45,21 @@
         <TextBox
             x:Name="tbNouveauNomPersonnelModifier"
             Width="168"
-            Margin="26,99,0,0"
-            HorizontalAlignment="Left"
+            Margin="0,129,0,0"
+            HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Foreground="#FFA6A6A6"
             Text="Nouveau nom"
-            TextWrapping="Wrap" />
+            TextWrapping="Wrap" RenderTransformOrigin="0.682,0.908" />
         <TextBox
             x:Name="tbPrenomPersonnelModification"
             Width="168"
-            Margin="29,153,0,0"
-            HorizontalAlignment="Left"
+            HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Foreground="#FFAEABAB"
             RenderTransformOrigin="0.5,0.5"
             Text="Nouveau prénom"
-            TextWrapping="Wrap">
+            TextWrapping="Wrap" Margin="0,173,0,0">
             <TextBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="1" />
@@ -69,8 +72,8 @@
         </TextBox>
         <Label
             Width="168"
-            Margin="29,176,0,0"
-            HorizontalAlignment="Left"
+            Margin="0,191,0,0"
+            HorizontalAlignment="Center"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
             Content="Mail du personnel"
@@ -78,17 +81,17 @@
         <TextBox
             x:Name="tbMailPersonnelModification"
             Width="168"
-            Margin="29,207,0,0"
-            HorizontalAlignment="Left"
+            Margin="0,217,0,0"
+            HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Foreground="#FF9D9D9D"
             Text="Mail nouveau"
             TextWrapping="Wrap" />
         <Button
-            Width="97"
-            Height="39"
-            Margin="111,230,0,0"
-            HorizontalAlignment="Left"
+            Width="80"
+            Height="31"
+            Margin="0,293,0,0"
+            HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Click="Button_ClickCreationOK"
             Content="ANNULER"
@@ -96,19 +99,22 @@
         <ComboBox
             x:Name="cbNomPersonnelModification"
             Width="168"
-            Margin="28,41,0,0"
-            HorizontalAlignment="Left"
+            Margin="0,82,0,0"
+            HorizontalAlignment="Center"
             VerticalAlignment="Top"
             DisplayMemberPath="NomPersonnel"
             ItemsSource="{Binding LesPersonnels}"
             SelectedIndex="0"
-            SelectedValuePath="idPersonnel" />
+            SelectedValuePath="idPersonnel" SelectionChanged="cbNomPersonnelModification_SelectionChanged" />
         <Label
             Width="168"
-            Margin="29,10,0,0"
-            HorizontalAlignment="Left"
+            Margin="0,57,0,0"
+            HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Content="Nom du personnel" />
+            Content="Nom du personnel" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="25" />
+        <Image Margin="39,10,162,299" Source="/ressources/character-design.png" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Modification" HorizontalAlignment="Left" Margin="87,10,0,0" VerticalAlignment="Top" Width="119" FontWeight="Bold" FontSize="14"/>
+        <Label Content="du personnel" HorizontalAlignment="Left" Margin="87,33,0,0" VerticalAlignment="Top" Width="119" FontWeight="Bold" FontSize="14"/>
 
     </Grid>
 </Window>

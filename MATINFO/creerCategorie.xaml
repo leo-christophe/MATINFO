@@ -7,10 +7,12 @@
         mc:Ignorable="d"
         Title="Création d'une catégorie" Height="198" Width="236" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/ressources/add-folder.png">
     <Grid>
-        <Button Content="Ajouter" HorizontalAlignment="Center" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Width="76" Height="20" VerticalAlignment="Top" Margin="0,86,0,0"/>
-        <Label Content="Nom de la catégorie" HorizontalAlignment="Center" Margin="0,26,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="169" HorizontalContentAlignment="Center" FontWeight="Bold" Background="Transparent"/>
-        <TextBox x:Name="tbNomCategorieCreation" HorizontalAlignment="Center" Margin="0,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="168"/>
-        <Button Content="Annuler" Margin="0,111,0,0" Click="Button_ClickCreationAnnuler" RenderTransformOrigin="1.045,-1.618" IsCancel="True" Height="21" Width="76" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+        <Button Content="Ajouter" HorizontalAlignment="Center" Click="Button_ClickCreationOK" RenderTransformOrigin="1.045,-1.618" Width="76" Height="20" VerticalAlignment="Top" Margin="0,99,0,0"/>
+        <Label Content="Nom de la catégorie" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.591" Width="168" HorizontalContentAlignment="Center" Background="Transparent"/>
+        <TextBox x:Name="tbNomCategorieCreation" HorizontalAlignment="Center" Margin="0,76,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="168"/>
+        <Button Content="Annuler" Margin="0,124,0,0" Click="Button_ClickCreationAnnuler" RenderTransformOrigin="1.045,-1.618" IsCancel="True" Height="21" Width="76" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+        <Image Margin="33,10,167,137" Source="/ressources/options.png" Stretch="Fill"/>
+        <Label Content="Création d'une catégorie" HorizontalAlignment="Left" Margin="69,10,0,0" VerticalAlignment="Top" Height="35" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
     </Grid>
 </Window>

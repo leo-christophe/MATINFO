@@ -20,7 +20,8 @@ namespace MATINFO
     /// </summary>
     public partial class creerCategorie : Window
     {
-        CategorieMateriel nouvelleCategorie;
+        // Nouvelle catégorie qui va être communiquée à la MainWindow
+        private CategorieMateriel nouvelleCategorie;
 
         public CategorieMateriel NouvelleCategorie
         {
@@ -40,14 +41,29 @@ namespace MATINFO
             InitializeComponent();
         }
         
+        /// <summary>
+        ///  Méthode déclenchée lorsque l'utilisateur décide de valider la création d'une catégorie
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickCreationOK(object sender, RoutedEventArgs e)
         {
-            NouvelleCategorie = new CategorieMateriel(tbNomCategorieCreation.Text);
-            Console.WriteLine(NouvelleCategorie.IdCategorie);
-            DialogResult = true;
+            // Si le texte est bien renseigné, on créer la nouvelle catégorie
+            if (!String.IsNullOrEmpty(tbNomCategorieCreation.Text))
+            {
+                NouvelleCategorie = new CategorieMateriel(tbNomCategorieCreation.Text);
+                DialogResult = true;
+            }
+            else
+                MessageBox.Show("Le nom de matériel doit apparaître !", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error) ;
 
         }
 
+        /// <summary>
+        /// Méthode déclenchée lorsque l'utilisateur décide d'annuler la création d'une catégorie.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickCreationAnnuler(object sender, RoutedEventArgs e)
         {
             DialogResult = false;

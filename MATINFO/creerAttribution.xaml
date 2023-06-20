@@ -8,17 +8,20 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Création d'une attribution"
     Width="414"
-    Height="312"
+    Height="362"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.DataContext>
         <model:ApplicationData x:Name="applicationData"></model:ApplicationData>
     </Window.DataContext>
-        <Grid Margin="0,0,0,-6">
+    <Grid Margin="0,0,0,-6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Label
             Width="169"
-            Margin="10,10,0,0"
+            Margin="33,49,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
@@ -26,7 +29,7 @@
             RenderTransformOrigin="0.758,0.591" />
         <Label
             Width="169"
-            Margin="184,10,0,0"
+            Margin="207,49,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
@@ -34,31 +37,31 @@
             RenderTransformOrigin="0.758,0.591" />
         <Label
             Width="170"
-            Margin="10,68,0,0"
+            Margin="33,107,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
             Content="Commentaire"
-            RenderTransformOrigin="0.758,0.591" />
+            RenderTransformOrigin="0.758,0.591" FontWeight="Bold" />
         <TextBox x:Name="tbCreerAttributionCommentaire"
             Width="169"
-            Margin="10,99,0,0"
+            Margin="33,138,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="Entrez un commentaire"
             TextWrapping="Wrap" Height="131" />
         <Label
             Width="169"
-            Margin="184,68,0,0"
+            Margin="207,107,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
             Content="Date"
-            RenderTransformOrigin="0.758,0.591" />
+            RenderTransformOrigin="0.758,0.591" FontWeight="Bold" />
         <DatePicker x:Name="tbCreerAttributionDate"
             Width="169"
             Height="131"
-            Margin="184,99,0,0"
+            Margin="207,138,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             RenderTransformOrigin="0.5,0.5">
@@ -74,21 +77,23 @@
         <Button
             Width="91"
             Height="33"
-            Margin="49,235,0,0"
+            Margin="72,274,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="AJOUTER"
-            RenderTransformOrigin="1.045,-1.618" Click="Button_Click" />
+            RenderTransformOrigin="1.045,-1.618" Click="Button_Click_Valider" />
         <Button
             Width="91"
             Height="33"
-            Margin="223,235,0,0"
+            Margin="246,274,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="ANNULER"
-            RenderTransformOrigin="1.045,-1.618" Click="Button_Click_1" />
-        <ComboBox x:Name="cbCreerAttributionIdPersonnel" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="169" SelectedIndex="0"  ItemsSource="{Binding Path=LesPersonnels}" DisplayMemberPath="NomPersonnel" SelectedValuePath="IdPersonnel"/>
-        <ComboBox x:Name="cbCreerAttributionIdMateriel" HorizontalAlignment="Left" Margin="184,41,0,0" VerticalAlignment="Top" Width="169" SelectedIndex="0"  ItemsSource="{Binding Path=LesMateriaux}" DisplayMemberPath="NomMateriel" SelectedValuePath="IdMateriel"/>
+            RenderTransformOrigin="1.045,-1.618" Click="Button_Click_Annuler" />
+        <ComboBox x:Name="cbCreerAttributionIdPersonnel" HorizontalAlignment="Left" Margin="33,80,0,0" VerticalAlignment="Top" Width="169" SelectedIndex="0"  ItemsSource="{Binding Path=LesPersonnels}" DisplayMemberPath="NomPersonnel" SelectedValuePath="IdPersonnel"/>
+        <ComboBox x:Name="cbCreerAttributionIdMateriel" HorizontalAlignment="Left" Margin="207,80,0,0" VerticalAlignment="Top" Width="169" SelectedIndex="0"  ItemsSource="{Binding Path=LesMateriaux}" DisplayMemberPath="NomMateriel" SelectedValuePath="IdMateriel"/>
+        <Image Margin="33,9,0,0" Source="/ressources/team.png" Stretch="Fill" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Création d'une attribution" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" Height="34" Width="286" FontWeight="Bold" FontSize="20"/>
 
     </Grid>
 </Window>

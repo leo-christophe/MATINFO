@@ -12,6 +12,7 @@
     <None Remove="ressources\add-folder.png" />
     <None Remove="ressources\addPerson.png" />
     <None Remove="ressources\attributes.png" />
+    <None Remove="ressources\character-design.png" />
     <None Remove="ressources\desktop.png" />
     <None Remove="ressources\folder.png" />
     <None Remove="ressources\interrogation-mark.png" />
@@ -36,6 +37,7 @@
     <Resource Include="ressources\attributes.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="ressources\character-design.png" />
     <Resource Include="ressources\desktop.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

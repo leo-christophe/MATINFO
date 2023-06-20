@@ -94,6 +94,11 @@ namespace MATINFO.Model
             return $"{this.IdCategorie} \n{this.NomCategorie}";
         }
 
+        /// <summary>
+        /// Equals permet de vérifier l'égalité entre deux objets categorieMateriel (ID et le nom)
+        /// </summary>
+        /// <param name="obj">Le deuxième objet à vérifier l'égalité</param>
+        /// <returns>true si égal, false sinon</returns>
         public override bool Equals(object? obj)
         {
             return obj is CategorieMateriel materiel &&

@@ -9,6 +9,7 @@ namespace MATINFO
     /// </summary>
     public partial class creerMateriel : Window
     {
+        // Nouveau matériel communiqué à la MainWindow
         private Materiel nouveauMateriel;
 
         public creerMateriel()
@@ -29,18 +30,24 @@ namespace MATINFO
             }
         }
 
+        /// <summary>
+        /// Méthode déclenchée lorsque l'utilisateur décide de valider la création d'un matériel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickCreationOK(object sender, RoutedEventArgs e)
         {
+            // Si tout va bien, le nouveau matériel est créée
             CategorieMateriel categorie = (CategorieMateriel)cbCategorieChoixMat.SelectionBoxItem;
             if ( !string.IsNullOrEmpty( cbCategorieChoixMat.SelectionBoxItem.ToString() ) && !string.IsNullOrEmpty(cbCategorieChoixMat.SelectionBoxItem.ToString()) 
                 && !string.IsNullOrEmpty(tbNomMaterielCreation.Text) && !string.IsNullOrEmpty( tbReferenceConstructeurCreation.Text ) && !string.IsNullOrEmpty( tbCodeBarreCreation.Text ))
             { 
                 
-
+                // nouvel objet
                 this.NouveauMateriel = new Materiel(categorie.IdCategorie,
                     tbNomMaterielCreation.Text,
                     tbReferenceConstructeurCreation.Text,
-                    tbCodeBarreCreation.Text, categorie);
+                    tbCodeBarreCreation.Text);
 
             
                 DialogResult = true;
@@ -51,6 +58,11 @@ namespace MATINFO
             }
         }
 
+        /// <summary>
+        /// Méthode déclenchée lorsque l'utilisateur décide d'annuler la création d'un matériel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickCreationAnnuler(object sender, RoutedEventArgs e)
         {
             DialogResult = false;

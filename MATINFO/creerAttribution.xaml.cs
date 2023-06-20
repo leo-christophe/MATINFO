@@ -20,7 +20,8 @@ namespace MATINFO
     /// </summary>
     public partial class creerAttribution : Window
     {
-        Attributions nouvelAttribu;
+        // Champ qui va nous permettre de communiquer avec la MainWindow
+        private Attributions nouvelAttribu;
         public creerAttribution()
         {
             InitializeComponent();
@@ -39,11 +40,17 @@ namespace MATINFO
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Méthode déclenchée quand l'utilisateur décide de valider la création d'une attribution
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_Valider(object sender, RoutedEventArgs e)
         {
-            //Les champs doivent êtres remplit
+            // si tous les champs sont remplis correctement
             if (!string.IsNullOrEmpty(tbCreerAttributionCommentaire.Text) && !string.IsNullOrEmpty(tbCreerAttributionDate.Text))
             {
+                // On définit la nouvelle attribution
                 Personnel personnel = (Personnel)cbCreerAttributionIdPersonnel.SelectionBoxItem;
                 Materiel materiel = (Materiel)cbCreerAttributionIdMateriel.SelectionBoxItem;
                 nouvelAttribu = new Attributions(
@@ -61,9 +68,15 @@ namespace MATINFO
             }
             else
                 MessageBox.Show("Tous les champs doivent être renseignés.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            // On prévient l'utilisateur grace à un MessageBox
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Méthode déclenchée quand l'utilisateur décide d'annuler la création d'une attribution
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_Annuler(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
         }

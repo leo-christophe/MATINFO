@@ -20,7 +20,8 @@ namespace MATINFO
     /// </summary>
     public partial class creerPersonnel : Window
     {
-        Personnel nouveauPersonnel;
+        // Nouveau personnel communiqué à la MainWindow
+        private Personnel nouveauPersonnel;
 
         public creerPersonnel()
         {
@@ -40,6 +41,11 @@ namespace MATINFO
             }
         }
 
+        /// <summary>
+        ///  Cette méthode se déclenche lorsque l'utilisateur décide de valider la création
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickCreationOK(object sender, RoutedEventArgs e)
         {
             //les champs doivent êtres remplit
@@ -62,6 +68,21 @@ namespace MATINFO
             }
         }
 
+            if (tbMailPersonnel.Text != "" && tbNomPersonnel.Text != "" && tbPrenomPersonnel.Text != "")
+            {
+                // Le nouveau personnel à rajouter
+                NouveauPersonnel = new Personnel(tbNomPersonnel.Text, tbPrenomPersonnel.Text, tbMailPersonnel.Text);
+                DialogResult = true;
+            }
+            else
+                MessageBox.Show("Tous les champs doivent être renseignés !", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        /// <summary>
+        /// Cette méthode se déclenche lorsque l'utilisateur annule la demande de création
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickCreationAnnuler(object sender, RoutedEventArgs e)
         {
             DialogResult = false;

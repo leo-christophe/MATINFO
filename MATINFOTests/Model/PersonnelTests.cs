@@ -12,32 +12,23 @@ namespace MATINFO.Model.Tests
     public class PersonnelTests
     {
         private Personnel p1;
-
-        private Personnel pVide1;
-        private Personnel pVide2;
-        private Personnel pVide3;
-
-        private Personnel pMail1;
-        private Personnel pMail2;
-        private Personnel pMail3;
-
-        private Personnel pLong1;
-        private Personnel pLong2;
-        private Personnel pLong3;
+        private Personnel p2;
 
         [TestInitialize()]
         public void init()
         {
             p1 = new Personnel("Jean", "Franc", "unmail@gmail.com");
+            p2 = new Personnel(1000, "Jean", "Franc", "unmail@gmail.com");
         }
         [TestMethod()]
         public void PersonnelTest()
         {
             Assert.IsTrue(p1.NomPersonnel == "Jean" && p1.PrenomPersonnel == "Franc" && p1.EmailPersonnel == "unmail@gmail.com");
+            Assert.IsTrue(p2.IdPersonnel == 1000 && p2.NomPersonnel == "Jean" && p1.PrenomPersonnel == "Franc" && p1.EmailPersonnel == "unmail@gmail.com");
         }
         [TestMethod()]
         [ExpectedException(typeof(ArgumentException),
-        "Nom vide")]
+        "Nom vide ou mail mauvais format ou trop long")]
         public void PersonnelTest1()
         {
             Personnel pVide1 = new Personnel("", "Franc", "unmail@gmail.com");
@@ -51,66 +42,22 @@ namespace MATINFO.Model.Tests
             Personnel pLong1 = new Personnel("Jeanisfiusdfhsdifhsdsdgfdsfdsfdsfdsfdsf", "Franc", "unmail@gmail");
             Personnel pLong2 = new Personnel("Jean", "Francqsdqsdqsdqsdqsdqsdqsdsdqdqsdqsdqsdsqdqsd", "unmail@gmail");
             Personnel pLong3 = new Personnel("Jean", "Franc", "unmail@gmailqsdqsdqsdsqdsqdsqdqsdqsdsqdqsdqsdsqdqsdqsdqsdsqdqsdqsdqsdqsdqsdqsdd.fr");
-        }
 
-        [TestMethod()]
-        public void ToStringTest()
-        {
-            Assert.Fail();
-        }
 
-        [TestMethod()]
-        public void EqualsTest()
-        {
-            Assert.Fail();
-        }
+            Personnel pVide4 = new Personnel(1000, "", "Franc", "unmail@gmail.com");
+            Personnel pVide5 = new Personnel(1000, "Jean", "", "unmail@gmail.com");
+            Personnel pVide6 = new Personnel(1000, "Jean", "Franc", "");
 
-        [TestMethod()]
-        public void CalculerNouvelIdTest()
-        {
-            Assert.Fail();
-        }
+            Personnel pMail4 = new Personnel(1000, "Jean", "Franc", "@gmail.com");
+            Personnel pMail5 = new Personnel(1000, "Jean", "Franc", "unmail@.com");
+            Personnel pMail6 = new Personnel(1000, "Jean", "Franc", "unmail@gmail");
 
-        [TestMethod()]
-        public void CreateTest()
-        {
-            Assert.Fail();
-        }
+            Personnel pLong4 = new Personnel(1000, "Jeanisfiusdfhsdifhsdsdgfdsfdsfdsfdsfdsf", "Franc", "unmail@gmail");
+            Personnel pLong5 = new Personnel(1000, "Jean", "Francqsdqsdqsdqsdqsdqsdqsdsdqdqsdqsdqsdsqdqsd", "unmail@gmail");
+            Personnel pLong6 = new Personnel(1000, "Jean", "Franc", "unmail@gmailqsdqsdqsdsqdsqdsqdqsdqsdsqdqsdqsdsqdqsdqsdqsdsqdqsdqsdqsdqsdqsdqsdd.fr");
 
-        [TestMethod()]
-        public void DeleteTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void FindAllTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void FindBySelectionTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void GetHashCodeTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void ReadTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void UpdateTest()
-        {
-            Assert.Fail();
+            Personnel pId1 = new Personnel(0, "Jean", "Franc", "unmail@gmail.com");
+            Personnel pId2 = new Personnel(-1, "Jean", "Franc", "unmail@gmail.com");
         }
     }
 }

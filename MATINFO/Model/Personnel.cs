@@ -286,10 +286,11 @@ namespace MATINFO.Model
         /// <returns> Un booléen est retourné. true si le mail existe, false sinon.</returns>
         public bool Read()
         {
+
             // Accès à la base de donnée
             DataAccess accesBD = new DataAccess();
             // Requête
-            String requete = $"SELECT idPersonnel FROM personnel WHERE emailPersonnel = {this.EmailPersonnel};";
+            String requete = $"SELECT idPersonnel FROM personnel WHERE emailPersonnel = '{this.EmailPersonnel}';";
             // Récupération des données
             DataTable datas = accesBD.GetData(requete);
 

@@ -68,16 +68,6 @@ namespace MATINFO
             }
         }
 
-            if (tbMailPersonnel.Text != "" && tbNomPersonnel.Text != "" && tbPrenomPersonnel.Text != "")
-            {
-                // Le nouveau personnel à rajouter
-                NouveauPersonnel = new Personnel(tbNomPersonnel.Text, tbPrenomPersonnel.Text, tbMailPersonnel.Text);
-                DialogResult = true;
-            }
-            else
-                MessageBox.Show("Tous les champs doivent être renseignés !", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-
         /// <summary>
         /// Cette méthode se déclenche lorsque l'utilisateur annule la demande de création
         /// </summary>

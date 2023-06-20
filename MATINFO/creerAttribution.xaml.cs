@@ -59,7 +59,7 @@ namespace MATINFO
                     materiel,
                     personnel);
                 //si l'attribution n'existe pas déjà
-                if (NouvelAttribu.Read())
+                if (!NouvelAttribu.Read())
                 {
                     DialogResult = true;
                 }

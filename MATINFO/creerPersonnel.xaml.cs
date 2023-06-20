@@ -76,7 +76,6 @@ namespace MATINFO
         private void Button_ClickCreationAnnuler(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
-
         }
     }
 }

@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:MATINFO"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="clr-namespace:MATINFO.Model"
     Title="Modification d'attributions"
     Width="269"
     Height="529"
@@ -12,35 +13,38 @@
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
+    <Window.DataContext>
+        <model:ApplicationData x:Name="applicationData"/>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Label
             Width="182"
-            HorizontalAlignment="Center"
+            HorizontalAlignment="Left"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
             Content="Commentaire"
-            RenderTransformOrigin="0.758,0.591" Height="26" Margin="0,188,0,0" />
+            RenderTransformOrigin="0.758,0.591" Height="26" Margin="42,218,0,0" />
         <Label
-            Width="180"
-            Margin="42,140,0,0"
-            HorizontalAlignment="Left"
+            Width="178"
+            Margin="0,123,0,0"
+            HorizontalAlignment="Center"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
             Content="Nom personnel"
             RenderTransformOrigin="0.758,0.591" Height="26" />
-        <TextBox
+        <TextBox x:Name="tbModificationAttributionCommentaire"
             Width="182"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Foreground="#FFA6A6A6"
-            Text="Nouveau commentaire"
-            TextWrapping="Wrap" Margin="42,214,0,0" Height="128" />
+            Text=""
+            TextWrapping="Wrap" Margin="42,244,0,0" Height="128" />
         <Label
             Width="182"
-            Margin="42,342,0,0"
+            Margin="42,377,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
@@ -49,16 +53,16 @@
         <Button
             Width="86"
             Height="36"
-            Margin="136,404,0,0"
+            Margin="136,437,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="ANNULER"
-            RenderTransformOrigin="1.045,-1.618" />
+            RenderTransformOrigin="1.045,-1.618" Click="Button_Click_1" />
         <Label
             Width="178"
             Height="26"
-            Margin="42,87,0,0"
-            HorizontalAlignment="Left"
+            Margin="0,74,0,0"
+            HorizontalAlignment="Center"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
             Content="Nom matériel"
@@ -72,24 +76,42 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <DatePicker
+        <DatePicker x:Name="dpModificationAttributionDate"
             Width="182"
-            Margin="42,368,0,0"
+            Margin="42,408,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top" />
         <Button
             Width="84"
             Height="36"
-            Margin="40,404,0,0"
+            Margin="42,437,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="VALIDER"
-            RenderTransformOrigin="1.045,-1.618" />
-        <ComboBox HorizontalAlignment="Left" Margin="43,113,0,0" VerticalAlignment="Top" Width="180"/>
-        <ComboBox HorizontalAlignment="Center" Margin="0,166,0,0" VerticalAlignment="Top" Width="180"/>
-        <Image Margin="44,29,165,431" Source="/ressources/attributes.png" Stretch="Fill"/>
-        <Label Content="Modification des" HorizontalAlignment="Left" Margin="109,30,0,0" VerticalAlignment="Top" Width="111" FontWeight="Bold" FontSize="14"/>
-        <Label Content="attributions" HorizontalAlignment="Left" Margin="109,56,0,0" VerticalAlignment="Top" Width="111" FontSize="14" FontWeight="Bold"/>
+            RenderTransformOrigin="1.045,-1.618" Click="Button_Click" />
+        <Image Margin="46,21,0,0" Source="/ressources/attributes.png" Stretch="Fill" RenderTransformOrigin="0.675,0.776" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Modification des" HorizontalAlignment="Left" Margin="99,12,0,0" VerticalAlignment="Top" Width="120" FontWeight="Bold" FontSize="14"/>
+        <Label Content="attributions" HorizontalAlignment="Left" Margin="99,38,0,0" VerticalAlignment="Top" Width="112" FontSize="14" FontWeight="Bold"/>
+        <ComboBox x:Name="cbModificationAttributionMateriel" HorizontalAlignment="Center" Margin="0,100,0,0" VerticalAlignment="Top" Width="178" 
+            ItemsSource="{Binding LesMateriaux}"
+
+            SelectedValuePath="IdMateriel" DisplayMemberPath="NomMateriel" SelectionChanged="cbModificationAttributionMateriel_SelectionChanged"/>
+        <ComboBox x:Name="cbModificationAttributionPersonnel" HorizontalAlignment="Center" Margin="0,149,0,0" VerticalAlignment="Top" Width="178"
+            ItemsSource="{Binding LesPersonnels}"
+
+            SelectedValuePath="IdPersonnel" DisplayMemberPath="NomPersonnel" SelectionChanged="cbModificationAttributionPersonnel_SelectionChanged"/>
+        <Button Content="🗑️" HorizontalAlignment="Left" Margin="52,66,0,0" VerticalAlignment="Top" Width="28" Click="Button_Click_ReinitialiseFiltre" Background="#FFFF8E8E" Height="28" RenderTransformOrigin="0.893,-1.141"/>
+        <ComboBox x:Name="cbDate" HorizontalAlignment="Left" Margin="99,176,0,0" VerticalAlignment="Top" Width="125"
+
+             SelectionChanged="cbModificationAttributionPersonnel_SelectionChanged"/>
+        <Label
+            Width="53"
+            Margin="46,174,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            Content="Date :"
+            RenderTransformOrigin="0.758,0.591" Height="26" />
 
     </Grid>
 </Window>

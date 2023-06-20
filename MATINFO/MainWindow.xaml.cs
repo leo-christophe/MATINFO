@@ -183,7 +183,38 @@ namespace MATINFO
                     }
                 case "btModifierAtt":
                     {
-                        modificationAtt.Show();
+                        modifAttributions modificationAtt = new modifAttributions();
+                        modificationAtt.Owner = this;
+
+                        modificationAtt.DataContext = this.applicationdata;
+
+                        modificationAtt.cbModificationAttributionMateriel.ItemsSource = applicationdata.LesMateriaux;
+                        modificationAtt.cbModificationAttributionPersonnel.ItemsSource = applicationdata.LesPersonnels;
+
+                        //on rentre les données dans la fenêtre de modification par défault
+                        //Console.WriteLine(listViewAttributions.SelectedItems);
+                        //modificationAtt.cbModificationAttributionMateriel.SelectedItem = ((Attributions)listViewAttributions.SelectedItems).AMateriel;
+                        //modificationAtt.cbModificationAttributionPersonnel.SelectedItem = ((Attributions)listViewAttributions.SelectedItems).APersonnel;
+                        //modificationAtt.tbModificationAttributionCommentaire.Text = ((Attributions)listViewAttributions.SelectedItem).Commentaire;
+                        //modificationAtt.tbModificationAttributionDate.Text = ((Attributions)listViewAttributions.SelectedItem).DateAttribution.ToString();
+
+                        modificationAtt.ShowDialog();
+                        if ((bool)modificationAtt.DialogResult == true)
+                        {
+                            int index = 0;
+                            foreach (Attributions attribut in applicationdata.LesAttributions)
+                            {
+                                if (attribut.FK_idMateriel == modificationAtt.NouvelAttribut.FK_idMateriel && attribut.FK_idPersonnel == modificationAtt.NouvelAttribut.FK_idPersonnel && attribut.DateAttribution == modificationAtt.NouvelAttribut.DateAttribution)
+                                {
+                                    index = applicationdata.LesAttributions.IndexOf(attribut);
+                                    applicationdata.LesAttributions[index] = modificationAtt.NouvelAttribut;
+                                }
+                            }
+
+                            // Mettre à jour avec la bd
+                            applicationdata.LesAttributions[index].Update();
+                            listViewAttributions.Items.Refresh();
+                        }
                         break;
                     }
                 case "btModifierCat":

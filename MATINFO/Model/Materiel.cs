@@ -36,14 +36,12 @@ namespace MATINFO.Model
         /// <param name="nomMateriel">Nom du matériel</param>
         /// <param name="referenceConstructeur">La référence du constructeur du matériel</param>
         /// <param name="codeBarreInventaire">Le code barre unique du matériel.</param>
-        /// <param name="uneCategorieM">La catégorie du matériel correspondant.</param>
-        public Materiel(int fK_idCategorie, string nomMateriel, string referenceConstructeur, string codeBarreInventaire, CategorieMateriel uneCategorieM)
+        public Materiel(int fK_idCategorie, string nomMateriel, string referenceConstructeur, string codeBarreInventaire)
         {
             this.FK_idCategorie = fK_idCategorie;
             this.NomMateriel = nomMateriel;
             this.ReferenceConstructeur = referenceConstructeur;
             this.CodeBarreInventaire = codeBarreInventaire;
-            this.UneCategorieM = uneCategorieM;
 
             this.IdMateriel = this.CalculNouvelId();
         }
@@ -165,6 +163,11 @@ namespace MATINFO.Model
             return $"{this.IdMateriel} \n{this.NomMateriel} \n{this.FK_idCategorie} \n{this.UneCategorieM.NomCategorie} \n{this.ReferenceConstructeur} \n{this.CodeBarreInventaire}";
         }
 
+        /// <summary>
+        /// Equals permet de vérifier l'égalité entre deux objets materiel (ID Materiel, ID categorie, Nom, Reference, Code Barre)
+        /// </summary>
+        /// <param name="obj">Le deuxième objet à vérifier l'égalité</param>
+        /// <returns>true si égal, false sinon</returns>
         public override bool Equals(object? obj)
         {
             return obj is Materiel materiel &&

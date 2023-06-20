@@ -12,6 +12,7 @@ namespace MATINFO.Model
         private ObservableCollection<Materiel> lesMateriaux;
         private ObservableCollection<Personnel> lesPersonnels;
         private ObservableCollection<Attributions> lesAttributions;
+
         public ObservableCollection<Attributions> LesAttributions
         {
             get
@@ -63,6 +64,8 @@ namespace MATINFO.Model
                 lesCategoriesMateriel = value;
             }
         }
+
+
         public ApplicationData()
         {
             CategorieMateriel categorieMateriel = new CategorieMateriel();
@@ -75,14 +78,15 @@ namespace MATINFO.Model
             LesPersonnels = personnel.FindAll();
             LesAttributions = attributions.FindAll();
 
+            // POUR MATERIEL / CATEGORIE
             //pour chaque matériel, on affecte une catégorie matériel.
             foreach ( Materiel leMateriel in LesMateriaux.ToList())
             {
                 leMateriel.UneCategorieM = LesCategoriesMateriel.ToList().Find(g => g.IdCategorie == leMateriel.FK_idCategorie);
-
+                Console.WriteLine(leMateriel.UneCategorieM.ToString());
             }
 
-            //pour chaques catégorie matériel on affecte un matériel.
+            //pour chaques catégorie matériel on affecte les matériaux associés.
             foreach ( CategorieMateriel uneCategorie in LesCategoriesMateriel.ToList())
             {
                 uneCategorie.LesMateriauxCM = new ObservableCollection<Materiel>(
@@ -92,8 +96,7 @@ namespace MATINFO.Model
 
 
 
-
-            //POUR LES ATTRIBUTIONS
+            // POUR LES ATTRIBUTIONS
             // pour chaque attributions, on affecte son personnel
             foreach (Attributions uneAttribution in LesAttributions.ToList())
             {

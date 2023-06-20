@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -23,15 +24,6 @@ namespace MATINFO
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        creerPersonnel creationWinPers;
-        creerCategorie creationWinCat;
-        creerAttribution creationWinAtt;
-
-        modifPersonnel modificationPers;
-        modifAttributions modificationAtt;
-        modifCategorie modificationCat;
-
         DataAccess accesBD;
         bool res;
         public MainWindow()
@@ -42,14 +34,24 @@ namespace MATINFO
             res = accesBD.OpenConnection();
         }
 
+        /// <summary>
+        /// Cette méthode permet de détecter le clic de l'utilisateur sur un bouton "Create". Elle est universelle pour les 4 boutons : on récupère le nom pour faire les différents
+        /// traitements.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickCreate(object sender, RoutedEventArgs e)
         {
             Button bouton = (Button)sender;
+            // On vérifie le nom du bouton appuyé.
             switch (bouton.Name)
             {
+                // Bouton créer un personnage
                 case "btCreerPers":
                     {
-                        creationWinPers = new creerPersonnel();
+                        // On créée une nouvelle fenêtre creerPersonnel
+                        creerPersonnel creationWinPers = new creerPersonnel();
+                        // On affiche la fenêtre en mode "dialog" (va nous retourner un booléen pour savoir l'avis de l'utilisateur)
                         creationWinPers.ShowDialog();
                         if ((bool)creationWinPers.DialogResult == true)
                         {
@@ -62,32 +64,38 @@ namespace MATINFO
                         }
                         break;
                     }
+                 
+                // Bouton créer un materiel
                 case "btCreerMat":
                     {
-
+                        // On créer une nouvelle fenêtre creerMateriel
                         creerMateriel creationWinMat = new creerMateriel();
-                        creationWinMat.Owner = this;
+                        // On définit le datacontext de cette fenêtre par le même que MainWindow
                         creationWinMat.DataContext = applicationdata;
 
-
-
-
+                        // Booléen qui va nous servir à savoir si on peut rajouter le nouveau matériel ou non
                         bool? confirm = creationWinMat.ShowDialog();
 
-                        if (confirm == true)
+                        if ( confirm == true )
                         {
-                            
+                            // on fait une liaison entre materiel et categorie_materiel
+                            creationWinMat.NouveauMateriel.UneCategorieM = 
+                                applicationdata.LesCategoriesMateriel.ToList().Find(g => g.IdCategorie == creationWinMat.NouveauMateriel.FK_idCategorie);
+
+                            // on ajoute le nouveau materiel à la collection observable de applicationdata
                             applicationdata.LesMateriaux.Add(creationWinMat.NouveauMateriel);
-                            
-                            
+
+                            // on ajoute le nouveau materiel dans la base de données
                             creationWinMat.NouveauMateriel.Create();
-                            
+
+                            // on rafraîchit
                             listViewMateriel.Items.Refresh();
-                            listViewCategories.Items.Refresh();
                         }
 
                         break;
                     }
+
+                // Bouton créer une attribution
                 case "btCreerAtt":
                     {
                         creerAttribution creationWinAtt = new creerAttribution();
@@ -104,9 +112,11 @@ namespace MATINFO
                         }
                         break;
                     }
+
+                // Bouton créer une catégorie
                 case "btCreerCat":
                     {
-                        creationWinCat = new creerCategorie();
+                        creerCategorie creationWinCat = new creerCategorie();
                         creationWinCat.ShowDialog();
                         if ((bool)creationWinCat.DialogResult == true)
                         {
@@ -134,7 +144,7 @@ namespace MATINFO
             {
                 case "btModifierPers":
                     {
-                        modificationPers = new modifPersonnel();
+                        modifPersonnel modificationPers = new modifPersonnel();
                         modificationPers.DataContext = this.applicationdata;
 
                         //on rentre les données dans la fenêtre de modification par défault
@@ -219,7 +229,7 @@ namespace MATINFO
                     }
                 case "btModifierCat":
                     {
-                        modificationCat = new modifCategorie();
+                        modifCategorie modificationCat = new modifCategorie();
                         modificationCat.ShowDialog();
                         if ((bool)modificationCat.DialogResult)
                         {

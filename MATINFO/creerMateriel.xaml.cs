@@ -40,7 +40,7 @@ namespace MATINFO
                 this.NouveauMateriel = new Materiel(categorie.IdCategorie,
                     tbNomMaterielCreation.Text,
                     tbReferenceConstructeurCreation.Text,
-                    tbCodeBarreCreation.Text, categorie);
+                    tbCodeBarreCreation.Text);
 
             
                 DialogResult = true;

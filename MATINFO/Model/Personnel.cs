@@ -34,9 +34,9 @@ namespace MATINFO.Model
         /// <summary>
         /// Constructeur dont l'ID personnel est automatiquement généré.
         /// </summary>
-        /// <param name="nomPersonnel"></param>
-        /// <param name="prenomPersonnel"></param>
-        /// <param name="emailPersonnel"></param>
+        /// <param name="nomPersonnel">Le nom de famille du personnel</param>
+        /// <param name="prenomPersonnel">Le prénom du personnel</param>
+        /// <param name="emailPersonnel">L'adresse e-mail du personnel</param>
         public Personnel(string nomPersonnel, string prenomPersonnel, string emailPersonnel)
         {
             this.NomPersonnel = nomPersonnel;
@@ -120,7 +120,7 @@ namespace MATINFO.Model
                     emailPersonnel = value;
                 else
                     throw new ArgumentException("Le mail du personnel doit être une chaine de caractère non nulle de longueur inférieur à 30 de format correct.");
-            }
+            } 
         }
 
         public ObservableCollection<Attributions> SesAttributions
@@ -148,9 +148,23 @@ namespace MATINFO.Model
             return $"{this.IdPersonnel} \n{this.NomPersonnel} \n{this.PrenomPersonnel} \n{this.EmailPersonnel}";
         }
 
+        /// <summary>
+        /// Equals permet de vérifier l'égalité entre deux objets personnel (ID, Nom, Prenom, Email)
+        /// </summary>
+        /// <param name="obj">Le deuxième objet à vérifier l'égalité</param>
+        /// <returns>true si égal, false sinon</returns>
         public override bool Equals(object? obj)
         {
-            return base.Equals(obj);
+            return obj is Personnel personnel &&
+                   this.IdPersonnel == personnel.IdPersonnel &&
+                   this.NomPersonnel == personnel.NomPersonnel &&
+                   this.PrenomPersonnel == personnel.PrenomPersonnel &&
+                   this.EmailPersonnel == personnel.EmailPersonnel;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(this.IdPersonnel, this.NomPersonnel, this.PrenomPersonnel, this.EmailPersonnel);
         }
 
         /// <summary>
@@ -198,7 +212,7 @@ namespace MATINFO.Model
             // Connexion BD
             DataAccess accesBD = new DataAccess();
             // Requete
-            String requete = "DELETE FROM personnel WHERE idpersonnel=" + IdPersonnel + ";";
+            String requete = "DELETE FROM personnel WHERE idpersonnel = " + IdPersonnel + ";";
             // Envoi de la requête
             DataTable datas = accesBD.GetData(requete);
 
@@ -235,41 +249,71 @@ namespace MATINFO.Model
             return lesPersonnels;
         }
 
-
+        /// <summary>
+        /// FindBySelection permet d'affiner les résultats d'une recherche complète comme FindAll. Elle est composées au minimum d'une clause (WHERE, HAVE, ORDER...) 
+        /// étant l'argument criteres : une chaîne de caractères. 
+        /// </summary>
+        /// <param name="criteres">criteres est une chaîne de caractères composé de clauses SQL positionné après SELECT et FROM. </param>
+        /// <returns>La sélection demandée sous la forme d'une collection observable de personnels.</returns>
         public ObservableCollection<Personnel> FindBySelection(string criteres)
         {
-            throw new NotImplementedException();
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
-
-        public bool Read()
-        {
+            ObservableCollection<Personnel> lesPersonnels = new ObservableCollection<Personnel>();
+            // Connexion BD
             DataAccess accesBD = new DataAccess();
-            String requete = $"SELECT MAX(idPersonnel) + 1 FROM Personnel;";
+            // Requête
+            String requete = $"select * from personnel {criteres};";
+            // Récupération des données à partir de la requête
             DataTable datas = accesBD.GetData(requete);
 
-
+            // Formation des données
             if (datas != null)
             {
                 foreach (DataRow row in datas.Rows)
                 {
-                    if (int.Parse(row["idpersonnel"].ToString()) == idPersonnel)
-                    {
-
-                    }
+                    Personnel e = new Personnel(
+                        int.Parse(row["idpersonnel"].ToString()),
+                        (String)row["nompersonnel"],
+                        (String)row["prenompersonnel"],
+                        (String)row["emailpersonnel"]
+                        );
+                    lesPersonnels.Add(e);
                 }
             }
-            return true;
+            return lesPersonnels;
         }
-        
+
+        /// <summary>
+        /// La méthode READ permet de savoir si un personnel existe déjà selon son mail qui est unique. 
+        /// </summary>
+        /// <returns> Un booléen est retourné. true si le mail existe, false sinon.</returns>
+        public bool Read()
+        {
+            // Accès à la base de donnée
+            DataAccess accesBD = new DataAccess();
+            // Requête
+            String requete = $"SELECT idPersonnel FROM personnel WHERE emailPersonnel = {this.EmailPersonnel};";
+            // Récupération des données
+            DataTable datas = accesBD.GetData(requete);
+
+            if (datas != null && datas.Rows.Count > 0)
+                return true;
+                // existe
+
+            // n'existe pas
+            return false;
+        }
+
+        /// <summary>
+        /// La méthode UPDATE permet de mettre à jour le personnel dans la base de donnée à partir des propriétés de l'objet. On prend chaque champ et on redéfinit chaque
+        /// attribut de la table par les champs de l'objet. Le personnel correspondant à l'objet dans la table est retrouvé grace à l'ID personnel de l'objet.
+        /// </summary>
         public void Update()
         {
+            // Accès à la base de données
             DataAccess accesBD = new DataAccess();
+            // Requête
             String requete = $"UPDATE Personnel SET nomPersonnel = '{this.NomPersonnel}', prenomPersonnel = '{this.PrenomPersonnel}', emailPersonnel = '{this.EmailPersonnel}' WHERE idPersonnel = {this.idPersonnel};";
+            // Envoi requête
             int datas = accesBD.SetData(requete);
         }
     }

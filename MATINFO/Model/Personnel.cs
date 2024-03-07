@@ -181,11 +181,12 @@ namespace MATINFO.Model
             String requete = "SELECT MAX(idPersonnel) + 1 AS \"E\" FROM personnel;";
             // Envoi de la requête
             DataTable datas = accesBD.GetData(requete);
-
+            Console.WriteLine(datas.ToString());
             // Récupération du nouvel ID
-            if (datas != null && datas.Rows.Count > 0)
-                return int.Parse(datas.Rows[0]["E"].ToString());
-            else
+            if (! String.IsNullOrEmpty(datas.ToString())) { 
+                Console.WriteLine(datas.Rows[0]);
+            return int.Parse(datas.Rows[0].ToString());
+        } else
                 return 1;
         }
 

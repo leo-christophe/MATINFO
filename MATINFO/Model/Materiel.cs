@@ -261,7 +261,7 @@ namespace MATINFO.Model
                         int.Parse(row["idmateriel"].ToString()),
                         int.Parse(row["idcategorie"].ToString()),
                         (String)row["nommateriel"],
-                        (String)row["referenceconstructeurmateriel"],
+                        (String)row["refconstructeur"],
                         (String)row["codebarreinventaire"]
                         );
                     lesMateriaux.Add(e);

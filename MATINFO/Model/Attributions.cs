@@ -162,7 +162,7 @@ namespace MATINFO.Model
             DataAccess accesBD = new DataAccess();
             String requete = $"" +
                 $"INSERT INTO est_attribue " +
-                $"(idpersonnel, idmateriel, dateattribution, commentaireattribution) " +
+                $"(idpersonnel, idmateriel, dateattribution, commentaire) " +
                 $"VALUES " +
                 $"({this.FK_idPersonnel}, {this.FK_idMateriel}, '{this.DateAttribution.ToString("yyyy'-'MM'-'dd")}', '{this.Commentaire}');";
             int datas = accesBD.SetData(requete);
@@ -269,7 +269,7 @@ namespace MATINFO.Model
             String requete = $"" +
                 $"UPDATE est_attribue" +
                 $" SET dateattribution = '{this.DateAttribution.ToString("yyyy'-'MM'-'dd")}', " +
-                $"      commenaireattribution = '{this.Commentaire}' " +
+                $"      commentaire = '{this.Commentaire}' " +
                 $" WHERE idPersonnel = {this.FK_idPersonnel};" +
                 $" AND idMateriel = {this.FK_idMateriel}" +
                 $"AND dateattribution = {this.DateAttribution.ToString("yyyy'-'MM'-'dd")};";

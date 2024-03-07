@@ -34,12 +34,12 @@ namespace MATINFO.Model /// A MODIFIER SI VOTRE PROJET A UN AUTRE NOM
               NpgSQLConnect = new NpgsqlConnection
               {
                   ConnectionString = "" +
-                  "Server=postgresql-leochristophe.alwaysdata.net;" +
+                  "Server=localhost;" +
                   "port=5432;" +
-                  "Database=leochristophe_romainbajorek_matinfo;" +
+                  "Database=matinfo;" +
                   "Search Path=public;" +
-                  "uid=leochristophe_romainbajorek;" +
-                  "password=leobamain729\r\n;" // A MODIFIER POUR VOTR BD
+                  "uid=postgres;" +
+                  "password=postgres;" // A MODIFIER POUR VOTR BD
               };
               NpgSQLConnect.Open();
                 

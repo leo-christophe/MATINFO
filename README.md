@@ -44,3 +44,7 @@ Le projet est composé d'une interface front-end réalisée en WPF et d'un back-
    - Exécuter la commande suivante :  
    ```sh
    dotnet run
+
+  ## Auteurs
+- [Léo Christophe](https://github.com/leo-christophe)  
+- [Romain Bajorek](https://github.com/bajrom)  
